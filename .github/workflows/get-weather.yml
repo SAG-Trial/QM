@@ -15,5 +15,6 @@ jobs:
         id: get-weather
         run: |
           curl --location 'http://api.weatherstack.com/current?access_key=${{ secrets.REPO_B_TOKEN }}&query=%22New%20York%22'
-          
+        env:
+          REPO_B_TOKEN: ${{ secrets.REPO_B_TOKEN }}
         
