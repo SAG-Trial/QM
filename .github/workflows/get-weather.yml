@@ -14,7 +14,7 @@ jobs:
       - name: Make API call to get weather data
         id: get-weather
         run: |
-          curl --location "http://api.weatherstack.com/current?access_key=${REPO_TOKEN}&query=%22New%20York%22"
+          curl --location "http://api.weatherstack.com/current?access_key=${{ secrets.GITHUB_TOKEN }}&query=%22New%20York%22"
         env:
-          REPO_TOKEN: ${{ secrets.ORG_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_PAT }}
         
