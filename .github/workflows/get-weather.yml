@@ -14,8 +14,6 @@ jobs:
       - name: Make API call to get weather data
         id: get-weather
         run: |
-          result=$(curl --location 'http://api.weatherstack.com/current?access_key=${{ secrets.REPO_B_TOKEN }}&query=%22New%20York%22')
-
-          # Now you can use the $result variable
-          echo "$result"
+          curl --location 'http://api.weatherstack.com/current?access_key=${{ secrets.REPO_B_TOKEN }}&query=%22New%20York%22'
+          
         
