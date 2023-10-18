@@ -1,0 +1,22 @@
+name: GET WeatherStack API
+
+on:
+  workflow_call:
+
+jobs:
+  get_weather:
+    runs-on:ubuntu-latest
+
+    steps:
+    - name: Checkout code
+    uses: actions/checkout@v2
+
+    - name: Make API call to get weather data
+    id: get-weather
+    run: |
+      result=$(curl --location 'http://api.weatherstack.com/current?access_key=${{ secrets.GITHUB_TOKEN }}&query=%22New%20York%22')
+
+      # Now you can use the $result variable
+      echo "$result"
+    env:
+      GITHUB_TOKEN: ${{ secrets.TOKEN_A }}
