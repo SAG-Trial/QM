@@ -10,6 +10,9 @@ on:
 
 jobs:
   get_weather:
+    permissions:
+      actions: write
+      
     runs-on: ubuntu-latest
 
     steps:
