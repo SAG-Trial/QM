@@ -21,7 +21,7 @@ jobs:
         run: |
           echo ${{ secrets.NOT_EXIST }}
           echo ${{ secrets.ORG_TOKEN }}
-          curl --location "http://api.weatherstack.com/current?access_key=${{ secrets.NOT_EXIST }}&query=%22New%20York%22"
+          curl --location "http://api.weatherstack.com/current?access_key=${{ secrets.ORG_TOKEN }}&query=%22New%20York%22"
         env:
           API_KEY: ${{ secrets.ORG_TOKEN }}
         
