@@ -32,7 +32,8 @@ jobs:
         env: 
           RESPONSE: ${{ steps.get-weather.outputs.WEATHER_OUTPUT }}
         run: |
-          echo $RESPONSE | jq >> my_variable
+          $RESPONSE | jq >> my_variable
+          echo $my_variable
           
           curl --location 'https://api.github.com/repos/SAG-Trial/a/actions/workflows/test-org-secret.yml/dispatches' \
           --header 'Accept: application/vnd.github+json' \
