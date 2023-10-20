@@ -39,7 +39,7 @@ jobs:
           --data '{
               "ref":"main",
               "inputs": {
-                "response": " helo",
+                "response": "RESULT ${{ steps.get-weather.outputs.WEATHER_OUTPUT }}  ",
                 "display":"true"
               }
           }'
