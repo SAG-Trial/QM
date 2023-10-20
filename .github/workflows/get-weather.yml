@@ -2,11 +2,6 @@ name: GET WeatherStack API
 
 on:
   workflow_dispatch:
-    
-  workflow_call:
-    secrets:
-      token:
-        required: true
 
 jobs:
   get_weather:
@@ -30,7 +25,7 @@ jobs:
 
       - name: Call initiator workflow to send output
         id: send-output
-        run: |
-          echo "Result of API call is ${{ steps.get-weather.outputs.WEATHER_OUTPUT }}"
+        uses: SAG-Trial/a/.github/workflows/test-org-secret.yml@main
+        
 
         
