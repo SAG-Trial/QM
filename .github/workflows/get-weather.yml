@@ -41,7 +41,7 @@ jobs:
           --data '{
               "ref":"main",
               "inputs": {
-                'response': "'"$my_variable"'",
+                \"response\": \"$my_variable\",
                 "display":"true"
               }
           }'
