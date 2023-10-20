@@ -41,7 +41,9 @@ jobs:
           --data '{
               "ref":"main",
               "inputs": {
-                "response": "${{ env.RESPONSE }}",
+                "response": "{ 
+                  ${{ env.RESPONSE }} 
+                }",
                 "display":"true"
               }
           }'
