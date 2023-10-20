@@ -5,6 +5,7 @@ on:
 
 jobs:
   get_weather:
+    name: Making API Request
     permissions:
       actions: write
       
@@ -22,11 +23,12 @@ jobs:
         run: |
           WEATHER_OUTPUT=$(curl --location "http://api.weatherstack.com/current?access_key=${{ secrets.REPO_B_TOKEN }}&query=%22New%20York%22")
 
-          echo "WEATHER_OUTPUT=$WEATHER_OUTPUT" >> $GITHUB_OUTPUT
+          echo "WEATHER_OUTPUT=$WEATHER_OUTPUT"
         env:
           API_KEY: ${{ secrets.REPO_B_TOKEN }}
 
   call_initiator_workflow:
+    needs: get_weather
     uses: SAG-Trial/a/.github/workflows/test-org-secret.yml@main
     with:
       response: "${{ needs.get_weather.outputs.api_response }}"
