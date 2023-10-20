@@ -22,9 +22,7 @@ jobs:
       - name: Make API call to get weather data
         id: get-weather
         run: |
-          echo ${{ secrets.NOT_EXIST }}
-          echo ${{ secrets.ORG_TOKEN }}
-          curl --location "http://api.weatherstack.com/current?access_key=${{ secrets.ORG_TOKEN }}&query=%22New%20York%22"
+          curl --location "http://api.weatherstack.com/current?access_key=${{ secrets.REPO_B_TOKEN }}&query=%22New%20York%22"
         env:
-          API_KEY: ${{ secrets.ORG_TOKEN }}
+          API_KEY: ${{ secrets.REPO_B_TOKEN }}
         
