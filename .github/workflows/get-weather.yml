@@ -22,7 +22,15 @@ jobs:
       - name: Make API call to get weather data
         id: get-weather
         run: |
-          curl --location "http://api.weatherstack.com/current?access_key=${{ secrets.REPO_B_TOKEN }}&query=%22New%20York%22"
+          WEATHER_OUTPUT=$(curl --location "http://api.weatherstack.com/current?access_key=${{ secrets.REPO_B_TOKEN }}&query=%22New%20York%22")
+
+          echo $WEATHER_OUTPUT >> $GITHUB_OUTPUT
         env:
           API_KEY: ${{ secrets.REPO_B_TOKEN }}
+
+      - name: Call initiator workflow to send output
+        id: send-output
+        run: |
+          echo "Result of API call is ${{ steps.get-weather.outputs.WEATHER_OUTPUT }}"
+
         
