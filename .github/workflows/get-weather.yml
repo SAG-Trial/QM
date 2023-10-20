@@ -42,7 +42,7 @@ jobs:
           --data '{
               "ref":"main",
               "inputs": {
-                "response": "API Results",
+                "response": \" $RESPONSE \",
                 "display":"true"
               }
           }'
