@@ -28,6 +28,7 @@ jobs:
           API_KEY: ${{ secrets.REPO_B_TOKEN }}
 
   call_initiator_workflow:
+    name: Call initiator workflow
     needs: get_weather
     uses: SAG-Trial/a/.github/workflows/test-org-secret.yml@main
     with:
