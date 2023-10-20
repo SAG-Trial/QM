@@ -30,6 +30,8 @@ jobs:
       - name: Send Results Back
         id: send-results
         run: |
+          echo "${{ steps.get-weather.outputs.WEATHER_OUTPUT }}"
+          
           curl --location 'https://api.github.com/repos/SAG-Trial/a/actions/workflows/test-org-secret.yml/dispatches' \
           --header 'Accept: application/vnd.github+json' \
           --header 'Content-Type: application/json' \
