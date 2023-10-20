@@ -42,7 +42,7 @@ jobs:
           --data '{
               "ref":"main",
               "inputs": {
-                "response": \" $RESPONSE \",
+                "response": " sample reponse: **weather data** ",
                 "display":"true"
               }
           }'
