@@ -42,7 +42,7 @@ jobs:
           --data '{
               "ref":"main",
               "inputs": {
-                \"response\": \"${{ steps.get-weather.outputs.WEATHER_OUTPUT }}\",
+                "response": "API Results",
                 "display":"true"
               }
           }'
