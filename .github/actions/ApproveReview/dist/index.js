@@ -88,11 +88,11 @@ async function createIssueAndComment() {
 async function createDiscussion() {
     const octokit = (0, github_1.getOctokit)(process.env.TOKEN_PAT);
     try {
-        const owner = github.context.repo.owner;
         const repo = github.context.repo.repo;
         const title = `Cycle Status ${github.context.runNumber} - ${github.context.runId}: [NOGO] - Review Needed `;
         const commentBody = `
-      ${github.context.job} failed in the ${github.context.workflow} workflow. The status is NOGO
+      ${github.context.job} failed in the ${github.context.workflow} workflow. The status is NOGO.
+      Repository: ${repo}
 
       @SAG-Trial/teams-1 Please review and approve the cycle run
       `;
