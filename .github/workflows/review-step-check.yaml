@@ -1,0 +1,29 @@
+name: Review Step check
+
+on:
+  workflow_dispatch:
+    inputs:
+        proceed:
+            description: 'GO/NOGO'
+            type: boolean
+            required: true
+            default: false
+    
+
+jobs:
+  get-proceed-status:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check Proceed Status
+        id: check-proceed-status
+        run: |
+          echo "Proceed Status: ${{ github.event.inputs.proceed }}"
+            
+      - name: Request Review step
+        if: ${{ inputs.proceed == false}}
+        run: |
+          exit 0  
