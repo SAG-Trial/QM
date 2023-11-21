@@ -87,7 +87,7 @@ async function createDiscussion() {
     //   title: title,
     // });
 
-    const response = await octokit.request('POST /orgs/{org}/discussions',{
+    const response = await octokit.request('POST /orgs/{org}/teams/{team_slug}/discussions',{
       org:"SAG-Trial",
       body: commentBody,
       team_slug: "teams-1",
@@ -97,7 +97,7 @@ async function createDiscussion() {
       }
     })
 
-    console.log(`Discussion created with ID: ${response.data.id}`);
+    console.log(`Discussion created with ID: ${response.data.number}`);
   } catch (error) {
     console.error("Error creating discussion:", error);
   }
