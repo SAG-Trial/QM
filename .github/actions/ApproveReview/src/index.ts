@@ -97,6 +97,7 @@ async function createDiscussion() {
       }
     })
 
+    console.log({response});
     console.log(`Discussion created with ID: ${response.data.number}`);
   } catch (error) {
     console.error("Error creating discussion:", error);
