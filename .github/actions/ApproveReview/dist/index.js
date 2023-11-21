@@ -96,11 +96,20 @@ async function createDiscussion() {
 
       @SAG-Trial/teams-1 Please review and approve the cycle run
       `;
-        const response = await octokit.rest.teams.createDiscussionInOrg({
+        // const response = await octokit.rest.teams.createDiscussionInOrg({
+        //   org:"SAG-Trial",
+        //   body: commentBody,
+        //   team_slug: "teams-1",
+        //   title: title,
+        // });
+        const response = await octokit.request('POST /orgs/{org}/teams/{team_slug}/discussions', {
             org: "SAG-Trial",
             body: commentBody,
             team_slug: "teams-1",
             title: title,
+            headers: {
+                'X-GitHub-Api-Version': '2022-11-28'
+            }
         });
         console.log(`Discussion created with ID: ${response.data.number}`);
     }
