@@ -90,12 +90,7 @@ async function createDiscussion() {
     try {
         const repo = github.context.repo.repo;
         const title = `Cycle Status ${github.context.runNumber} - ${github.context.runId}: [NOGO] - Review Needed `;
-        const commentBody = `
-      ${github.context.job} failed in the ${github.context.workflow} workflow. The status is NOGO.
-      Repository: ${repo}
-
-      @SAG-Trial/teams-1 Please review and approve the cycle run
-      `;
+        const commentBody = `${github.context.job} failed in the ${github.context.workflow} workflow. The status is NOGO.\nRepository: ${repo}\n@SAG-Trial/teams-1 Please review and approve the cycle run`;
         // const response = await octokit.rest.teams.createDiscussionInOrg({
         //   org:"SAG-Trial",
         //   body: commentBody,
