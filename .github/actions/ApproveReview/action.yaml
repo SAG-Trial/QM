@@ -1,0 +1,8 @@
+name: Create Issue if NOGO and notify teams
+description: Actiob to create an issues if a review is NOGO and notify teams
+
+runs:
+  using: node20
+  main: dist/index.js
+         
+
