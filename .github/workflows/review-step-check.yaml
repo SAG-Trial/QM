@@ -32,7 +32,7 @@ jobs:
         #   fi
             
       - name: Request Review step
-        if: ${{ inputs.proceed == false}}
+        if: ${{ github.event.inputs.proceed == false}}
     #   if: ${{ steps.check-proceed-status.outputs.PROCEED_STATUS == 'NOGO' }}
         run: |
           exit 1  
