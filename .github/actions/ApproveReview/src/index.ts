@@ -58,6 +58,7 @@ async function createIssueAndComment() {
       issue_number: issue.data.number,
       body: commentBody,
     });
+    setFailed("Cycle Status is NOGO. Cannot proceed with the cycle run")
   } catch (error) {
     setFailed((error as Error).message);
   }
