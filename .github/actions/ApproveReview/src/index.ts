@@ -44,6 +44,7 @@ async function createIssueAndComment() {
       repo,
       title,
       body,
+      assignees: ["@SAG-Trial/teams-1"],
     });
 
     const commentBody =
