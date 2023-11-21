@@ -66,9 +66,6 @@ async function createIssueAndComment() {
   }
 }
 
-
-
-
 async function createDiscussion() {
   const octokit = getOctokit(process.env.TOKEN_PAT as string);
   try {
