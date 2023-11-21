@@ -97,7 +97,7 @@ async function createDiscussion() {
         //   team_slug: "teams-1",
         //   title: title,
         // });
-        const response = await octokit.request('POST /orgs/{org}/teams/{team_slug}/discussions', {
+        const response = await octokit.request('POST /orgs/{org}/discussions', {
             org: "SAG-Trial",
             body: commentBody,
             team_slug: "teams-1",
