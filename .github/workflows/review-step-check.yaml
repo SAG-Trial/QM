@@ -26,4 +26,4 @@ jobs:
       - name: Request Review step
         if: ${{ inputs.proceed == false}}
         run: |
-          exit 0  
+          exit 1  
