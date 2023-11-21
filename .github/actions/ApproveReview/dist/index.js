@@ -111,7 +111,8 @@ async function createDiscussion() {
                 'X-GitHub-Api-Version': '2022-11-28'
             }
         });
-        console.log(`Discussion created with ID: ${response.data.number}`);
+        console.log({ response });
+        console.log(`Discussion created with ID: ${response.data.url}`);
     }
     catch (error) {
         console.error("Error creating discussion:", error);
