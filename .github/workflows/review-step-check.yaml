@@ -22,6 +22,7 @@ jobs:
         id: check-proceed-status
         run: |
           echo "Proceed Status: ${{ github.event.inputs.proceed }}"
+          
         #   random_number=$((RANDOM % 2))
 
           # Use the random number to determine the output
