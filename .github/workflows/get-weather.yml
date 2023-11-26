@@ -9,18 +9,18 @@ jobs:
     # permissions:
     #   actions: write
       
-    runs-on: ubuntu-latest
+    uses: SAG-Trial/b/.github/actions/GetWeather@main
+
 
     # outputs:
     #   api_response: ${{ steps.get-weather.outputs.WEATHER_OUTPUT }}
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    # steps:
+    #   - name: Checkout code
+    #     uses: actions/checkout@v3
 
-      - name: Make API call to get weather data
-        id: get-weather
-        uses: SAG-Trial/b/.github/actions/GetWeather@main
+    #   - name: Make API call to get weather data
+    #     id: get-weather
         # run: |
         #   WEATHER_OUTPUT=$(curl --location "http://api.weatherstack.com/current?access_key=${{ secrets.REPO_B_TOKEN }}&query=%22New%20York%22")
 
