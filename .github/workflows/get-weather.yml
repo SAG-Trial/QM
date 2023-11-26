@@ -8,8 +8,9 @@ jobs:
     name: Making API Request
     # permissions:
     #   actions: write
-      
     uses: SAG-Trial/b/.github/actions/GetWeather@main
+      
+    
 
 
     # outputs:
