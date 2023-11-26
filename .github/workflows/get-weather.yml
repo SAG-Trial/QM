@@ -1,51 +1,52 @@
 name: GET WeatherStack API
 
 on:
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
   get_weather:
     name: Making API Request
-    permissions:
-      actions: write
+    # permissions:
+    #   actions: write
       
     runs-on: ubuntu-latest
 
-    outputs:
-      api_response: ${{ steps.get-weather.outputs.WEATHER_OUTPUT }}
+    # outputs:
+    #   api_response: ${{ steps.get-weather.outputs.WEATHER_OUTPUT }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Make API call to get weather data
         id: get-weather
-        run: |
-          WEATHER_OUTPUT=$(curl --location "http://api.weatherstack.com/current?access_key=${{ secrets.REPO_B_TOKEN }}&query=%22New%20York%22")
+        uses: SAG-Trial/b/.github/actions/GetWeather@main
+        # run: |
+        #   WEATHER_OUTPUT=$(curl --location "http://api.weatherstack.com/current?access_key=${{ secrets.REPO_B_TOKEN }}&query=%22New%20York%22")
 
-          echo "WEATHER_OUTPUT=$WEATHER_OUTPUT" >> $GITHUB_OUTPUT
-        env:
-          API_KEY: ${{ secrets.REPO_B_TOKEN }}
+        #   echo "WEATHER_OUTPUT=$WEATHER_OUTPUT" >> $GITHUB_OUTPUT
+        # env:
+        #   API_KEY: ${{ secrets.REPO_B_TOKEN }}
 
-      - name: Send Results Back
-        id: send-results
-        env: 
-          RESPONSE: ${{ steps.get-weather.outputs.WEATHER_OUTPUT }}
-        run: |
-          $RESPONSE | jq >> my_variable
-          echo $my_variable
+      # - name: Send Results Back
+      #   id: send-results
+      #   env: 
+      #     RESPONSE: ${{ steps.get-weather.outputs.WEATHER_OUTPUT }}
+      #   run: |
+      #     $RESPONSE | jq >> my_variable
+      #     echo $my_variable
           
-          curl --location 'https://api.github.com/repos/SAG-Trial/a/actions/workflows/test-org-secret.yml/dispatches' \
-          --header 'Accept: application/vnd.github+json' \
-          --header 'Content-Type: application/json' \
-          --header 'Authorization: Bearer ${{ secrets.ORG_TOKEN }}' \
-          --data '{
-              "ref":"main",
-              "inputs": {
-                "response": " sample reponse: **weather data** ",
-                "display":"true"
-              }
-          }'
+      #     curl --location 'https://api.github.com/repos/SAG-Trial/a/actions/workflows/test-org-secret.yml/dispatches' \
+      #     --header 'Accept: application/vnd.github+json' \
+      #     --header 'Content-Type: application/json' \
+      #     --header 'Authorization: Bearer ${{ secrets.ORG_TOKEN }}' \
+      #     --data '{
+      #         "ref":"main",`
+      #         "inputs": {
+      #           "response": " sample reponse: **weather data** ",
+      #           "display":"true"
+      #         }
+      #     }'
 
   # call_initiator_workflow:
   #   name: Call initiator workflow

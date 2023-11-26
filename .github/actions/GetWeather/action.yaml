@@ -1,0 +1,6 @@
+name: Get Weather data with an API Key
+description: Reusable action to get weather data without giving consumer the API key
+
+runs:
+  using: node20
+  main: dist/index.js
