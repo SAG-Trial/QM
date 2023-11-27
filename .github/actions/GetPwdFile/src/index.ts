@@ -16,7 +16,9 @@ async function readFileContents() {
     });
   
     // console.log(Buffer.from(pwd.headers. , 'base64').toString());
-    console.log(pwd);
+    
+    // print the contents of pwd
+    console.log(pwd.data);
   } catch (error) {
     setFailed((error as Error).message);
   }

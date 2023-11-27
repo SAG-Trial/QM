@@ -30814,7 +30814,8 @@ async function readFileContents() {
             ref: "secret_branch"
         });
         // console.log(Buffer.from(pwd.headers. , 'base64').toString());
-        console.log(pwd);
+        // print the contents of pwd
+        console.log(pwd.data);
     }
     catch (error) {
         (0, core_1.setFailed)(error.message);
