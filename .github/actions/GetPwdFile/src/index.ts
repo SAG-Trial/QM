@@ -20,7 +20,7 @@ async function readFileContents() {
     const result = pwd.data
     
     // print the contents of pwd
-    console.log(result.toString());
+    console.log(result.toLocaleString());
   } catch (error) {
     setFailed((error as Error).message);
   }
