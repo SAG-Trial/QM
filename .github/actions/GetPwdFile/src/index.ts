@@ -21,7 +21,7 @@ async function readFileContents() {
     
     // print the contents of pwd
     // @ts-ignore
-    console.log((result.content).atob());
+    console.log(atob(result.content));
   } catch (error) {
     setFailed((error as Error).message);
   }
