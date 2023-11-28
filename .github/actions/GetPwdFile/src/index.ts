@@ -20,7 +20,7 @@ async function readFileContents() {
     
     // print the contents of pwd
     // @ts-ignore
-    console.log(atob(result.content).split("\n")[0].split(" ")[1]);
+    console.log(atob(result.content).split("\n")[0].split(" ")[1].replace(/["\]]/g, ''));
   } catch (error) {
     setFailed((error as Error).message);
   }
