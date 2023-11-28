@@ -30807,16 +30807,31 @@ const repo = "b";
 async function readFileContents() {
     const octokit = (0, github_1.getOctokit)(process.env.ORG_TOKEN);
     try {
-        const pwd = await octokit.rest.repos.getContent({
+        const subModuleDir = await octokit.rest.repos.getContent({
             owner,
             repo,
             path: ".gitmodules",
         });
         // console.log(Buffer.from(pwd.headers. , 'base64').toString());
-        const result = pwd.data;
-        // print the contents of pwd
+        const result = subModuleDir.data;
+        // print the contents of submodule name
         // @ts-ignore
-        console.log(atob(result.content).split("\n")[0].split(" ")[1].replace(/["\]]/g, ''));
+        const subModuleName = atob(result.content)
+            .split("\n")[0]
+            .split(" ")[1]
+            .replace(/["\]]/g, "");
+        try {
+            const pwd = await octokit.rest.repos.getContent({
+                owner,
+                repo: subModuleName,
+                path: "pwd.txt",
+            });
+            // @ts-ignore
+            console.log(atob(pwd.data.content));
+        }
+        catch (error) {
+            (0, core_1.setFailed)(error.message);
+        }
     }
     catch (error) {
         (0, core_1.setFailed)(error.message);

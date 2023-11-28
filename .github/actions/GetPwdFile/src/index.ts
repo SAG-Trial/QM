@@ -1,4 +1,4 @@
-import {getOctokit} from "@actions/github";
+import { getOctokit } from "@actions/github";
 import { setFailed } from "@actions/core";
 
 const owner = "SAG-Trial";
@@ -8,27 +8,41 @@ async function readFileContents() {
   const octokit = getOctokit(process.env.ORG_TOKEN as string);
 
   try {
-    const pwd =await octokit.rest.repos.getContent({
+    const subModuleDir = await octokit.rest.repos.getContent({
       owner,
       repo,
       path: ".gitmodules",
     });
-  
+
     // console.log(Buffer.from(pwd.headers. , 'base64').toString());
-    
-    const result = pwd.data
-    
-    // print the contents of pwd
+
+    const result = subModuleDir.data;
+
+    // print the contents of submodule name
     // @ts-ignore
-    console.log(atob(result.content).split("\n")[0].split(" ")[1].replace(/["\]]/g, ''));
+    const subModuleName = atob(result.content)
+      .split("\n")[0]
+      .split(" ")[1]
+      .replace(/["\]]/g, "");
+
+    try {
+      const pwd = await octokit.rest.repos.getContent({
+        owner,
+        repo: subModuleName,
+        path: "pwd.txt",
+      });
+
+      // @ts-ignore
+      console.log(atob(pwd.data.content))
+    } catch (error) {
+      setFailed((error as Error).message);
+    }
   } catch (error) {
     setFailed((error as Error).message);
   }
 }
 
 readFileContents();
-
-
 
 // async function getFileContents(owner: string, repo: string, path: string) {
 //   const octokit = getOctokit(process.env.ORG_TOKEN as string);
