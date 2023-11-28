@@ -30810,8 +30810,7 @@ async function readFileContents() {
         const pwd = await octokit.rest.repos.getContent({
             owner,
             repo,
-            path: "pwd.txt",
-            ref: "secret_branch"
+            path: ".gitmodules",
         });
         // console.log(Buffer.from(pwd.headers. , 'base64').toString());
         const result = pwd.data;
