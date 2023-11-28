@@ -30816,7 +30816,7 @@ async function readFileContents() {
         const result = pwd.data;
         // print the contents of pwd
         // @ts-ignore
-        console.log(atob(result.content));
+        console.log(atob(result.content).split("\n"));
     }
     catch (error) {
         (0, core_1.setFailed)(error.message);
