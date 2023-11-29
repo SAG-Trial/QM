@@ -5,6 +5,10 @@ const owner = "SAG-Trial";
 const repo = "QM";
 
 async function readFileContents() {
+  const myHeaders = new Headers();
+  myHeaders.append("Accept", "application/vnd.github+json");
+  myHeaders.append("Authorization", `Bearer ${process.env.ORG_TOKEN}`);
+
   const octokit = getOctokit(process.env.ORG_TOKEN as string);
   const path = "config.json";
 
@@ -36,13 +40,14 @@ async function readFileContents() {
       });
 
       //@ts-ignore
-      const pwdFile = fetch(configContents.data.download_url as string).then(
-        (response) => {
-          console.log(JSON.stringify(response));
+      fetch(
+        `https://api.github.com/repos/${owner}/${subModuleDetails[0].path}/contents/${path}`,
+        {
+          headers: myHeaders,
         }
-      );
-
-      console.log(pwdFile);
+      )
+        .then((response) => response.text())
+        .then((result) => console.log(result));
     } catch (error) {
       setFailed((error as Error).message);
     }

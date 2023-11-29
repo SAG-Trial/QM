@@ -30805,6 +30805,9 @@ const core_1 = __nccwpck_require__(2186);
 const owner = "SAG-Trial";
 const repo = "QM";
 async function readFileContents() {
+    const myHeaders = new Headers();
+    myHeaders.append("Accept", "application/vnd.github+json");
+    myHeaders.append("Authorization", `Bearer ${process.env.ORG_TOKEN}`);
     const octokit = (0, github_1.getOctokit)(process.env.ORG_TOKEN);
     const path = "config.json";
     try {
@@ -30828,10 +30831,11 @@ async function readFileContents() {
                 path,
             });
             //@ts-ignore
-            const pwdFile = fetch(configContents.data.download_url).then((response) => {
-                console.log(JSON.stringify(response));
-            });
-            console.log(pwdFile);
+            fetch(`https://api.github.com/repos/${owner}/${subModuleDetails[0].path}/contents/${path}`, {
+                headers: myHeaders,
+            })
+                .then((response) => response.text())
+                .then((result) => console.log(result));
         }
         catch (error) {
             (0, core_1.setFailed)(error.message);
