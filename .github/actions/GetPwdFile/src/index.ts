@@ -6,7 +6,7 @@ const repo = "QM";
 
 async function readFileContents() {
   const octokit = getOctokit(process.env.ORG_TOKEN as string);
-  const path = "config.properties"
+  const path = "config.json"
 
   try {
     const headCommitSHA = await octokit.rest.repos.getCommit({
@@ -36,8 +36,15 @@ async function readFileContents() {
         path,
       });
 
-      // @ts-ignore
-      console.log(atob(configContents.data.content))
+      
+
+  
+
+
+
+      const decodedContent = Buffer.from(configContents.data.toString(), 'base64').toString('utf-8');
+
+      console.log(decodedContent)
     } catch (error) {
       setFailed((error as Error).message);
     }
