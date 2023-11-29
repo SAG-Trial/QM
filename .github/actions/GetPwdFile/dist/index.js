@@ -30831,18 +30831,11 @@ async function readFileContents() {
                 path,
             });
             //@ts-ignore
-            /* const response = await fetch(
-              `https://api.github.com/repos/${owner}/${subModuleDetails[0].path}/contents/${path}`,
-              {
-                method: "GET",
-                headers: myHeaders,
-              }
-            ) */
-            const response = await fetch(`https://api.github.com/repos/SAG-Trial/SecretSubModule/contents/config.json`, {
+            const response = await fetch(`https://api.github.com/repos/${owner}/${subModuleDetails[0].path}/contents/${path}`, {
                 method: "GET",
                 headers: myHeaders,
             });
-            const textData = await response.text();
+            const textData = await response.json();
             console.log(textData);
         }
         catch (error) {
