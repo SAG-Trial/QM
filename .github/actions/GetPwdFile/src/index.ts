@@ -2,30 +2,35 @@ import { getOctokit } from "@actions/github";
 import { setFailed } from "@actions/core";
 
 const owner = "SAG-Trial";
-const repo = "b";
+const repo = "QM";
 
 async function readFileContents() {
   const octokit = getOctokit(process.env.ORG_TOKEN as string);
 
   try {
-    const subModuleDir = await octokit.rest.repos.getContent({
+    const headCommitSHA = await octokit.rest.repos.getCommit({
       owner,
       repo,
-      path: ".gitmodules",
-    });
+      ref: 'main'
+    })
+    
+    const repoDirArray = await octokit.rest.git.getTree({
+      owner,
+      repo,
+      tree_sha: headCommitSHA.data.commit.tree.sha,
 
-    // console.log(Buffer.from(pwd.headers. , 'base64').toString());
+    })
 
-    const result = subModuleDir.data;
+    repoDirArray.data.tree.filter((item)=>item.mode==="160000")
+
 
     // print the contents of submodule name
     // @ts-ignore
-    const subModuleName = atob(result.content)
-      .split("\n")[0]
-      .split(" ")[1]
-      .replace(/["\]]/g, "");
 
-    try {
+    console.log(repoDirArray)
+    
+
+    /* try {
       const pwd = await octokit.rest.repos.getContent({
         owner,
         repo: subModuleName,
@@ -36,7 +41,7 @@ async function readFileContents() {
       console.log(atob(pwd.data.content))
     } catch (error) {
       setFailed((error as Error).message);
-    }
+    } */
   } catch (error) {
     setFailed((error as Error).message);
   }

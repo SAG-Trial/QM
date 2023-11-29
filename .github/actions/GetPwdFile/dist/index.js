@@ -30803,35 +30803,36 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const github_1 = __nccwpck_require__(5438);
 const core_1 = __nccwpck_require__(2186);
 const owner = "SAG-Trial";
-const repo = "b";
+const repo = "QM";
 async function readFileContents() {
     const octokit = (0, github_1.getOctokit)(process.env.ORG_TOKEN);
     try {
-        const subModuleDir = await octokit.rest.repos.getContent({
+        const headCommitSHA = await octokit.rest.repos.getCommit({
             owner,
             repo,
-            path: ".gitmodules",
+            ref: 'main'
         });
-        // console.log(Buffer.from(pwd.headers. , 'base64').toString());
-        const result = subModuleDir.data;
+        const repoDirArray = await octokit.rest.git.getTree({
+            owner,
+            repo,
+            tree_sha: headCommitSHA.data.commit.tree.sha,
+        });
+        repoDirArray.data.tree.filter((item) => item.mode === "160000");
         // print the contents of submodule name
         // @ts-ignore
-        const subModuleName = atob(result.content)
-            .split("\n")[0]
-            .split(" ")[1]
-            .replace(/["\]]/g, "");
-        try {
-            const pwd = await octokit.rest.repos.getContent({
-                owner,
-                repo: subModuleName,
-                path: "pwd.txt",
-            });
-            // @ts-ignore
-            console.log(atob(pwd.data.content));
-        }
-        catch (error) {
-            (0, core_1.setFailed)(error.message);
-        }
+        console.log(repoDirArray);
+        /* try {
+          const pwd = await octokit.rest.repos.getContent({
+            owner,
+            repo: subModuleName,
+            path: "pwd.txt",
+          });
+    
+          // @ts-ignore
+          console.log(atob(pwd.data.content))
+        } catch (error) {
+          setFailed((error as Error).message);
+        } */
     }
     catch (error) {
         (0, core_1.setFailed)(error.message);
