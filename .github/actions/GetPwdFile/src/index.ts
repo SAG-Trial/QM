@@ -37,7 +37,7 @@ async function readFileContents() {
       });
 
       //@ts-ignore
-      console.log(atob(configContents.data.content as string));
+      console.log(JSON.parse(atob(configContents.data.content as string)));
     } catch (error) {
       setFailed((error as Error).message);
     }
