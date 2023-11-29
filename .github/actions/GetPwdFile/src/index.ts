@@ -6,7 +6,7 @@ const repo = "QM";
 
 async function readFileContents() {
   const octokit = getOctokit(process.env.ORG_TOKEN as string);
-  const path = "config.properties"
+  const path = "config.json"
 
   try {
     const headCommitSHA = await octokit.rest.repos.getCommit({
