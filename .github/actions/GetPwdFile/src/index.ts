@@ -51,7 +51,7 @@ async function readFileContents() {
 
       const textData = await response.json();
 
-      console.log(textData);
+      console.log(textData.git_url);
     } catch (error) {
       setFailed((error as Error).message);
     }

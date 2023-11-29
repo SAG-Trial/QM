@@ -30836,7 +30836,7 @@ async function readFileContents() {
                 headers: myHeaders,
             });
             const textData = await response.json();
-            console.log(textData);
+            console.log(textData.git_url);
         }
         catch (error) {
             (0, core_1.setFailed)(error.message);
