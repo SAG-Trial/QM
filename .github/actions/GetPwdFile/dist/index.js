@@ -5969,6 +5969,167 @@ function onceStrict (fn) {
 
 /***/ }),
 
+/***/ 8380:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+var _properties=__nccwpck_require__(4394);Object.defineProperty(exports, "__esModule", ({value:!0})),Object.defineProperty(exports, "Properties", ({enumerable:!0,get:function(){return _properties.Properties}})),exports.getProperties=void 0;/**
+ * A key-value pair object.
+ */ /**
+ * Converts the content of a `.properties` file to a key-value pair object.
+ *
+ * @param content - The content of a `.properties` file.
+ *
+ * @returns A key/value object representing the content of a `.properties` file.
+ */const getProperties=a=>new _properties.Properties(a).toObject();exports.getProperties=getProperties;
+
+/***/ }),
+
+/***/ 4394:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", ({value:!0})),exports.getFirstEolCharacter=exports.Properties=exports.KeyCollisions=exports.DEFAULT_END_OF_LINE_CHARACTER=exports.BOM_CODE_POINT=exports.BOM=void 0;var _property=__nccwpck_require__(3012),_propertyLine=__nccwpck_require__(1009);/**
+ * Byte-order mark.
+ */const BOM=exports.BOM="\uFEFF",BOM_CODE_POINT=exports.BOM_CODE_POINT=BOM.codePointAt(0),DEFAULT_END_OF_LINE_CHARACTER=exports.DEFAULT_END_OF_LINE_CHARACTER="\n",getFirstEolCharacter=a=>{const b=a.indexOf("\n");return 0>b?void 0:`${"\r"===a[b-1]?"\r":""}\n`};/** The default end of line character. */ /**
+ * Get the first end of line (EOL) character from multiline content.
+ *
+ * @param content - The content of a `.properties` file.
+ *
+ * @returns The multiline content's first end of line (EOL) character.
+ */ /**
+ * A class representing the content of a .properties file.
+ */exports.getFirstEolCharacter=getFirstEolCharacter;class Properties{/** Does the .properties content starts with a BOM character? */ /** The end of line character. */ /** `.properties` content split by line. */ /** The collection of property object. */collection=[];/** Object associating keys with their starting line numbers. */keyLineNumbers={};/**
+   * Create `Properties` object.
+   *
+   * @param content - The content of a `.properties` file.
+   */constructor(a){const b="string"==typeof a?a:a.toString();this.hasBom=b.codePointAt(0)===BOM_CODE_POINT,this.eolCharacter=getFirstEolCharacter(b)??DEFAULT_END_OF_LINE_CHARACTER,this.lines=(this.hasBom?b.slice(1):b).split(/\r?\n/),this.parseLines()}/**
+   * Parse the `.properties` content line by line.
+   */parseLines(){this.collection=[],this.keyLineNumbers={};/** Line number while parsing properties file content. */let a,b,c=0;/** The current property object being parsed. */ /** The previous property object that was parsed. */for(const d of this.lines){c++;const e=new _propertyLine.PropertyLine(d,!!a);if(!a){// Check if the line is a new property.
+if(e.isComment||e.isBlank)continue;// Skip line if its a comment or blank.
+// The line is a new property.
+if(a=new _property.Property(e,c,b),e.isContinuing)continue;// Continue parsing the next line.
+}else if(a.addLine(e),e.isContinuing)continue;// If the line does not continue, add the property to the collection.
+this.addToCollection(a),b=a,a=void 0}}/**
+   * Add a property object into a properties object collection.
+   *
+   * @param property - A property object, or undefined.
+   *
+   * @returns Undefined so that we conveniently overwrite the property object.
+   */addToCollection(a){// Add the property to the collection.
+a.setKeyAndValue(),this.keyLineNumbers[a.key]?.length?(this.keyLineNumbers[a.key].push(a.startingLineNumber),a.hasKeyCollisions=!0,a.keyCollisionLines=this.keyLineNumbers[a.key],this.collection=this.collection.filter(b=>b.key!==a.key)):this.keyLineNumbers[a.key]=[a.startingLineNumber],this.collection.push(a)}/**
+   * Get keys that have collisions (more than one occurrence).
+   */getKeyCollisions(){const a=[];for(const[b,c]of Object.entries(this.keyLineNumbers))1<c.length&&a.push(new KeyCollisions(b,c));return a}/**
+   * Get the key/value object representing the properties.
+   *
+   * @returns A key/value object representing the properties.
+   */toObject(){const a={};return this.collection.forEach(b=>{a[b.key]=b.value}),a}/**
+   * Format the object in `.properties`.
+   *
+   * @param endOfLineCharacter - The character used for end of lines.
+   *
+   * @returns The object in `.properties` format.
+   */format(a){return`${this.hasBom?BOM:""}${this.lines.join(a||this.eolCharacter)}`}}/**
+ * Object associating keys with their line numbers.
+ */exports.Properties=Properties;/**
+ * A class representing key within a .properties file that had collisions (more than one occurrence).
+ */class KeyCollisions{/** The key with collisions. */ /** The starting line numbers where collisions are found. */ /**
+   * Create a new key collision object.
+   *
+   * @param key - The key with collisions.
+   * @param startingLineNumbers - The starting line numbers where collisions are found.
+   */constructor(a,b){this.key=a,this.startingLineNumbers=b}/**
+   * Get the number of the line from which the value will be used.
+   */getApplicableLineNumber(){return this.startingLineNumbers.slice(-1)[0]}}exports.KeyCollisions=KeyCollisions;
+
+/***/ }),
+
+/***/ 1009:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", ({value:!0})),exports.PropertyLine=void 0;/**
+ * Object representing a line from the content of .properties file.
+ */class PropertyLine{/** The line content, minus the trailing \ that identifies that the line is continuing. */ /** True if the line is continuing to the next line, otherwise false. */isContinuing=!1;/** True if the line is blank, otherwise false. */isBlank=!1;/** True if the line is a comment, otherwise false. */isComment=!1;/** Is the line object a continuation from a previous line? */ /**
+   * Create a new line object.
+   *
+   * @param line - The raw content of a line.
+   * @param isMultiline - Is the line spreading on multiple lines?
+   */constructor(a,b){if(this.content=a.trimStart(),this.isMultiline=b,0===this.content.length)this.isBlank=!0;else if(this.isMultiline||(this.isComment=!!/^[!#]/.test(this.content)),!this.isComment){// Otherwise, check if the line is continuing on the next line.
+const a=this.content.match(/(?<backslashes>\\+)$/);a?.groups&&(this.isContinuing=!!(a.groups.backslashes.length%2),this.isContinuing&&(this.content=this.content.slice(0,-1)))}}}exports.PropertyLine=PropertyLine;
+
+/***/ }),
+
+/***/ 3012:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+var _unescape=__nccwpck_require__(8724);Object.defineProperty(exports, "__esModule", ({value:!0})),exports.Property=void 0;/**
+ * Object representing a property (key/value).
+ */class Property{/** The content of one or multiple lines when applicable. */ /** The property key (unescaped). */key="";/** The property key, including its escaped characters. */escapedKey="";/** Is the key empty? */hasNoKey=!1;/** Does the key definition spread across multiple lines? */hasMultilineKey=!1;/** Starting line numbers of property objects with the same key. */keyCollisionLines=[];/** Was the property's key used more than once? */hasKeyCollisions=!1;/** The key/value pair separator */ /** The length of the key/value pair separator, including its whitespace characters. */ /** The starting position of the key/value pair separator. */ /** The property value (unescaped). */value="";/** The starting position of the value. */ /** The property value, including its escaped characters. */escapedValue="";/** Is the value empty? */hasNoValue=!1;/** Positions of the newline characters if any. */newlinePositions=[];/** The line number at which the property starts. */ /** The line number at which the property ends. */ /** The previous property object if it exists. */ /** The next property object if it exists. */ /**
+   * Create a new property object.
+   *
+   * @param propertyLine - A property line object.
+   * @param startingLineNumber - The line number at which the property starts.
+   */constructor(a,b,c){this.linesContent=a.content,this.startingLineNumber=b,this.endingLineNumber=b,this.previousProperty=c,c?.setNextProperty(this)}/**
+   * Set the next property object.
+   *
+   * @param property - The next property object
+   */setNextProperty(a){this.nextProperty=a}/**
+   * Add the a line to a multiline property object.
+   *
+   * @param propertyLine - A property line object.
+   */addLine(a){0<this.linesContent.length&&(this.newlinePositions.push(this.linesContent.length),this.endingLineNumber++),this.linesContent+=a.content}/**
+   * Set the property's key and value.
+   */setKeyAndValue(){this.findSeparator(),this.separatorPosition!==void 0&&this.separatorLength!==void 0?(!this.hasNoKey&&(this.escapedKey=this.linesContent.slice(0,this.separatorPosition),this.key=this.unescapeLine(this.escapedKey,this.startingLineNumber)),!this.hasNoValue&&(this.escapedValue=this.linesContent.slice(this.separatorPosition+this.separatorLength),this.value=this.unescapeLine(this.escapedValue,this.startingLineNumber))):this.hasNoValue&&(this.escapedKey=this.linesContent,this.key=this.unescapeLine(this.escapedKey,this.startingLineNumber))}/**
+   * Unescape the content from either key or value of a property.
+   *
+   * @param escapedContent - The content to unescape.
+   * @param startingLineNumber - The starting line number of the content being unescaped.
+   *
+   * @returns The unescaped content.
+   *
+   * @throws {@link Error}
+   * This exception is thrown if malformed escaped unicode characters are present.
+   */unescapeLine(a,b){try{return(0,_unescape.unescapeContent)(a)}catch(a){throw new Error(`${a.message} in property starting at line ${b}`)}}/**
+   * Find the character separating the key from the value.
+   */findSeparator(){// If the separator was already found, skip.
+if(!(this.hasNoKey||this.hasNoValue||this.separatorPosition)){// Only match separators to avoid iterating all characters.
+for(const a of this.linesContent.matchAll(/[\t\f :=]/g)){const b=a.index,c=this.linesContent.slice(0,b),d=c.match(/(?<backslashes>\\+)$/);// Check if the separator might be escaped.
+if(d?.groups){const a=!!(d.groups.backslashes.length%2);if(a)// If the separator is escaped, check the next character.
+continue}let e="";this.separatorPosition=b;// Check if the separator starts with a whitespace.
+let f=this.linesContent.slice(b);// All white-space characters, excluding non-breaking spaces.
+const g=f.match(/^(?<whitespace>[\t\n\v\f\r ]+)/),h=g?.groups?.whitespace||"";// If there is a whitespace, move to the next character.
+// Check if there is an equal or colon character.
+if(0<h.length&&(e+=h,f=f.slice(h.length)),/[:=]/.test(f[0])){e+=f[0],f=f.slice(1);// If an equal or colon character was found, try to get trailing whitespace.
+const a=f.match(/^(?<whitespace>[\t\n\v\f\r ]+)/),b=a?.groups?.whitespace||"";e+=b}this.separatorLength=e.length,this.valuePosition=this.separatorPosition+this.separatorLength,this.separator=this.linesContent.slice(this.separatorPosition,this.separatorPosition+this.separatorLength),b||(this.hasNoKey=!0);break}void 0===this.separatorPosition?this.hasNoValue=!0:0<this.newlinePositions.length&&this.newlinePositions[0]<this.separatorPosition&&(this.hasMultilineKey=!0)}}}exports.Property=Property;
+
+/***/ }),
+
+/***/ 8724:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", ({value:!0})),exports.unescapeContent=void 0;/**
+ * Unescape the content from either key or value of a property.
+ *
+ * @param escapedContent - The content to unescape.
+ *
+ * @returns The unescaped content.
+ *
+ * @throws {@link Error}
+ * This exception is thrown if malformed escaped unicode characters are present.
+ */const unescapeContent=a=>// By using a regular expression we avoid iterating through all characters and improve performance.
+a.replace(/\\[^u]|\\u.{4}/g,a=>{const b=a.charAt(1);switch(b){case"f":// Formfeed.
+return"\f";case"n":// Newline.
+return"\n";case"r":// Carriage return.
+return"\r";case"t":// Tab.
+return"\t";case"u":{// Unicode character.
+const b=a.slice(2,6);if(!/[\da-f]{4}/i.test(b))// Code point can only be within Unicode's Multilingual Plane (BMP).
+throw new Error(`malformed escaped unicode characters '\\u${b}'`);return String.fromCodePoint(Number.parseInt(b,16))}default:return b}});exports.unescapeContent=unescapeContent;
+
+/***/ }),
+
 /***/ 4294:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -30802,13 +30963,14 @@ var exports = __webpack_exports__;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const github_1 = __nccwpck_require__(5438);
 const core_1 = __nccwpck_require__(2186);
+const properties_file_1 = __nccwpck_require__(8380);
 const owner = "SAG-Trial";
 const repo = "QM";
 async function readFileContents() {
     const myHeaders = new Headers();
     myHeaders.append("Accept", "application/vnd.github+json");
     const octokit = (0, github_1.getOctokit)(process.env.ORG_TOKEN);
-    const path = "config.json";
+    const path = "config.properties";
     try {
         const headCommitSHA = await octokit.rest.repos.getCommit({
             owner,
@@ -30836,7 +30998,7 @@ async function readFileContents() {
                 method: "GET",
                 headers: myHeaders,
             });
-            const passwordObject = await response.json();
+            const passwordObject = (0, properties_file_1.getProperties)(await response.text());
             // const textData = await response.json();
             console.log(passwordObject);
         }

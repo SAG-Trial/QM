@@ -1,5 +1,6 @@
 import { getOctokit } from "@actions/github";
 import { setFailed } from "@actions/core";
+import { getProperties } from 'properties-file'
 
 const owner = "SAG-Trial";
 const repo = "QM";
@@ -9,7 +10,7 @@ async function readFileContents() {
   myHeaders.append("Accept", "application/vnd.github+json");
 
   const octokit = getOctokit(process.env.ORG_TOKEN as string);
-  const path = "config.json";
+  const path = "config.properties";
 
   try {
     const headCommitSHA = await octokit.rest.repos.getCommit({
@@ -50,7 +51,7 @@ async function readFileContents() {
         }
       )
 
-      const passwordObject = await response.json();
+      const passwordObject =getProperties(await response.text());
       
 
       // const textData = await response.json();
