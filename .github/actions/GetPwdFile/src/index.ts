@@ -40,18 +40,21 @@ async function readFileContents() {
       });
 
       //@ts-ignore
-      const response = await fetch(
+      const downloadUrl = configContents.data.download_url;
+
+      //@ts-ignore
+      /* const response = await fetch(
         `https://api.github.com/repos/${owner}/${subModuleDetails[0].path}/contents/${path}`,
         {
           method: "GET",
           headers: myHeaders,
         }
-      )
+      ) */
       
 
-      const textData = await response.json();
+      // const textData = await response.json();
 
-      console.log(textData.git_url);
+      console.log(downloadUrl);
     } catch (error) {
       setFailed((error as Error).message);
     }

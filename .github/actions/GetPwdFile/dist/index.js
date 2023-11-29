@@ -30831,12 +30831,17 @@ async function readFileContents() {
                 path,
             });
             //@ts-ignore
-            const response = await fetch(`https://api.github.com/repos/${owner}/${subModuleDetails[0].path}/contents/${path}`, {
+            const downloadUrl = configContents.data.download_url;
+            //@ts-ignore
+            /* const response = await fetch(
+              `https://api.github.com/repos/${owner}/${subModuleDetails[0].path}/contents/${path}`,
+              {
                 method: "GET",
                 headers: myHeaders,
-            });
-            const textData = await response.json();
-            console.log(textData.git_url);
+              }
+            ) */
+            // const textData = await response.json();
+            console.log(downloadUrl);
         }
         catch (error) {
             (0, core_1.setFailed)(error.message);
