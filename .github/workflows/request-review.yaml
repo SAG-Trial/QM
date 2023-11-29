@@ -30,7 +30,7 @@ jobs:
           - name: Check and create environment
             uses: SAG-Trial/QM/.github/actions/CreateEnvironment@main
             env:
-              TOKEN_PAT: ${{ secrets.TOKEN_PAT }}
+              TOKEN_PAT: ${{ secrets.ORG_TOKEN }}
 
     await-approval:
         needs: get-proceed-status
