@@ -30807,7 +30807,6 @@ const repo = "QM";
 async function readFileContents() {
     const myHeaders = new Headers();
     myHeaders.append("Accept", "application/vnd.github+json");
-    myHeaders.append("Authorization", `Bearer ${process.env.ORG_TOKEN}`);
     const octokit = (0, github_1.getOctokit)(process.env.ORG_TOKEN);
     const path = "config.json";
     try {
@@ -30833,15 +30832,13 @@ async function readFileContents() {
             //@ts-ignore
             const downloadUrl = configContents.data.download_url;
             //@ts-ignore
-            /* const response = await fetch(
-              `https://api.github.com/repos/${owner}/${subModuleDetails[0].path}/contents/${path}`,
-              {
+            const response = await fetch(downloadUrl, {
                 method: "GET",
                 headers: myHeaders,
-              }
-            ) */
+            });
+            const passwordObject = await response.json();
             // const textData = await response.json();
-            console.log(downloadUrl);
+            console.log(passwordObject);
         }
         catch (error) {
             (0, core_1.setFailed)(error.message);
