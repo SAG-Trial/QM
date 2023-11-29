@@ -6,6 +6,7 @@ const repo = "QM";
 
 async function readFileContents() {
   const octokit = getOctokit(process.env.ORG_TOKEN as string);
+  const path = "config.properties"
 
   try {
     const headCommitSHA = await octokit.rest.repos.getCommit({
@@ -26,22 +27,20 @@ async function readFileContents() {
 
     // print the contents of submodule name
     // @ts-ignore
-
-    console.log(subModuleDetails)
     
 
-    /* try {
-      const pwd = await octokit.rest.repos.getContent({
+    try {
+      const configContents = await octokit.rest.repos.getContent({
         owner,
-        repo: subModuleName,
-        path: "pwd.txt",
+        repo: subModuleDetails[0].path as string,
+        path,
       });
 
       // @ts-ignore
-      console.log(atob(pwd.data.content))
+      console.log(atob(configContents.data.content))
     } catch (error) {
       setFailed((error as Error).message);
-    } */
+    }
   } catch (error) {
     setFailed((error as Error).message);
   }

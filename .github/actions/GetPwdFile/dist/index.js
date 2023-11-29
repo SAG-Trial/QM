@@ -30806,6 +30806,7 @@ const owner = "SAG-Trial";
 const repo = "QM";
 async function readFileContents() {
     const octokit = (0, github_1.getOctokit)(process.env.ORG_TOKEN);
+    const path = "config.properties";
     try {
         const headCommitSHA = await octokit.rest.repos.getCommit({
             owner,
@@ -30820,19 +30821,18 @@ async function readFileContents() {
         const subModuleDetails = repoDirArray.data.tree.filter((item) => item.mode === "160000");
         // print the contents of submodule name
         // @ts-ignore
-        console.log(subModuleDetails);
-        /* try {
-          const pwd = await octokit.rest.repos.getContent({
-            owner,
-            repo: subModuleName,
-            path: "pwd.txt",
-          });
-    
-          // @ts-ignore
-          console.log(atob(pwd.data.content))
-        } catch (error) {
-          setFailed((error as Error).message);
-        } */
+        try {
+            const configContents = await octokit.rest.repos.getContent({
+                owner,
+                repo: subModuleDetails[0].path,
+                path,
+            });
+            // @ts-ignore
+            console.log(atob(configContents.data.content));
+        }
+        catch (error) {
+            (0, core_1.setFailed)(error.message);
+        }
     }
     catch (error) {
         (0, core_1.setFailed)(error.message);
