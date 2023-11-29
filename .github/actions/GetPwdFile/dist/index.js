@@ -30831,11 +30831,11 @@ async function readFileContents() {
                 path,
             });
             //@ts-ignore
-            fetch(`https://api.github.com/repos/${owner}/${subModuleDetails[0].path}/contents/${path}`, {
+            const response = await fetch(`https://api.github.com/repos/${owner}/${subModuleDetails[0].path}/contents/${path}`, {
                 headers: myHeaders,
-            })
-                .then((response) => response.text())
-                .then((result) => console.log(result));
+            });
+            const textData = await response.text();
+            console.log(textData);
         }
         catch (error) {
             (0, core_1.setFailed)(error.message);

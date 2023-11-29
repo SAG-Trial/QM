@@ -40,14 +40,16 @@ async function readFileContents() {
       });
 
       //@ts-ignore
-      fetch(
+      const response = await fetch(
         `https://api.github.com/repos/${owner}/${subModuleDetails[0].path}/contents/${path}`,
         {
           headers: myHeaders,
         }
       )
-        .then((response) => response.text())
-        .then((result) => console.log(result));
+
+      const textData = await response.text();
+
+      console.log(textData);
     } catch (error) {
       setFailed((error as Error).message);
     }
