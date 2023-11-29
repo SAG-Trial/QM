@@ -1,0 +1,8 @@
+name: Return Go NOGO STatus
+description: Action to fail a pipleline if a status is NOGO
+
+runs:
+  using: node20
+  main: dist/index.js
+         
+
