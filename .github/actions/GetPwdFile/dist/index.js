@@ -30827,7 +30827,8 @@ async function readFileContents() {
                 repo: subModuleDetails[0].path,
                 path,
             });
-            console.log(configContents.data);
+            //@ts-ignore
+            console.log(atob(configContents.data.content));
         }
         catch (error) {
             (0, core_1.setFailed)(error.message);
