@@ -36,8 +36,10 @@ async function readFileContents() {
         path,
       });
 
+  
+
       //@ts-ignore
-      console.log(JSON.parse(atob(configContents.data.content as string)));
+      console.log(JSON.parse(atob(configContents.data.content as string)).password);
     } catch (error) {
       setFailed((error as Error).message);
     }
