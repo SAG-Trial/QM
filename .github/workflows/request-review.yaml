@@ -1,0 +1,43 @@
+name: Review Step check
+
+on:
+  workflow_call: 
+      inputs:
+          proceed:
+              description: 'GO/NOGO'
+              type: string
+              required: true
+      outputs:
+          proceed-status:
+              description: 'GO/NOGO'
+              value: ${{ jobs.get-proceed-status.outputs.proceed-status  }}
+
+jobs:
+    get-proceed-status:
+        runs-on: ubuntu-latest
+        outputs:
+            proceed-status: ${{ steps.check-proceed-status.outputs.PROCEED_STATUS }}
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v3
+    
+          - name: Check Proceed Status
+            id: check-proceed-status
+            uses: SAG-Trial/QM/.github/actions/CheckProceedStatus@main
+            with:
+              proceed: ${{ github.event.inputs.proceed }}
+
+          - name: Check and create environment
+            uses: SAG-Trial/QM/.github/actions/CreateEnvironment@main
+            env:
+              TOKEN_PAT: ${{ secrets.TOKEN_PAT }}
+
+    await-approval:
+        needs: get-proceed-status
+        if: ${{ always() && needs.get-proceed-status.outputs.proceed-status == 'NOGO'  }}
+        runs-on: ubuntu-latest
+        environment: QA
+        steps:
+            - name: Deploy to QA
+              run: |
+                echo "Deploying to QA, paused for review"
