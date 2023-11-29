@@ -36,15 +36,9 @@ async function readFileContents() {
         path,
       });
 
-      
-
-  
-
-
-
       const decodedContent = Buffer.from(configContents.data.toString(), 'base64').toString('utf-8');
 
-      console.log(decodedContent)
+      console.log(configContents.data.toLocaleString())
     } catch (error) {
       setFailed((error as Error).message);
     }

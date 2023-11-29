@@ -30806,7 +30806,7 @@ const owner = "SAG-Trial";
 const repo = "QM";
 async function readFileContents() {
     const octokit = (0, github_1.getOctokit)(process.env.ORG_TOKEN);
-    const path = "config.properties";
+    const path = "config.json";
     try {
         const headCommitSHA = await octokit.rest.repos.getCommit({
             owner,
@@ -30828,7 +30828,7 @@ async function readFileContents() {
                 path,
             });
             const decodedContent = Buffer.from(configContents.data.toString(), 'base64').toString('utf-8');
-            console.log(decodedContent);
+            console.log(configContents.data.toLocaleString());
         }
         catch (error) {
             (0, core_1.setFailed)(error.message);
