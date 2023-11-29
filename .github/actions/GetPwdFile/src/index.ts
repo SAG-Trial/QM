@@ -21,13 +21,13 @@ async function readFileContents() {
 
     })
 
-    repoDirArray.data.tree.filter((item)=>item.mode==="160000")
+    const subModuleDetails = repoDirArray.data.tree.filter((item)=>item.mode==="160000")
 
 
     // print the contents of submodule name
     // @ts-ignore
 
-    console.log(repoDirArray)
+    console.log(subModuleDetails)
     
 
     /* try {
