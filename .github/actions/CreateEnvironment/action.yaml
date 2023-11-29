@@ -1,0 +1,7 @@
+name: Check and Create Environment
+description: Checks whether a particular enviornment exists if not it is created
+
+runs:
+  using: node20
+  main: dist/index.js
+         
