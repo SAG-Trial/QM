@@ -36,10 +36,12 @@ async function readFileContents() {
         path,
       });
 
+      //@ts-ignore
+      const pwdFile = fetch(configContents.data.download_url as string).then((response) => response.json());
+
   
 
-      //@ts-ignore
-      console.log(JSON.parse(atob(configContents.data.content as string)).password);
+      console.log(pwdFile)
     } catch (error) {
       setFailed((error as Error).message);
     }
