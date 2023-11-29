@@ -30811,7 +30811,7 @@ async function readFileContents() {
         const headCommitSHA = await octokit.rest.repos.getCommit({
             owner,
             repo,
-            ref: 'main'
+            ref: "main",
         });
         const repoDirArray = await octokit.rest.git.getTree({
             owner,
@@ -30828,7 +30828,9 @@ async function readFileContents() {
                 path,
             });
             //@ts-ignore
-            const pwdFile = fetch(configContents.data.download_url).then((response) => response.json());
+            const pwdFile = fetch(configContents.data.download_url).then((response) => {
+                console.log(JSON.stringify(response));
+            });
             console.log(pwdFile);
         }
         catch (error) {

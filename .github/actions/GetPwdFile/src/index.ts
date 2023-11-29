@@ -6,28 +6,27 @@ const repo = "QM";
 
 async function readFileContents() {
   const octokit = getOctokit(process.env.ORG_TOKEN as string);
-  const path = "config.json"
+  const path = "config.json";
 
   try {
     const headCommitSHA = await octokit.rest.repos.getCommit({
       owner,
       repo,
-      ref: 'main'
-    })
-    
+      ref: "main",
+    });
+
     const repoDirArray = await octokit.rest.git.getTree({
       owner,
       repo,
       tree_sha: headCommitSHA.data.commit.tree.sha,
+    });
 
-    })
-
-    const subModuleDetails = repoDirArray.data.tree.filter((item)=>item.mode==="160000")
-
+    const subModuleDetails = repoDirArray.data.tree.filter(
+      (item) => item.mode === "160000"
+    );
 
     // print the contents of submodule name
     // @ts-ignore
-    
 
     try {
       const configContents = await octokit.rest.repos.getContent({
@@ -37,11 +36,13 @@ async function readFileContents() {
       });
 
       //@ts-ignore
-      const pwdFile = fetch(configContents.data.download_url as string).then((response) => response.json());
+      const pwdFile = fetch(configContents.data.download_url as string).then(
+        (response) => {
+          console.log(JSON.stringify(response));
+        }
+      );
 
-  
-
-      console.log(pwdFile)
+      console.log(pwdFile);
     } catch (error) {
       setFailed((error as Error).message);
     }
