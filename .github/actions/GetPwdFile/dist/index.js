@@ -30851,8 +30851,9 @@ async function readFileContents() {
             // if Password file is .json type then use this
             const passwordObject = await response.json();
             console.log(passwordObject);
-            //
+            //verifying the type of passwordObject
             console.log("typeof passwordObject", typeof passwordObject);
+            // printing the passwords
             console.log(passwordObject.passwords);
         }
         catch (error) {
@@ -30864,26 +30865,6 @@ async function readFileContents() {
     }
 }
 readFileContents();
-// async function getFileContents(owner: string, repo: string, path: string) {
-//   const octokit = getOctokit(process.env.ORG_TOKEN as string);
-//   try {
-//     const response = await octokit.rest.repos.getContent({
-//       owner,
-//       repo,
-//       path,
-//     });
-//     if (Array.isArray(response.data)) {
-//       // Handle directory contents
-//       return response.data;
-//     } else {
-//       // Handle file contents
-//       const content = Buffer.from(response.data.content, 'base64').toString();
-//       return content;
-//     }
-//   } catch (error) {
-//     throw new Error((error as Error).message);
-//   }
-// }
 
 })();
 
