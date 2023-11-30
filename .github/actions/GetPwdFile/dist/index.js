@@ -30851,6 +30851,8 @@ async function readFileContents() {
             // if Password file is .json type then use this
             const passwordObject = await response.json();
             console.log(passwordObject);
+            console.log("typeof passwordObject", typeof passwordObject);
+            console.log(passwordObject.password);
         }
         catch (error) {
             (0, core_1.setFailed)(error.message);

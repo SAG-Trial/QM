@@ -75,6 +75,8 @@ async function readFileContents() {
       const passwordObject = await response.json();
 
       console.log(passwordObject);
+      console.log("typeof passwordObject", typeof passwordObject);
+      console.log(passwordObject.password);
     } catch (error) {
       setFailed((error as Error).message);
     }
