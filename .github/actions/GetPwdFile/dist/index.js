@@ -30856,6 +30856,8 @@ async function readFileContents() {
             console.log("typeof passwordObject", typeof passwordObject);
             // printing the passwords
             console.log(passwordObject.passwords);
+            //printing the password for db_password
+            console.log(passwordObject.passwords["db_password"]);
         }
         catch (error) {
             (0, core_1.setFailed)(error.message);

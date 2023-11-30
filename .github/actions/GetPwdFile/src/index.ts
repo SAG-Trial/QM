@@ -84,6 +84,9 @@ async function readFileContents() {
       // printing the passwords
       console.log(passwordObject.passwords);
 
+      //printing the password for db_password
+      console.log(passwordObject.passwords["db_password"]);
+
     } catch (error) {
       setFailed((error as Error).message);
     }
