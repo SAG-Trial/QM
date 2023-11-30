@@ -10,6 +10,8 @@ const owner = "SAG-Trial";
 const repo = "QM";
 
 async function readFileContents() {
+
+  //headers for download the password file
   const myHeaders = new Headers();
   myHeaders.append("Accept", "application/vnd.github+json");
 

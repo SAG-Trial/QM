@@ -30809,6 +30809,7 @@ const owner = "SAG-Trial";
 // Repo Name 
 const repo = "QM";
 async function readFileContents() {
+    //headers for download the password file
     const myHeaders = new Headers();
     myHeaders.append("Accept", "application/vnd.github+json");
     // Create an octokit instance with API token
