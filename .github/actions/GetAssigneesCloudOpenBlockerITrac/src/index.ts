@@ -48,7 +48,6 @@ const config = {
 };
 
 async function getAssignees() {
-  
   try {
     const response = await axios.request<responseData>(config);
     const assignees = response.data.issues.map((issue) => {
@@ -61,8 +60,6 @@ async function getAssignees() {
   } catch (error) {
     setFailed((error as Error).message);
   }
-
-  
 }
 
 getAssignees();
