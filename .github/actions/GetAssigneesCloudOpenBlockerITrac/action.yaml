@@ -1,0 +1,7 @@
+name: Get cloud-open-blocker-itrac assignees using REST API
+description: Get cloud-open-blocker-itrac assignees using REST API
+
+runs:
+  using: node20
+  main: dist/index.js
+  
