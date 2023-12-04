@@ -1,3 +1,5 @@
+import {setFailed, setOutput} from "@actions/core";
+
 // import axios library for making API calls to iTrac
 import axios from "axios";
 
@@ -46,14 +48,21 @@ const config = {
 };
 
 async function getAssignees() {
-  const response = await axios.request<responseData>(config);
+  
+  try {
+    const response = await axios.request<responseData>(config);
+    const assignees = response.data.issues.map((issue) => {
+      return {
+        name: issue.fields.assignee.displayName,
+        email: issue.fields.assignee.emailAddress,
+      };
+    });
+    setOutput("ASSIGNEES", JSON.stringify(assignees));
+  } catch (error) {
+    setFailed((error as Error).message);
+  }
 
-  const assignees = response.data.issues.map((issue) => {
-    return {
-      name: issue.fields.assignee.displayName,
-      email: issue.fields.assignee.emailAddress,
-    };
-  });
+  
 }
 
 getAssignees();
