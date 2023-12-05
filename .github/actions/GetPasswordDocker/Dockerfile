@@ -4,7 +4,7 @@
 FROM node:20
 
 # Copy the environment file with secrets
-COPY .env ./.env
+COPY ./.env ./.env
 
 # Copy the TypeScript files
 COPY dist/index.js ./index.js
