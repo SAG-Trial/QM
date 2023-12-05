@@ -44,7 +44,6 @@ async function readFileContents() {
       (item) => item.mode === "160000"
     );
 
-    
     try {
 
       // Reading the contents from Submoduke repo where the password file is stored . This returns a base64 encoded string which is not practical. So we will take download_url and fetch the contents from there directly in right format

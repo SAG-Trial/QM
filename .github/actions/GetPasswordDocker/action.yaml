@@ -1,0 +1,6 @@
+name: Docker Action to read passwords without sharing token
+description: Docker Action to read passwords without sharing token
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
