@@ -9,5 +9,7 @@ COPY .env ./
 # Copy the TypeScript files
 COPY dist/index.js ./index.js
 
+RUN ["chmod", "+x", "index.js"]
+
 # Set the entrypoint to execute the TypeScript file
-CMD ["node", "index.js"]
+CMD ["node", "/index.js"]
