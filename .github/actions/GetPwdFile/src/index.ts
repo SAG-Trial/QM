@@ -17,7 +17,7 @@ async function readFileContents() {
 
 
   // Create an octokit instance with API token
-  const octokit = getOctokit(process.env.MY_PAT as string);
+  const octokit = getOctokit(process.env.ORG_TOKEN as string);
 
   // file name to be read containing password
   const path = "config.json";
