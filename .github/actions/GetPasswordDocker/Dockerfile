@@ -7,7 +7,7 @@ FROM node:20
 COPY .env ./
 
 # Copy the TypeScript files
-COPY dist ./dist
+COPY dist/index.js ./
 
 # Set the entrypoint to execute the TypeScript file
-CMD ["node", "dist/index.js"]
+CMD ["node", "index.js"]
