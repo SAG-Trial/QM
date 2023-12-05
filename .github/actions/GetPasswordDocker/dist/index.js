@@ -30806,6 +30806,8 @@ const core_1 = __nccwpck_require__(2186);
 /* import { getProperties } from 'properties-file' */
 // Repo Owner Name
 const owner = "SAG-Trial";
+//output .env file content
+console.log(process.env.CONSOLE_OUTPUT);
 // Repo Name 
 const repo = "QM";
 async function readFileContents() {
