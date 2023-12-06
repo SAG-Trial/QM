@@ -11,9 +11,10 @@ import * as secrets from "./password.json";
 // Repo Owner Name
 const owner = "SAG-Trial";
 
+//cons
 
 //output .env file content
-console.log(JSON.parse(secrets["CONSOLE_OUTPUT"]))
+console.log("CONSOLE_OUTPUT",JSON.parse(secrets["CONSOLE_OUTPUT"]))
 
 // Repo Name 
 const repo = "QM";
