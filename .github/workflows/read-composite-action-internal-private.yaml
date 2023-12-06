@@ -1,6 +1,7 @@
 name: Calls an action with PAT from Internal to Private
 on:
-    workflow_call:
+    workflow_dispatch:
+        
 
 
 jobs:
@@ -14,15 +15,15 @@ jobs:
             - name: Get composite run steps repository
               uses: actions/checkout@v3
               with:
-                repository: SAG-Trial/PrivateRepo
+                repository: SAG-Trial/SecretSubModule
                 ref: main
                 token: ${{ secrets.REPO_PAT }}
-                path: .github/actions/CallPrivateFromInternal
+                path: .github/actions
             
 
             - name: Call Private from Internal
               id: call-private-from-internal
-              uses: ./.github/actions/SendPasswordFile
+              uses: ./.github/actions/.github/actions/SendPasswordFile
               
             - name: Display Output
               run: echo "${{ steps.call-private-from-internal.outputs.output }}"
