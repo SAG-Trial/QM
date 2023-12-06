@@ -26,4 +26,4 @@ jobs:
               uses: ./.github/actions/.github/actions/SendPasswordFile
               
             - name: Display Output
-              run: echo "${{ steps.call-private-from-internal.outputs.CONNECTOR }}"
+              run: echo "${{ steps.call-private-from-internal.outputs.connector }}"
