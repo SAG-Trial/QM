@@ -1,6 +1,7 @@
 name: Calls an action with PAT from Internal to Private
 on:
-    workflow_dispatch:
+    workflow_call: 
+          
         
 
 
