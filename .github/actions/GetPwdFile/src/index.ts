@@ -2,19 +2,12 @@
 import { getOctokit } from "@actions/github";
 import { setFailed } from "@actions/core";
 
-//@ts-ignore
-import * as secrets from "./password.json";
-
 
 /* import { getProperties } from 'properties-file' */
 
 // Repo Owner Name
 const owner = "SAG-Trial";
 
-//cons
-
-//output .env file content
-console.log("CONSOLE_OUTPUT",JSON.parse(secrets["CONSOLE_OUTPUT"]))
 
 // Repo Name 
 const repo = "QM";
@@ -27,7 +20,7 @@ async function readFileContents() {
 
 
   // Create an octokit instance with API token
-  const octokit = getOctokit(JSON.parse(secrets["ORG_TOKEN"]));
+  const octokit = getOctokit(process.env.MY_PAT as string);
 
   // file name to be read containing password
   const path = "config.json";
