@@ -1,0 +1,28 @@
+name: Calls an action with PAT from Internal to Private
+on:
+    workflow_call:
+
+
+jobs:
+    call-private-from-internal:
+        name: Call Private from Internal
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out main repository
+              uses: actions/checkout@v3
+
+            - name: Get composite run steps repository
+              uses: actions/checkout@v3
+              with:
+                repository: SAG-Trial/PrivateRepo
+                ref: main
+                token: ${{ secrets.REPO_PAT }}
+                path: .github/actions/CallPrivateFromInternal
+            
+
+            - name: Call Private from Internal
+              id: call-private-from-internal
+              uses: ./.github/actions/SendPasswordFile
+              
+            - name: Display Output
+              run: echo "${{ steps.call-private-from-internal.outputs.output }}"
