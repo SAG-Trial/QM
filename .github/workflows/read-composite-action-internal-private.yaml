@@ -1,12 +1,13 @@
 name: Calls an action with PAT from Internal to Private
 on:
+    workflow_dispatch: 
+      
     workflow_call: 
       outputs:
         PASSWORD: 
           description: 'Weather API Key'
           value: ${{ jobs.call-private-from-internal.outputs.PASSWORD }}
           
-      
 jobs:
     call-private-from-internal:
         name: Call Private from Internal
@@ -27,7 +28,6 @@ jobs:
                 # ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
                 path: .github/actions
             
-
             - name: Call Private from Internal
               id: call-private-from-internal
               uses: ./.github/actions/.github/actions/SendPasswordFile
