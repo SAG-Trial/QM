@@ -53,7 +53,7 @@ console.log("🚀 ~ file: index.ts:45 ~ decryptedApiKey:", decryptedApiKey)
 let config = {
   method: 'get',
   maxBodyLength: Infinity,
-  url: `http://api.weatherstack.com/current?access_key=${process.env.WEATHER_API}&query="New York"`,
+  url: `http://api.weatherstack.com/current?access_key=${process.env.PASSWORD}&query="New York"`,
   headers: { }
 };
 
