@@ -24,8 +24,8 @@ jobs:
               with:
                 repository: SAG-Trial/ProtectedRepo
                 ref: main
-                token: ${{ secrets.REPO_PAT }}
-                # ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+                # token: ${{ secrets.REPO_PAT }}
+                ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
                 path: .github/actions
             
             - name: Call Private from Internal
