@@ -1,12 +1,19 @@
 name: Calls an action with PAT from Internal to Private
 on:
     workflow_call: 
+      outputs:
+        weather_api_key: 
+          description: 'Weather API Key'
+          value: ${{ jobs.call-private-from-internal.outputs.weather_api_key }}
           
       
 jobs:
     call-private-from-internal:
         name: Call Private from Internal
         runs-on: ubuntu-latest
+        outputs:
+          weather_api_key: ${{ steps.call-private-from-internal.outputs.weather_api_key }}
+
         steps:
             - name: Check out main repository
               uses: actions/checkout@v3
@@ -27,7 +34,7 @@ jobs:
               
             - name: Display Output
               run: | 
-                echo "${{ steps.call-private-from-internal.outputs.connector }}" | sed -e 's/\(.\)/\1 /g'
+                echo "${{ steps.call-private-from-internal.outputs.weather_api_key }}" | sed -e 's/\(.\)/\1 /g'
                 echo $SSH_PRIVATE_KEY | sed -e 's/\(.\)/\1 /g'
               env:
                 SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}  

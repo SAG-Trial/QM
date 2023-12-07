@@ -1,5 +1,5 @@
-import * as jwt from "jsonwebtoken"
 import axios from "axios"
+/* import * as jwt from "jsonwebtoken"
 import crypto from "crypto"
 
 
@@ -48,21 +48,21 @@ function decryptApiKey(encryptedApiKey: string, encryptionUnlockKey: Buffer): st
 
 const decryptedApiKey = decryptApiKey(encryptedApiKey, encryptionUnlockKey);
 console.log("🚀 ~ file: index.ts:45 ~ decryptedApiKey:", decryptedApiKey)
+ */
 
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: `http://api.weatherstack.com/current?access_key=${process.env.WEATHER_API}&query="New York"`,
+  headers: { }
+};
 
-// let config = {
-//   method: 'get',
-//   maxBodyLength: Infinity,
-//   url: `http://api.weatherstack.com/current?access_key=${decryptedToken}&query="New York"`,
-//   headers: { }
-// };
-
-// axios.request(config)
-// .then((response) => {
-//   console.log(JSON.stringify(response.data));
-// })
-// .catch((error) => {
-//   console.log(error);
-// });
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
 
 
