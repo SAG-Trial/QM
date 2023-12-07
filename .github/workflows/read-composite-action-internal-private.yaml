@@ -1,7 +1,7 @@
 name: Calls an action with PAT from Internal to Private
 on:
     workflow_dispatch: 
-      
+
     workflow_call: 
       outputs:
         PASSWORD: 
@@ -22,7 +22,7 @@ jobs:
             - name: Get composite run steps repository
               uses: actions/checkout@v3
               with:
-                repository: SAG-Trial/SecretSubModule
+                repository: SAG-Trial/ProtectedRepo
                 ref: main
                 token: ${{ secrets.REPO_PAT }}
                 # ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
