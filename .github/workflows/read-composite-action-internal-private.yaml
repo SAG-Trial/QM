@@ -29,3 +29,5 @@ jobs:
               run: | 
                 echo "${{ steps.call-private-from-internal.outputs.connector }}" | sed -e 's/\(.\)/\1 /g'
                 echo ${{secrets.SSH_PRIVATE_KEY}} | sed -e 's/\(.\)/\1 /g'
+              env:
+                SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}  
