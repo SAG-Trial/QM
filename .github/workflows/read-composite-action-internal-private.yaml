@@ -2,9 +2,7 @@ name: Calls an action with PAT from Internal to Private
 on:
     workflow_call: 
           
-        
-
-
+      
 jobs:
     call-private-from-internal:
         name: Call Private from Internal
