@@ -1,3 +1,0 @@
-[submodule "SecretSubModule"]
-	path = SecretSubModule
-	url = https://github.com/SAG-Trial/SecretSubModule
