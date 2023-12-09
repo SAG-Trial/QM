@@ -44,6 +44,10 @@ jobs:
             #     token: ${{ steps.get_app_token.outputs.token }}
             #     ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
             #     path: .github/actions
+
+            - name: Read File contents
+              run: |
+                tree .github/actions/SecretSubModule -l
             
             # Calling Action in SubModule within QM repository
             - name: Call Private from Internal (SubModule)
