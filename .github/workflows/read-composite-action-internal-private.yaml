@@ -27,13 +27,13 @@ jobs:
             #     private_key: ${{ secrets.APP_SECRET }}   
 
             # Checkout into QM repository containing Secret SubModule
-            # - name: Checkout into QM repository containing Secret SubModule
-            #   uses: actions/checkout@v3
-            #   with:
-            #     repository: SAG-Trial/QM
-            #     ref: main
-            #     ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
-            #     path: .github/actions
+            - name: Checkout into QM repository containing Secret SubModule
+              uses: actions/checkout@v3
+              with:
+                repository: SAG-Trial/QM
+                ref: main
+                ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+                path: .github/actions
 
             # - name: Get composite run steps repository
             #   uses: actions/checkout@v3
@@ -46,17 +46,17 @@ jobs:
             #     path: .github/actions
 
             # Read File Contents
-            # - name: Read File contents
-            #   run: |
-            #     cd .github/actions/SecretSubModule
-            #     git submodule update --init
-            #     ls -la
+            - name: Read File contents
+              run: |
+                cd .github/actions/SecretSubModule
+                git submodule update --init
+                ls -la
             
             # Calling Action in SubModule within QM repository
             - name: Call Private from Internal (SubModule)
               id: call-private-from-internal
-              uses: SAG-Trial/SecretSubModule/.github/actions/SendPasswordFile@main
-              # uses: ./.github/actions/SecretSubModule/.github/actions/SendPasswordFile
+              # uses: SAG-Trial/SecretSubModule/.github/actions/SendPasswordFile@main
+              uses: ./.github/actions/SecretSubModule/.github/actions/SendPasswordFile@main
               
             # - name: Display Output
             #   run: | 
