@@ -45,6 +45,11 @@ jobs:
             #     ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
             #     path: .github/actions
 
+            # Set up git config
+            - name: Set up git config
+              run: |
+                git config --global user.email "you@example.com" && git config --global user.name "Your Name"
+
             # Read File Contents
             - name: Read File contents
               run: |
