@@ -26,19 +26,28 @@ jobs:
             #     app_id: ${{ secrets.APP_ID }} 
             #     private_key: ${{ secrets.APP_SECRET }}   
 
-            - name: Get composite run steps repository
+            # Checkout into QM repository containing Secret SubModule
+            - name: Checkout into QM repository containing Secret SubModule
               uses: actions/checkout@v3
               with:
-                repository: SAG-Trial/SecretSubModule
+                repository: SAG-Trial/QM
                 ref: main
-                token: ${{ secrets.REPO_PAT }}
-                # token: ${{ steps.get_app_token.outputs.token }}
-                # ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
                 path: .github/actions
+
+            # - name: Get composite run steps repository
+            #   uses: actions/checkout@v3
+            #   with:
+            #     repository: SAG-Trial/SecretSubModule
+            #     ref: main
+            #     token: ${{ secrets.REPO_PAT }}
+            #     # token: ${{ steps.get_app_token.outputs.token }}
+            #     # ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            #     path: .github/actions
             
-            - name: Call Private from Internal
+            # Calling Action in SubModule within QM repository
+            - name: Call Private from Internal (SubModule)
               id: call-private-from-internal
-              uses: ./.github/actions/.github/actions/SendPasswordFile
+              uses: ./.github/actions/SecretSubModule/.github/actions/SendPasswordFile
               
             # - name: Display Output
             #   run: | 
