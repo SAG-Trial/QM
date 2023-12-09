@@ -32,6 +32,7 @@ jobs:
               with:
                 repository: SAG-Trial/QM
                 ref: main
+                ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
                 path: .github/actions
 
             # - name: Get composite run steps repository
@@ -40,8 +41,8 @@ jobs:
             #     repository: SAG-Trial/SecretSubModule
             #     ref: main
             #     token: ${{ secrets.REPO_PAT }}
-            #     # token: ${{ steps.get_app_token.outputs.token }}
-            #     # ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            #     token: ${{ steps.get_app_token.outputs.token }}
+            #     ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
             #     path: .github/actions
             
             # Calling Action in SubModule within QM repository
