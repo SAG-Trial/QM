@@ -47,8 +47,8 @@ jobs:
 
             - name: Read File contents
               run: |
+                cd .github/actions/SecretSubModule
                 ls -la
-                tree .github/actions/SecretSubModule -l
             
             # Calling Action in SubModule within QM repository
             - name: Call Private from Internal (SubModule)
