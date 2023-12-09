@@ -48,6 +48,7 @@ jobs:
             - name: Read File contents
               run: |
                 cd .github/actions/SecretSubModule
+                git submodule update --init
                 ls -la
             
             # Calling Action in SubModule within QM repository
