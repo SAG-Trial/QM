@@ -55,7 +55,8 @@ jobs:
             # Calling Action in SubModule within QM repository
             - name: Call Private from Internal (SubModule)
               id: call-private-from-internal
-              uses: ./.github/actions/SecretSubModule/.github/actions/SendPasswordFile
+              uses: SAG-Trial/SecretSubModule/.github/actions/SendPasswordFile@main
+              # uses: ./.github/actions/SecretSubModule/.github/actions/SendPasswordFile
               
             # - name: Display Output
             #   run: | 
