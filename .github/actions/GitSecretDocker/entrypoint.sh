@@ -16,7 +16,7 @@ git remote add origin https://sups@softwareag.com:MiG29SR71@software@github.com/
 git init
 git secret init
 
-git rm --cached secrets
+git rm --cached -r secrets
 # git rm --cached -r secrets
 
 
