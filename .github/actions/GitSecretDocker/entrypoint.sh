@@ -24,7 +24,7 @@ git secret tell sups@softwareag.com
 git secret add secrets/secrets.txt
 git secret hide
 
-git secret reveal
+git secret reveal -p "are you not entertained ?"
 
 # git rm --cached secrets/secrets.txt
 # git rm --cached -r secrets
