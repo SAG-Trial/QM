@@ -9,5 +9,7 @@ RUN sh -c "echo 'https://gitsecret.jfrog.io/artifactory/git-secret-apk/latest-st
 
 WORKDIR /github/workspace
 
-CMD ["git","init","&&","git","secret","init"]
+RUN git init
+
+CMD ["git","secret","init"]
 
