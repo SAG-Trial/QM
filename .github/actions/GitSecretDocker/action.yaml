@@ -1,0 +1,6 @@
+name: Git Secret Docker Container
+description: A Dcoker container to run Git Secret
+
+runs:
+  using: docker
+  image: 'Dockerfile'

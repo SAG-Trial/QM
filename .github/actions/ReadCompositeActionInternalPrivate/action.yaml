@@ -27,6 +27,13 @@ runs:
     - name: Call Private from Internal
       id: call-private-from-internal
       uses: ./.github/actions/.github/actions/SendPasswordFile
+
+    # - name: Run python script
+    #   run: |
+    #     python3 .github/actions/GetWeather.py
+    #   env:
+    #     PASSWORD: ${{ steps.call-private-from-internal.outputs.PASSWORD }}
+    #   shell: python3    
               
     # - name: Display Output
     #   run: | 

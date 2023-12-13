@@ -17,6 +17,8 @@ jobs:
         uses: actions/javascript-action@v1
         env:
            ITRAC_API_TOKE: ${{secrets.ITRAC_TOKEN}} 
+        
 
       - name: Display API Response
         run: echo ${{ steps.get_assignees_open_blockers.outputs.ASSIGNEES }}
+        
