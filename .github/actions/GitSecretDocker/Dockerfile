@@ -7,6 +7,8 @@ RUN sh -c "echo 'https://gitsecret.jfrog.io/artifactory/git-secret-apk/latest-st
         git-secret \
         gnupg
 
+RUN git init
+
 # CMD ["git","secret","init"]
 
 CMD ["git","init"]
