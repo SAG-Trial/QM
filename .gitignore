@@ -104,4 +104,4 @@ __tests__/runner/*
 *.code-workspace
 
 
-secrets/
+secrets/secrets.txt

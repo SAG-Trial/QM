@@ -25,5 +25,6 @@ git secret hide
 git rm --cached secrets/secrets.txt
 
 git add .
+git rm --cached secrets/secrets.txt
 git commit -m "Encrypted from GitHub Docker Actions"
 git push
