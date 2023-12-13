@@ -40,3 +40,5 @@ git commit -m "Encrypted from GitHub Docker Actions"
 
 git status
 # git push
+
+cat /github/home/.gnupg
