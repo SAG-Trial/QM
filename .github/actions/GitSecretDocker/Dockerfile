@@ -9,6 +9,7 @@ RUN sh -c "echo 'https://gitsecret.jfrog.io/artifactory/git-secret-apk/latest-st
 
 COPY entrypoint.sh /entrypoint.sh
 
+RUN ["chmod", "+x", "entrypoint.sh"]
 # CMD ["git","secret","init"]
 
 ENTRYPOINT ["/entrypoint.sh"]
