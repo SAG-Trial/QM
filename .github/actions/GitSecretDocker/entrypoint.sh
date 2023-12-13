@@ -16,8 +16,8 @@ git remote add origin https://sups@softwareag.com:MiG29SR71@software@github.com/
 git init
 git secret init
 
-git rm --cached secrets/secrets.txt
-git rm --cached -r secrets
+git rm --cached secrets
+# git rm --cached -r secrets
 
 
 git secret tell sups@softwareag.com
@@ -25,10 +25,10 @@ git secret tell sups@softwareag.com
 git secret add secrets/secrets.txt
 git secret hide
 
-git rm --cached secrets/secrets.txt
-git rm --cached -r secrets
+# git rm --cached secrets/secrets.txt
+# git rm --cached -r secrets
 
 git add .
-git rm --cached secrets/secrets.txt
+# git rm --cached secrets/secrets.txt
 git commit -m "Encrypted from GitHub Docker Actions"
 git push
