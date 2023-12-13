@@ -9,6 +9,8 @@ ls -la
 git config --global user.email "sups@softwareag.com"
 git config --global user.name "Supreeth S"
 
+gpg --import /secrets/supreeth_public.key
+
 
 git init
 git secret init
