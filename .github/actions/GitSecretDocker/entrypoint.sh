@@ -44,7 +44,7 @@ git status
 
 echo "Changing directory to /github/home/"
 cd /github/home/
-ls
+ls -la
 
 echo "Present working directory is: "
 pwd
