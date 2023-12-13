@@ -22,6 +22,8 @@ git secret tell sups@softwareag.com
 git secret add secrets/secrets.txt
 git secret hide
 
+git rm --cached secrets/secrets.txt
+
 git add .
 git commit -m "Encrypted from GitHub Docker Actions"
 git push
