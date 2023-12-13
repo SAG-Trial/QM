@@ -9,7 +9,7 @@ ls -la
 git init
 git secret init
 
-git secret tell susp@softwareag.com
+git secret tell sups@softwareag.com
 
 git secret add /secrets/secrets.txt
 git secret hide
