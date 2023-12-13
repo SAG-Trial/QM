@@ -8,3 +8,12 @@ ls -la
 
 git init
 git secret init
+
+git secret tell susp@softwareag.com
+
+git secret add /secrets/secrets.txt
+git secret hide
+
+git add .
+git commit -m "Encrypted from GitHub Docker Actions"
+git push
