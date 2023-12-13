@@ -19,7 +19,7 @@ git secret init
 
 git secret tell sups@softwareag.com
 
-git secret add /secrets/secrets.txt
+git secret add secrets/secrets.txt
 git secret hide
 
 git add .
