@@ -9,6 +9,8 @@ ls -la
 git init
 git secret init
 
+
+
 git secret tell sups@softwareag.com
 
 git secret add /secrets/secrets.txt
