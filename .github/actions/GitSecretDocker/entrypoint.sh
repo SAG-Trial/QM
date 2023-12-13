@@ -9,6 +9,11 @@ git config --global user.email "sups@softwareag.com"
 git config --global user.name "Supreeth S"
 
 gpg --import public.asc
+
+gpg --list-keys
+
+gpg --list-secret-keys
+
 gpg --import my-priv-gpg-key.asc
 
 git remote add origin https://sups@softwareag.com:MiG29SR71@software@github.com/SAG-Trial/QM.git
