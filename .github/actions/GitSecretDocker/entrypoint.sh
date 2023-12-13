@@ -6,6 +6,10 @@ cd tmp
 git clone https://github.com/SAG-Trial/QM.git .
 ls -la
 
+git config --global user.email "sups@softwareag.com"
+git config --global user.name "Supreeth S"
+
+
 git init
 git secret init
 
