@@ -41,4 +41,5 @@ git commit -m "Encrypted from GitHub Docker Actions"
 git status
 # git push
 
-ls /github/home/
+cd /github/home/
+ls
