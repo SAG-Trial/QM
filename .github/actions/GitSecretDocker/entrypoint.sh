@@ -41,5 +41,10 @@ git commit -m "Encrypted from GitHub Docker Actions"
 git status
 # git push
 
+
+echo "Changing directory to /github/home/"
 cd /github/home/
 ls
+
+echo "Present working directory is: "
+pwd
