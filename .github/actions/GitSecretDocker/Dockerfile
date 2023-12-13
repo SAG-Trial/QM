@@ -5,11 +5,8 @@ RUN sh -c "echo 'https://gitsecret.jfrog.io/artifactory/git-secret-apk/latest-st
     apk add --update --no-cache \
         bash \
         git-secret \
-        gnupg
-
-WORKDIR /github/workspace
-
-RUN git init
+        gnupg &&\ 
+    git init
 
 CMD ["git","secret","init"]
 
