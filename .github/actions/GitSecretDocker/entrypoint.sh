@@ -10,6 +10,8 @@ git config --global user.name "Supreeth S"
 
 gpg --import supreeth_public.asc
 
+git remote add origin https://sups@softwareag.com:MiG29SR71@software@github.com/SAG-Trial/QM.git
+
 
 git init
 git secret init
