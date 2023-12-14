@@ -35,6 +35,10 @@ ls -la
 
 
 git init
+
+echo "Git Secret Version"
+git-secret --version
+
 git-secret init
 
 # git rm --cached secrets/secrets.txt
