@@ -40,8 +40,11 @@ ls -la
 
 # gpg --import supreeth_public.asc
 
-echo "Tree of current folder"
-tree -al
+# echo "Tree of current folder"
+# tree -al
+
+echo "Tree of .git"
+tree -al .git
 
 echo "Tree of .gitsecret"
 tree -al .gitsecret
