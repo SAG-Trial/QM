@@ -43,16 +43,16 @@ ls -la
 # echo "Tree of current folder"
 # tree -al
 
-echo "Tree of /github/workspace/.git"
-tree -al /github/workspace/.git
+# echo "Tree of /github/workspace/.git"
+# tree -al /github/workspace/.git
 
-echo "Tree of .gitsecret"
-tree -al .gitsecret
+# echo "Tree of .gitsecret"
+# tree -al .gitsecret
 
-echo "Tree of secrets"
-tree -al secrets
+# echo "Tree of secrets"
+# tree -al secrets
 
-
+git remote add origin https://github.com/SAG-Trial/QM.git
 
 # echo "Listing git secrets "
 # git secret list
