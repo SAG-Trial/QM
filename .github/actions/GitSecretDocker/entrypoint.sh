@@ -41,6 +41,8 @@ ls -la
 # git config --global user.email "sups@softwareag.com"
 # git config --global user.name "Supreeth S"
 
+
+echo "Importing gpg private key"
 gpg --import secret.gpg
 
 # echo "Tree of current folder"
@@ -70,5 +72,5 @@ git secret list
 echo "Listing gpg keys"
 gpg --list-keys
 
-# echo "Revealing secrets"
-# git secret reveal
+echo "Revealing secrets"
+git secret reveal -p "helloworld"
