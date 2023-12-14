@@ -13,7 +13,7 @@ COPY entrypoint.sh /entrypoint.sh
 
 
 RUN ["chmod", "+x", "entrypoint.sh"]
-RUN ["mkdir", "tmp"]
+RUN ["mkdir", "revealing-folder"]
 
 COPY . /tmp
 # CMD ["git","secret","init"]

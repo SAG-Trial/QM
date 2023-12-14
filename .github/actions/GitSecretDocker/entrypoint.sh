@@ -4,8 +4,8 @@
 # cd ~
 # ls -la
 
-echo "cd to tmp"
-cd /github/workspace/tmp
+echo "cd to revealing-folder"
+cd /github/workspace/revealing-folder
 ls -la
 
 # echo "cd to github home"
