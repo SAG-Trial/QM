@@ -46,6 +46,9 @@ git-secret --version
 echo "Tree of .gitsecret"
 tree -al .gitsecret
 
+echo "Tree of secrets"
+tree -al secrets
+
 # git rm --cached secrets/secrets.txt
 # git rm --cached -r secrets
 
@@ -53,7 +56,6 @@ tree -al .gitsecret
 # git secret tell sups@softwareag.com
 
 # git secret add secrets/secrets.txt
-# git secret reveal
 
 # git rm --cached secrets/secrets.txt
 # git rm --cached -r secrets
@@ -62,3 +64,9 @@ tree -al .gitsecret
 # git rm --cached secrets/secrets.txt
 # git commit -m "Encrypted from GitHub Docker Actions"
 # git push
+
+
+echo "Listing git secrets "
+
+echo "Revealing secrets"
+git secret reveal
