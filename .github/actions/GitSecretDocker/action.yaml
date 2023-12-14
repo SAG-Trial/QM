@@ -1,5 +1,8 @@
 name: Git Secret Docker Container
 description: A Dcoker container to run Git Secret
+outputs:
+  WEATHER_API_SECRET: # id of output
+    description: 'The time we greeted you'
 
 runs:
   using: docker
