@@ -43,8 +43,8 @@ ls -la
 # echo "Tree of current folder"
 # tree -al
 
-echo "Tree of .git"
-tree -al .git
+echo "Tree of /github/workspace/.git"
+tree -al /github/workspace/.git
 
 echo "Tree of .gitsecret"
 tree -al .gitsecret
