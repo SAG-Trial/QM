@@ -19,7 +19,7 @@ ls -la
 
 
 # git init
-# git secret init
+git secret init
 
 # git rm --cached secrets/secrets.txt
 # git rm --cached -r secrets
