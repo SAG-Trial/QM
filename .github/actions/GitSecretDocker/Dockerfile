@@ -1,17 +1,19 @@
-FROM ubuntu:latest
+# FROM ubuntu:latest
 
-# RUN sh -c "echo 'https://gitsecret.jfrog.io/artifactory/git-secret-apk/latest-stable/main'" >> /etc/apk/repositories && \
-#     wget -O /etc/apk/keys/git-secret-apk.rsa.pub 'https://gitsecret.jfrog.io/artifactory/api/security/keypair/public/repositories/git-secret-apk' && \
-#     apk add --update --no-cache \
-#         bash \
-#         git-secret \
-#         gnupg
+FROM alpine:latest
 
-RUN sh -c "echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list" && \
-    apt-get update && apt-get install -y gnupg && \
-    apt-get install -y wget && \
-    wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | apt-key add - && \
-    apt-get install -y git-secret 
+RUN sh -c "echo 'https://gitsecret.jfrog.io/artifactory/git-secret-apk/latest-stable/main'" >> /etc/apk/repositories && \
+    wget -O /etc/apk/keys/git-secret-apk.rsa.pub 'https://gitsecret.jfrog.io/artifactory/api/security/keypair/public/repositories/git-secret-apk' && \
+    apk add --update --no-cache \
+        bash \
+        git-secret \
+        gnupg
+
+# RUN sh -c "echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list" && \
+#     apt-get update && apt-get install -y gnupg && \
+#     apt-get install -y wget && \
+#     wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | apt-key add - && \
+#     apt-get install -y git-secret 
 
 
 
