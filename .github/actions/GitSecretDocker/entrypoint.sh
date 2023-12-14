@@ -13,15 +13,20 @@
 
 
 
-echo "cd to github workspace"
-cd /github/workspace/
+# echo "cd to github workspace"
+# cd /github/workspace/
 
+echo "Making dest directory"
+mkdir /dest
+
+cd /dest
+
+echo "Initializing git and git-secret"
+git init
+git-secret init
 
 echo "copying contents from github workspace to dest"
 cp -a /github/workspace/. /dest/
-
-
-cd /dest
 
 echo "Listing contents of dest"
 ls -la
@@ -36,12 +41,11 @@ ls -la
 # gpg --import supreeth_public.asc
 
 
-git init
 
 echo "Git Secret Version"
 git-secret --version
 
-git-secret init
+
 
 # git rm --cached secrets/secrets.txt
 # git rm --cached -r secrets
