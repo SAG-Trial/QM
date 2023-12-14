@@ -46,5 +46,11 @@ echo "Changing directory to /github/home/"
 cd /github/home/
 ls -la
 
+git secret reveal
+
+cat secrets/secrets.txt.secret
+
 echo "Present working directory is: "
 pwd
+
+echo "pas"
