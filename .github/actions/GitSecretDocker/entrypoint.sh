@@ -28,6 +28,9 @@ git-secret init
 echo "copying contents from github workspace to dest"
 cp -a /github/workspace/. /dest/
 
+echo "Removing .git"
+rm -r .git
+
 echo "Listing contents of dest"
 ls -la
 
