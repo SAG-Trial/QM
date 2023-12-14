@@ -8,7 +8,8 @@ RUN sh -c "echo 'https://gitsecret.jfrog.io/artifactory/git-secret-apk/latest-st
     apk add --update --no-cache \
         bash \
         git-secret \
-        gnupg
+        gnupg \
+        tree
 
 COPY entrypoint.sh /entrypoint.sh
 

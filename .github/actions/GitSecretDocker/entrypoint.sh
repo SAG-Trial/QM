@@ -40,12 +40,11 @@ ls -la
 
 # gpg --import supreeth_public.asc
 
-
-
 echo "Git Secret Version"
 git-secret --version
 
-
+echo "Tree of .gitsecret"
+tree -al .gitsecret
 
 # git rm --cached secrets/secrets.txt
 # git rm --cached -r secrets
