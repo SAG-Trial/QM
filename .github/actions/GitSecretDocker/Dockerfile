@@ -7,9 +7,9 @@ FROM ubuntu
 #         git-secret \
 #         gnupg
 
-RUN sudo sh -c "echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list" && \
-    wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | sudo apt-key add - && \
-    sudo apt-get update && sudo apt-get install -y git-secret && sudo apt-get install -y gnupg 
+RUN sh -c "echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list" && \
+    wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | apt-key add - && \
+    apt-get update && apt-get install -y git-secret && apt-get install -y gnupg 
 
 
 
