@@ -66,5 +66,9 @@ git remote add origin https://github.com/SAG-Trial/QM.git
 echo "Listing git secrets "
 git secret list
 
-echo "Revealing secrets"
-git secret reveal
+
+echo "Listing gpg keys"
+gpg --list-keys
+
+# echo "Revealing secrets"
+# git secret reveal
