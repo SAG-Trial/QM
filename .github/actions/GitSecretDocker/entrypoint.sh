@@ -63,8 +63,8 @@ git config --global --add safe.directory /dest
 git init
 git remote add origin https://github.com/SAG-Trial/QM.git
 
-# echo "Listing git secrets "
-# git secret list
+echo "Listing git secrets "
+git secret list
 
 # echo "Revealing secrets"
 # git secret reveal
