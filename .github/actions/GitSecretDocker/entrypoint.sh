@@ -5,7 +5,7 @@
 # ls -la
 
 echo "cd to github workspace"
-cd /github/workspace
+cd /github/workspace/tmp
 ls -la
 
 # echo "cd to github home"
