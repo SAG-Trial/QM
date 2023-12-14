@@ -4,7 +4,7 @@
 # cd ~
 # ls -la
 
-echo "cd to github workspace"
+echo "cd to tmp"
 cd /github/workspace/tmp
 ls -la
 
