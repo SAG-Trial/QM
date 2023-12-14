@@ -8,6 +8,7 @@ FROM ubuntu
 #         gnupg
 
 RUN sh -c "echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list" && \
+    apt-get install -y wget && \
     wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | apt-key add - && \
     apt-get update && apt-get install -y git-secret && apt-get install -y gnupg 
 
