@@ -15,7 +15,13 @@ echo "cd to github workspace"
 cd /github/workspace/
 
 
-echo "Listing contents of github workspace"
+echo "copying contents from github workspace to dest"
+cp -a /github/workspace/. /dest/
+
+
+cd /dest
+
+echo "Listing contents of dest"
 ls -la
 
 # echo "cd to github home"
