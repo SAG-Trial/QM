@@ -1,5 +1,16 @@
 #!/bin/sh -l
 
+echo "cd to home directory"
+cd ~
+ls -la
+
+echo "cd to github workspace"
+cd /github/workspace
+ls -la
+
+echo "cd to github home"
+cd /github/home
+
 
 # git config --global user.email "sups@softwareag.com"
 # git config --global user.name "Supreeth S"
