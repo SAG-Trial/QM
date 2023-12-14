@@ -1,8 +1,10 @@
 name: Calls an action with PAT from Internal to Private
 on:
     workflow_dispatch: 
+    push: 
+      branches: [ main ]   
 
-    workflow_call: 
+    # workflow_call: 
       # outputs:
       #   PASSWORD: 
       #     description: 'Weather API Key'
@@ -32,7 +34,8 @@ jobs:
               with:
                 repository: SAG-Trial/QM
                 ref: main
-                ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+                submodules: recursive
+                # ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
                 path: .github/actions
 
             # - name: Get composite run steps repository
@@ -46,16 +49,16 @@ jobs:
             #     path: .github/actions
 
             # Set up git config
-            - name: Set up git config
-              run: |
-                git config --global user.email "you@example.com" && git config --global user.name "Your Name"
+            # - name: Set up git config
+            #   run: |
+            #     git config --global user.email "you@example.com" && git config --global user.name "Your Name"
 
             # Read File Contents
-            - name: Read File contents
-              run: |
-                cd .github/actions/SecretSubModule
-                git submodule update --init
-                ls -la
+            # - name: Read File contents
+            #   run: |
+            #     cd .github/actions/SecretSubModule
+            #     git submodule update --init
+            #     ls -la
             
             # Calling Action in SubModule within QM repository
             - name: Call Private from Internal (SubModule)
