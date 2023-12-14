@@ -11,9 +11,9 @@ COPY entrypoint.sh /entrypoint.sh
 
 
 RUN ["chmod", "+x", "entrypoint.sh"]
-RUN ["mkdir", "tmp"]
+RUN ["mkdir", "revealing-folder"]
 
-COPY . /tmp
+COPY . /revealing-folder
 # CMD ["git","secret","init"]
 
 ENTRYPOINT ["/entrypoint.sh"]

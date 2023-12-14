@@ -5,10 +5,10 @@
 # ls -la
 
 echo "Change Directory to revealing-folder"
-mkdir tmp
-cd tmp
+mkdir revealing-folder
+cd revealing-folder
 
-echo "Contents in tmp folder"
+echo "Contents in revealing-folder folder"
 ls -la
 
 # cd /github/workspace/
