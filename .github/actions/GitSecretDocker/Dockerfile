@@ -9,12 +9,9 @@ FROM ubuntu:latest
 #         git-secret \
 #         gnupg
 
-RUN apt-get update && apt-get install -y gnupg && \
-    apt-get install -y wget && \
+RUN apt-get update && apt-get install -y gnupg && apt-get install -y wget 
     
-
-
-
+    
 COPY entrypoint.sh /entrypoint.sh
 
 
