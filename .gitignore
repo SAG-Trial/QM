@@ -105,3 +105,5 @@ __tests__/runner/*
 
 
 secrets/secrets.txt
+**.env
+# secrets/.env
