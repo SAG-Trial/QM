@@ -78,3 +78,7 @@ git secret list
 
 echo "Revealing secrets"
 git secret reveal -p "helloworld"
+
+
+echo "Listing secrets"
+tree -al secrets
