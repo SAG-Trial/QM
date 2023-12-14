@@ -8,6 +8,9 @@ echo "Change Directory to revealing-folder"
 mkdir tmp
 cd tmp
 
+echo "Contents in tmp folder"
+ls -la
+
 # cd /github/workspace/
 
 # echo "cd to github home"
