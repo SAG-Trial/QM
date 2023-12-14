@@ -22,8 +22,8 @@ mkdir /dest
 cd /dest
 
 echo "Initializing git and git-secret"
-# git init
-# git-secret init
+git init
+git-secret init
 
 echo "copying contents from github workspace to dest"
 cp -a /github/workspace/. /dest/
