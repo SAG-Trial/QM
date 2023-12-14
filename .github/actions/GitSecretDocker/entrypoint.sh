@@ -4,14 +4,15 @@
 # cd ~
 # ls -la
 
-echo "Change Directory to revealing-folder"
-mkdir revealing-folder
-cd revealing-folder
+# echo "Change Directory to revealing-folder"
+# mkdir revealing-folder
+# cd revealing-folder
 
-echo "Contents in revealing-folder folder"
-ls -la
+# echo "Contents in revealing-folder folder"
+# ls -la
 
-# cd /github/workspace/
+echo "cd to github workspace"
+cd /github/workspace/
 
 # echo "cd to github home"
 # cd /github/home
@@ -24,7 +25,7 @@ ls -la
 
 
 git init
-git secret init
+# git secret init
 
 # git rm --cached secrets/secrets.txt
 # git rm --cached -r secrets
@@ -33,7 +34,7 @@ git secret init
 # git secret tell sups@softwareag.com
 
 # git secret add secrets/secrets.txt
-git secret reveal
+# git secret reveal
 
 # git rm --cached secrets/secrets.txt
 # git rm --cached -r secrets
