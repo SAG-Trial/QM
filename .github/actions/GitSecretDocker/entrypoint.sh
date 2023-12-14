@@ -69,8 +69,8 @@ echo "Listing git secrets "
 git secret list
 
 
-echo "Listing gpg keys"
-gpg --list-keys
+echo "Listing gpg secret keys"
+gpg --list-secret-keys
 
 echo "Revealing secrets"
 git secret reveal -p "helloworld"
