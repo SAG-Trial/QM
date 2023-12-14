@@ -52,6 +52,11 @@ ls -la
 # echo "Tree of secrets"
 # tree -al secrets
 
+
+# Removing dubious ownership
+git config --global --add safe.directory /dest
+
+
 git remote add origin https://github.com/SAG-Trial/QM.git
 
 # echo "Listing git secrets "
