@@ -18,7 +18,7 @@ ls -la
 # gpg --import supreeth_public.asc
 
 
-# git init
+git init
 git secret init
 
 # git rm --cached secrets/secrets.txt
