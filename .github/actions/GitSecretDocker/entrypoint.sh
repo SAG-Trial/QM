@@ -4,9 +4,11 @@
 # cd ~
 # ls -la
 
-echo "cd to revealing-folder"
-cd /github/workspace/revealing-folder
-ls -la
+echo "Change Directory to revealing-folder"
+mkdir tmp
+cd tmp
+
+# cd /github/workspace/
 
 # echo "cd to github home"
 # cd /github/home
