@@ -22,8 +22,8 @@ mkdir /dest
 cd /dest
 
 echo "Initializing git and git-secret"
-git init
-git-secret init
+# git init
+# git-secret init
 
 echo "copying contents from github workspace to dest"
 cp -a /github/workspace/. /dest/
@@ -40,8 +40,8 @@ ls -la
 
 # gpg --import supreeth_public.asc
 
-echo "Git Secret Version"
-git-secret --version
+echo "Tree of current folder"
+tree -al
 
 echo "Tree of .gitsecret"
 tree -al .gitsecret
@@ -49,24 +49,10 @@ tree -al .gitsecret
 echo "Tree of secrets"
 tree -al secrets
 
-# git rm --cached secrets/secrets.txt
-# git rm --cached -r secrets
 
 
-# git secret tell sups@softwareag.com
+# echo "Listing git secrets "
+# git secret list
 
-# git secret add secrets/secrets.txt
-
-# git rm --cached secrets/secrets.txt
-# git rm --cached -r secrets
-
-# git add .
-# git rm --cached secrets/secrets.txt
-# git commit -m "Encrypted from GitHub Docker Actions"
-# git push
-
-
-echo "Listing git secrets "
-
-echo "Revealing secrets"
-git secret reveal
+# echo "Revealing secrets"
+# git secret reveal
