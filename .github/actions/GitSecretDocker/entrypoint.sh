@@ -14,6 +14,10 @@
 echo "cd to github workspace"
 cd /github/workspace/
 
+
+echo "Listing contents of github workspace"
+ls -la
+
 # echo "cd to github home"
 # cd /github/home
 
@@ -25,7 +29,7 @@ cd /github/workspace/
 
 
 git init
-git secret init
+git-secret init
 
 # git rm --cached secrets/secrets.txt
 # git rm --cached -r secrets
