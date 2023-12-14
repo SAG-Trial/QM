@@ -41,7 +41,7 @@ ls -la
 # git config --global user.email "sups@softwareag.com"
 # git config --global user.name "Supreeth S"
 
-# gpg --import supreeth_public.asc
+gpg --import secret.gpg
 
 # echo "Tree of current folder"
 # tree -al
