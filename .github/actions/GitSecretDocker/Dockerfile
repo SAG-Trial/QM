@@ -1,11 +1,17 @@
-FROM alpine
+FROM ubuntu
 
-RUN sh -c "echo 'https://gitsecret.jfrog.io/artifactory/git-secret-apk/latest-stable/main'" >> /etc/apk/repositories && \
-    wget -O /etc/apk/keys/git-secret-apk.rsa.pub 'https://gitsecret.jfrog.io/artifactory/api/security/keypair/public/repositories/git-secret-apk' && \
-    apk add --update --no-cache \
-        bash \
-        git-secret \
-        gnupg
+# RUN sh -c "echo 'https://gitsecret.jfrog.io/artifactory/git-secret-apk/latest-stable/main'" >> /etc/apk/repositories && \
+#     wget -O /etc/apk/keys/git-secret-apk.rsa.pub 'https://gitsecret.jfrog.io/artifactory/api/security/keypair/public/repositories/git-secret-apk' && \
+#     apk add --update --no-cache \
+#         bash \
+#         git-secret \
+#         gnupg
+
+RUN sudo sh -c "echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list" && \
+    wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | sudo apt-key add - && \
+    sudo apt-get update && sudo apt-get install -y git-secret && sudo apt-get install -y gnupg 
+
+
 
 COPY entrypoint.sh /entrypoint.sh
 
