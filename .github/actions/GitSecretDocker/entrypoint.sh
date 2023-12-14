@@ -42,8 +42,16 @@ ls -la
 # git config --global user.name "Supreeth S"
 
 
-echo "Importing gpg private key"
+echo "Importing gpg public key"
 gpg --import secret.gpg
+
+echo "Importing gpg private key"
+gpg --import --batch --yes --pinentry-mode loopback secret.gpg
+
+
+echo "Listing gpg secret keys"
+gpg --list-secret-keys
+
 
 # echo "Tree of current folder"
 # tree -al
@@ -67,10 +75,6 @@ git remote add origin https://github.com/SAG-Trial/QM.git
 
 echo "Listing git secrets "
 git secret list
-
-
-echo "Listing gpg secret keys"
-gpg --list-secret-keys
 
 echo "Revealing secrets"
 git secret reveal -p "helloworld"

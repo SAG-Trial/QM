@@ -11,10 +11,11 @@ RUN sh -c "echo 'https://gitsecret.jfrog.io/artifactory/git-secret-apk/latest-st
         gnupg \
         tree
 
+ENV GPG_TTY /dev/console
+
 COPY entrypoint.sh /entrypoint.sh
 
 # Setting the GPG_TTY environment variable to /dev/console
-ENV GPG_TTY /dev/console
 
 
 RUN ["chmod", "+x", "entrypoint.sh"]
