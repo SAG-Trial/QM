@@ -34,14 +34,6 @@ rm -r .git
 echo "Listing contents of dest"
 ls -la
 
-# echo "cd to github home"
-# cd /github/home
-
-
-# git config --global user.email "sups@softwareag.com"
-# git config --global user.name "Supreeth S"
-
-
 echo "Importing gpg public key"
 gpg --import secret.gpg
 
@@ -70,18 +62,23 @@ gpg --list-secret-keys
 git config --global --add safe.directory /dest
 
 
+# Reinitalizing git to add remote origin
 git init
+
+# Adding remote origin
 git remote add origin https://github.com/SAG-Trial/QM.git
 
+
+# Listing git secrets
 echo "Listing git secrets "
 git secret list
 
+# Revealing secrets
 echo "Revealing secrets"
 git secret reveal -p "helloworld"
 
-
-echo "Listing secrets"
-tree -al secrets
+# echo "Tree of secrets folder"
+# tree -al secrets
 
 # Specify the path to the .env file
 ENV_FILE="secrets/.env"
@@ -98,4 +95,5 @@ if [ -f "$ENV_FILE" ]; then
 	echo "WEATHER_API_SECRET=$WEATHER_API_SECRET" >> $GITHUB_OUTPUT
 else
 	echo "Error: The .env file ($ENV_FILE) does not exist."
+    exit 1
 fi
