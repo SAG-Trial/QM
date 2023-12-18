@@ -4,7 +4,7 @@ on:
     # push: 
     #   branches: [ main ]   
 
-    # workflow_call: 
+    workflow_call: 
       # outputs:
       #   PASSWORD: 
       #     description: 'Weather API Key'
