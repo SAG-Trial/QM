@@ -19,6 +19,9 @@
 echo "Making dest directory"
 mkdir /dest
 
+echo "Listing contents of /github/workspace"
+ls -la /github/workspace/
+
 cd /dest
 
 echo "Initializing git and git-secret"
