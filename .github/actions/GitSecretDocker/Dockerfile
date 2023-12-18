@@ -11,9 +11,9 @@ RUN sh -c "echo 'https://gitsecret.jfrog.io/artifactory/git-secret-apk/latest-st
 # Setting the GPG_TTY environment variable to /dev/console
 ENV GPG_TTY /dev/console
 
-COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh public.gpg secret.gpg ./
 
-RUN ["chmod", "+x", "entrypoint.sh"]
+RUN ["chmod", "+x", "/entrypoint.sh"]
 # RUN ["mkdir", "revealing-folder"]
 
 ENTRYPOINT ["/entrypoint.sh"]
