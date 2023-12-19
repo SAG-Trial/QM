@@ -11,8 +11,8 @@ jobs:
             - name: Checkout the repo
               uses: actions/checkout@v3
 
-            # - name: Autheticate using Github Token
-            #   run: echo -e "\n//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ./.npmrc  
+            - name: Autheticate using Github Token
+              run: echo -e "\n//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ./.npmrc  
 
             - name: Setup Node  
               uses: actions/setup-node@v4
@@ -24,6 +24,6 @@ jobs:
               run: npm install
 
             - name: Test
-              run: SAG-Trial/QM/.github/actions/TestPrivateNPMPackage@main
+              run: npm run start
 
     
