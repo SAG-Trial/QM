@@ -1,0 +1,17 @@
+name: test Private NPM package internally
+on:
+    workflow_dispatch:
+    push: 
+      branches: [ main ]
+      
+jobs:
+    test-private-npm-package-internally:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout the repo
+              uses: actions/checkout@v3
+            
+            - name: Test
+              run: SAG-Trial/QM/.github/actions/TestPrivateNPMPackage@main
+
+    

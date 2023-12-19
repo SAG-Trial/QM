@@ -1,0 +1,6 @@
+name: Tests Private NPM Package
+description: Tests Private NPM Package
+
+runs:
+  using: node20
+  main: index.js

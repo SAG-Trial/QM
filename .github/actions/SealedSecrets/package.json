@@ -13,6 +13,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@kubernetes-models/sealed-secrets": "^4.3.1"
+    "@kubernetes-models/sealed-secrets": "^4.3.1",
+    "@SAG-Trial/hello-npm-github-package": "^1.0.0"
   }
 }
