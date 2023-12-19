@@ -1,3 +1,3 @@
-const helloNpm = require("@SAG-Trial/hello-npm-github-package");
+const helloNpm = require("@sag-trial/hello-npm-github-package");
 
 helloNpm();
