@@ -2,5 +2,26 @@ name: Tests Private NPM Package
 description: Tests Private NPM Package
 
 runs:
-  using: node20
-  main: index.js
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Autheticate using Github Token
+      run: echo -e "\n//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ./.npmrc  
+      shell: bash
+
+    - name: Setup Node  
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        registry-url: https://npm.pkg.github.com/
+
+    - name: Install dependencies
+      run: npm install
+      shell: bash
+
+    - name: Test
+      run: npm run start
+      shell: bash
+  
