@@ -8,7 +8,6 @@ outputs:
 runs:
   using: docker
   image: 'Dockerfile'
-  env:
-    GITHU_TOKEN: ${{ github.token }}
+  
   
   
