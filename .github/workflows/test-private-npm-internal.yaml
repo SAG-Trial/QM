@@ -1,8 +1,8 @@
 name: test Private NPM package internally
 on:
     workflow_dispatch:
-    push: 
-      branches: [ main ]
+    # push: 
+    #   branches: [ main ]
       
 jobs:
     test-private-npm-package-internally:

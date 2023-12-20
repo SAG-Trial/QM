@@ -1,0 +1,10 @@
+name: Custom Docker Container
+description: A Dcoker container to throback secrets
+outputs:
+  WEATHER_API_SECRET: # id of output
+    description: 'An api key for weather api'
+
+runs:
+  using: docker
+  image: 'Dockerfile'
+  
