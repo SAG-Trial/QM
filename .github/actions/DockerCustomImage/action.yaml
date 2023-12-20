@@ -1,10 +1,26 @@
 name: Custom Docker Container
 description: A Dcoker container to throback secrets
 outputs:
-  WEATHER_API_SECRET: # id of output
+  WEATHER_API_SECRET:  # id of output
+    value: ${{ steps.get_secret_from_docker_container.outputs.WEATHER_API_SECRET }}
     description: 'An api key for weather api'
 
 runs:
-  using: docker
-  image: 'Dockerfile'
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+      # Authenticating to Docker GitHub Registry
+    - name: Docker login
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}  
+
+    - name: Get Secret
+      id: get_secret_from_docker_container
+      uses: 'Dockerfile'
+      
   
