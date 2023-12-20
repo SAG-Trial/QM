@@ -5,7 +5,7 @@ RUN apt install docker.io -y
 RUN docker --version
 RUN docker login ghcr.io --username prhsag --password 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
 
-RUN docker images
+RUN docker pull ghcr.io/sag-trial/qm-secrets:latest
 
 FROM ghcr.io/sag-trial/qm-secrets:latest
 
