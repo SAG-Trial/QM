@@ -1,5 +1,5 @@
 name: Custom Docker Container
-description: A Dcoker container to throback secrets
+description: A Dcoker container to extract secrets
 outputs:
   WEATHER_API_SECRET:  # id of output
     # value: ${{ steps.get_secret_from_docker_container.outputs.WEATHER_API_SECRET }}
@@ -8,5 +8,5 @@ outputs:
 runs:
   using: docker
   image: 'Dockerfile'
-      
+  pre-entrypoint: 'echo "Hello World"'    
   
