@@ -8,7 +8,7 @@ runs:
       uses: actions/checkout@v3
 
     - name: Autheticate using Github Token
-      run: echo -e "\n//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ./.npmrc  
+      run: echo -e "\n//npm.pkg.github.com/:_authToken=${{ github.token }}" >> ./.npmrc  
       shell: bash
 
     - name: Setup Node  
