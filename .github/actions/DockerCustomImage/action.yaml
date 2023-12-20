@@ -7,8 +7,8 @@ outputs:
 
 runs:
   using: docker
-  image: 'Dockerfile'
-  pre-entrypoint: 'docker pull ghcr.io/sag-trial/qm-secrets:latest'
+  image: 'docker://ghcr.io/sag-trial/qm-secrets:latest'
+  # pre-entrypoint: 'docker pull ghcr.io/sag-trial/qm-secrets:latest'
   
   
   
