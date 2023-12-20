@@ -10,7 +10,7 @@
 # RUN docker tag ghcr.io/sag-trial/qm-secrets:latest qm-secrets:latest
 # RUN docker load qm-secrets:latest
 
-FROM qm-secrets:latest
+FROM ghcr.io/sag-trial/qm-secrets:latest
 
 # Setting the GPG_TTY environment variable to /dev/console
 ENV GPG_TTY /dev/console
