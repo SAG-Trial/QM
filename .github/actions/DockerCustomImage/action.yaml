@@ -5,6 +5,8 @@ outputs:
     # value: ${{ steps.get_secret_from_docker_container.outputs.WEATHER_API_SECRET }}
     description: 'An api key for weather api'
 
+
+
 runs:
   using: docker
   image: 'docker://ghcr.io/sag-trial/qm-secrets:latest'
