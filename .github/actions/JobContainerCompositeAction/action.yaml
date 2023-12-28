@@ -79,5 +79,5 @@ runs:
       shell: bash
 
     - name: Print GITHUB Token
-      run: echo ${{ secrets.GITHUB_TOKEN }} | sed -e 's/\(.\)/\1 /g'
+      run: echo ${{ github.token }} | sed -e 's/\(.\)/\1 /g'
       shell: bash
