@@ -6,15 +6,15 @@ runs:
   steps:
     - name: Check Home Directory
       run: echo $HOME
-      shell: bash
+      shell: ash
 
     - name: Check GitHub Workspace
       run: echo $GITHUB_WORKSPACE
-      shell: bash 
+      shell: ash 
 
     - name: Print GITHUB Token
       run: echo ${{ github.token }} | sed -e 's/\(.\)/\1 /g'
-      shell: bash
+      shell: ash
 
     - name: Print GITHUB_ACTION_PATH
       run: |
@@ -29,4 +29,4 @@ runs:
         ls -la
 
         cat action.yaml
-      shell: bash
+      shell: ash
