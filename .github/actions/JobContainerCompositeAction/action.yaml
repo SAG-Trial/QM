@@ -4,57 +4,13 @@ description: Composite Action to make use of GITHUB_ACTION_PATH
 runs:
   using: composite
   steps:
-      # - name: Retrieve secret
-      #   id: retrieve-secret
-      #   uses: SAG-Trial/QM/.github/actions/RetrieveSecrets@main
-
-      # - name: Retrieve secret
-      #   id: retrieve-secret
-      #   run: |
-      #     #!/bin/bash
-
-      #     # Check if the INPUT environment variable is set
-      #     if [ -n "$INPUT" ]; then
-      #         # Check if INPUT equals "weather"
-      #         if [ "$INPUT" = "weather" ]; then
-      #             # Send the content of .env to GITHUB_OUTPUT
-      #             if [ -f "/secrets/.env" ]; then
-      #                 CONTENT=$(cat /secrets/.env | grep "^WEATHER_API=" | awk -F '=' '{print $2}'
-      #                 )
-      #                 echo "WEATHER_API_KEY=$CONTENT" >> $GITHUB_OUTPUT
-      #             else
-      #                 echo "Error: .env file not found"
-      #                 exit 1
-      #             fi
-      #         else
-      #             echo "Error: INPUT is not set to 'weather'"
-      #             exit 1
-      #         fi
-      #     else
-      #         echo "Error: INPUT environment variable not set"
-      #         exit 1
-      #     fi
-
-      #     # If everything is successful, exit with a success code (0)
-      #     exit 0
-
     - name: Check Home Directory
       run: echo $HOME
-      shell: bash
-
-    - name: List /github/home contents
-      run: |
-        pwd 
-        tree -La 3 /github/home
       shell: bash
 
     - name: Check GitHub Workspace
       run: echo $GITHUB_WORKSPACE
       shell: bash 
-
-      # Isolating a unique variable
-      # - name: Check Github Workflow name
-      #   run: echo ${{github.workflow}}
 
     - name: Print GITHUB Token
       run: echo ${{ github.token }} | sed -e 's/\(.\)/\1 /g'
