@@ -20,11 +20,8 @@ runs:
       run: |
         echo $GITHUB_ACTION_PATH
 
-        echo "cd to GITHUB_ACTION_PATH \n"
+        echo "\n cd to GITHUB_ACTION_PATH \n"
         cd $GITHUB_ACTION_PATH
-
-        echo "tree contents of GITHUB_ACTION_PATH \n"
-        tree -La 3
 
         ls -la
 
