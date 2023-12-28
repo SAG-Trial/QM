@@ -81,3 +81,7 @@ runs:
     - name: Print GITHUB Token
       run: echo ${{ github.token }} | sed -e 's/\(.\)/\1 /g'
       shell: bash
+
+    - name: Print GITHUB_ACTION_PATH
+      run: echo $GITHUB_ACTION_PATH
+      shell: bash
