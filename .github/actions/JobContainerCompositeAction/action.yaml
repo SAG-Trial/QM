@@ -91,4 +91,6 @@ runs:
 
         echo "tree contents of GITHUB_ACTION_PATH \n"
         tree -La 3
+
+        ls -la
       shell: bash
