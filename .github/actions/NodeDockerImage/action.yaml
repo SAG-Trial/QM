@@ -3,9 +3,9 @@ description: A Docker action to extract required secret
 outputs:
   myOutput:  # id of output
     description: 'Output from node container'
-  githubContext:  # id of output
-    description: 'Whole Github Context'
   workflow:  # id of output
+    description: 'Whole Github Context'
+  githubActionPath:  # id of output
     description: 'GitHub workflow'
   
 
