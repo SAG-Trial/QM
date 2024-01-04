@@ -17,6 +17,7 @@ jobs:
             - name: Checkout Private Repo
               uses: actions/checkout@v3
               with:
+                ref: main
                 repository: SAG-Trial/SecretSubModule
                 ssh-key: ${{ secrets.ORG_PRIVATEREPO_SSH }}
                 path: .github/actions
@@ -30,9 +31,9 @@ jobs:
 
             #     tree .github  
 
-            - name: Call Private Repo Action
-              id: call-private-repo-action
-              uses: .github/actions/.github/actions/SendPasswordFile@main
+            - name: Call Private from Internal (SubModule)
+              id: call-private-from-internal
+              uses: ./.github/actions/SecretSubModule/.github/actions/SendPasswordFile
               
             - name: GetWeather
               uses: SAG-Trial/QM/.github/actions/GetWeather@main
