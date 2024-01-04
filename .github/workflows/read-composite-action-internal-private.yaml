@@ -32,4 +32,4 @@ jobs:
             - name: GetWeather
               uses: SAG-Trial/QM/.github/actions/GetWeather@main
               env:
-                PASSWORD: ${{ steps.call-private-repo-action.outputs.PASSWORD }}
+                PASSWORD: ${{ steps.call-private-from-internal.outputs.PASSWORD }}
