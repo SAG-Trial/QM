@@ -2,7 +2,7 @@ FROM node:slim
 
 COPY dist ./
 
-RUN cd /home/runner/work/_actions/SAG-Trial/QM/main/.github/actions/CompositeNodeAction
+RUN cd home
 
 CMD ["node","/index.js"]
 
