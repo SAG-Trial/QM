@@ -2,7 +2,7 @@ FROM node:slim
 
 COPY dist ./
 
-RUN pwd
+RUN ls -la
 
 CMD ["node","/github/workspace/index.js"]
 
