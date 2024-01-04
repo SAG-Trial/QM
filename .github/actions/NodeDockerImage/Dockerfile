@@ -4,6 +4,6 @@ COPY dist ./
 
 RUN ls -la
 
-CMD ["node","/github/workspace/index.js"]
+CMD ["node","/index.js"]
 
 
