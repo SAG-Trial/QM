@@ -25,6 +25,7 @@ jobs:
                 cd private_action
                 ls -la
 
+                pwd
                 # cd .github/actions/SendPasswordFile
 
             - name: Call Private Repo Action
