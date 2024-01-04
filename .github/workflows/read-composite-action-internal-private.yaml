@@ -19,20 +19,20 @@ jobs:
               with:
                 repository: SAG-Trial/SecretSubModule
                 ssh-key: ${{ secrets.ORG_PRIVATEREPO_SSH }}
-                path: private_action
+                path: .github/actions
 
-            - run: |
-                cd private_action
-                ls -la
+            # - run: |
+            #     cd private_action
+            #     ls -la
 
-                pwd
-                # cd .github/actions/SendPasswordFile
+            #     pwd
+            #     # cd .github/actions/SendPasswordFile
 
-                tree .github  
+            #     tree .github  
 
             - name: Call Private Repo Action
               id: call-private-repo-action
-              uses: /.github/actions/SendPasswordFile@main
+              uses: .github/actions/SendPasswordFile@main
               
             - name: GetWeather
               uses: SAG-Trial/QM/.github/actions/GetWeather@main
