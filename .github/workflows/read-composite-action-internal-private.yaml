@@ -12,5 +12,24 @@ on:
           
 jobs:
     call-private-from-internal:
-        name: Call Private from Internal
-        uses: SAG-Trial/QM/.github/workflows/git-secret
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v3
+              with:
+                repository: SAG-Trial/SecretSubModule
+                ssh-key: ${{ secrets.ORG_PRIVATEREPO_SSH }}
+                path: .github/workflows
+
+            - run: |
+                cd .github/workflows
+                ls -la
+
+            - name: Call Private Repo Action
+              id: call-private-repo-action
+              uses: ./.github/workflows/.github/actions/SendPasswordFile@main
+              
+            - name: GetWeather
+              uses: SAG-Trial/QM/.github/actions/GetWeather@main
+              env:
+                PASSWORD: ${{ steps.call-private-repo-action.outputs.PASSWORD }}
