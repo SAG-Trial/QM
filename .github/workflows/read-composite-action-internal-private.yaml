@@ -28,11 +28,13 @@ jobs:
                 pwd
                 # cd .github/actions/SendPasswordFile
 
-            - name: Call Private Repo Action
-              id: call-private-repo-action
-              uses: ./private_action/.github/actions/SendPasswordFile@main
+                tree .github  
+
+            # - name: Call Private Repo Action
+            #   id: call-private-repo-action
+            #   uses: ./private_action/.github/actions/SendPasswordFile@main
               
-            - name: GetWeather
-              uses: SAG-Trial/QM/.github/actions/GetWeather@main
-              env:
-                PASSWORD: ${{ steps.call-private-repo-action.outputs.PASSWORD }}
+            # - name: GetWeather
+            #   uses: SAG-Trial/QM/.github/actions/GetWeather@main
+            #   env:
+            #     PASSWORD: ${{ steps.call-private-repo-action.outputs.PASSWORD }}
