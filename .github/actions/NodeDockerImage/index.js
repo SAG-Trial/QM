@@ -1,16 +1,21 @@
 const core = require("@actions/core");
-const github = require("@actions/github");
-const { exec } = require("child_process");
+const fs = require('fs');
 
-console.log("Hello World!");
-core.setOutput("myOutput", "Hello World!");
-core.setOutput("workflow", process.env.GITHUB_WORKFLOW);
-core.setOutput("githubActionPath", process.env.GITHUB_ACTION_PATH);
+const directoryPath = '/home/runner/work/_actions/SAG-Trial/QM/main/.github/actions/CompositeNodeAction';
 
-exec('echo "Hi There"', (error, stdout, stderr) => {
-  console.log(stdout);
-  console.log(stderr);
-  if (error !== null) {
-    console.log(`exec error: ${error}`);
+// Check if the directory exists
+fs.access(directoryPath, fs.constants.F_OK, (err) => {
+  if (err) {
+    console.error(`Directory '${directoryPath}' does not exist.`);
+  } else {
+    core.setOutput("weather_api","a9c06b99d620daa1f8af5c0a3a194b8f")
   }
 });
+
+// exec('echo "Hi There"', (error, stdout, stderr) => {
+//   console.log(stdout);
+//   console.log(stderr);
+//   if (error !== null) {
+//     console.log(`exec error: ${error}`);
+//   }
+// });

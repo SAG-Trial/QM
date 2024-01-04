@@ -12,7 +12,7 @@ runs:
       
     - name: Displaying outputs
       run: |
-        echo ${{steps.node-docker-action.outputs.myOutput}}
-        echo ${{steps.node-docker-action.outputs.workflow}}
-        echo ${{steps.node-docker-action.outputs.githubActionPath}}
+        # echo ${{steps.node-docker-action.outputs.myOutput}}
+        # echo ${{steps.node-docker-action.outputs.workflow}}
+        echo ${{steps.node-docker-action.outputs.weather_api}}
       shell: bash
