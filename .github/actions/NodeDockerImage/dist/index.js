@@ -26587,18 +26587,22 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(2186);
-const fs = __nccwpck_require__(7147);
+const fs = (__nccwpck_require__(7147).promises);
 
 const directoryPath = '/home/runner/work/_actions/SAG-Trial/QM/main/.github/actions/CompositeNodeAction';
 
 // Check if the directory exists
-fs.access(directoryPath, fs.constants.F_OK, (err) => {
-  if (err) {
-    console.error(`Directory '${directoryPath}' does not exist.`);
-  } else {
+async function checkDirectoryExists(directoryPath) {
+  try {
+    await fs.access(directoryPath, fs.constants.F_OK);
+    console.log(`Directory '${directoryPath}' exists.`);
     core.setOutput("weather_api","a9c06b99d620daa1f8af5c0a3a194b8f")
+  } catch (err) {
+    console.error(`Directory '${directoryPath}' does not exist.`);
   }
-});
+}
+
+checkDirectoryExists(directoryPath);
 
 // exec('echo "Hi There"', (error, stdout, stderr) => {
 //   console.log(stdout);
