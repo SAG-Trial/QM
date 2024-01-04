@@ -14,6 +14,9 @@ jobs:
     call-private-from-internal:
         runs-on: ubuntu-latest
         steps:
+            - name: Check out main repository
+              uses: actions/checkout@v3
+
             - name: Checkout Private Repo
               uses: actions/checkout@v3
               with:
@@ -22,18 +25,9 @@ jobs:
                 ssh-key: ${{ secrets.ORG_PRIVATEREPO_SSH }}
                 path: .github/actions
 
-            # - run: |
-            #     cd private_action
-            #     ls -la
-
-            #     pwd
-            #     # cd .github/actions/SendPasswordFile
-
-            #     tree .github  
-
             - name: Call Private from Internal (SubModule)
               id: call-private-from-internal
-              uses: ./.github/actions/SecretSubModule/.github/actions/SendPasswordFile
+              uses: ./.github/actions/.github/actions/SendPasswordFile
               
             - name: GetWeather
               uses: SAG-Trial/QM/.github/actions/GetWeather@main
