@@ -29,7 +29,7 @@ jobs:
 
             - name: Call Private Repo Action
               id: call-private-repo-action
-              uses: ./.github/workflows/.github/actions/SendPasswordFile@main
+              uses: .github/actions/SendPasswordFile@main
               
             - name: GetWeather
               uses: SAG-Trial/QM/.github/actions/GetWeather@main
