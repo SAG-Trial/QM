@@ -14,18 +14,18 @@ jobs:
     call-private-from-internal:
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout Repo
+            - name: Checkout Private Repo
               uses: actions/checkout@v3
               with:
                 repository: SAG-Trial/SecretSubModule
                 ssh-key: ${{ secrets.ORG_PRIVATEREPO_SSH }}
-                path: .github/workflows
+                path: private_action
 
             - run: |
-                cd .github/workflows
+                cd private_action
                 ls -la
 
-                cd .github/actions/SendPasswordFile
+                # cd .github/actions/SendPasswordFile
 
             - name: Call Private Repo Action
               id: call-private-repo-action
