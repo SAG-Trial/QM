@@ -4,6 +4,6 @@ COPY dist ./
 
 RUN pwd
 
-CMD ["node","index.js"]
+CMD ["node","/github/workspace/index.js"]
 
 
