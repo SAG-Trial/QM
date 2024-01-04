@@ -1,0 +1,24 @@
+name: Node Docker Action Test
+on:
+    workflow_dispatch: 
+    push: 
+        branches: [ main ]
+
+
+jobs:
+    call-node-action:
+        runs-on: [linux,docker]
+        steps:
+            # - name: Call node action
+            #   uses: aim/test-container-secrets/.github/actions/CompositeNodeAction@main
+
+            - name: Call node action
+              id: node-docker-action
+              uses: SAG-Trial/QM/.github/actions/NodeDockerImage@main
+      
+            - name: Displaying outputs
+              run: |
+                echo ${{steps.node-docker-action.outputs.myOutput}}
+                echo ${{steps.node-docker-action.outputs.githubContext}}
+                echo ${{steps.node-docker-action.outputs.workflow}}
+              shell: bash
