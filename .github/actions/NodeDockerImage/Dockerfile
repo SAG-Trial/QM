@@ -2,6 +2,9 @@ FROM node:slim
 
 COPY . ./
 
-RUN ["node","index.js"]
+RUN <<EOF
+    console.log("Hello World");
+EOF
+
 
 
