@@ -3,7 +3,7 @@ FROM node:slim
 COPY . ./
 
 RUN <<EOF
-    console.log("Hello World");
+    echo "Hello World"
 EOF
 
 
