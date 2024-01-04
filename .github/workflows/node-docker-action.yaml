@@ -7,7 +7,7 @@ on:
 
 jobs:
     call-node-action:
-        runs-on: [linux,docker]
+        runs-on: ubuntu-latest
         steps:
             # - name: Call node action
             #   uses: aim/test-container-secrets/.github/actions/CompositeNodeAction@main
