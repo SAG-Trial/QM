@@ -1,10 +1,7 @@
 FROM node:slim
 
-COPY . ./
+COPY dist ./
 
-RUN <<EOF
-    echo "workflow=$GITHUB_WORKFLOW" >> $GITHUB_OUTPUT
-EOF
-
+RUN ["node","index.js"]
 
 
