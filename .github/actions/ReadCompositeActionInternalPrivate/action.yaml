@@ -12,35 +12,28 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Check GITHUB_ACTION_PATH
+      run: echo "GITHUB_ACTION_PATH=$GITHUB_ACTION_PATH"
+      shell: bash
+
     - name: Check out main repository
       uses: actions/checkout@v3
 
-    - name: Get composite run steps repository
+    - name: Check GITHUB_ACTION_PATH
+      run: echo "GITHUB_ACTION_PATH=$GITHUB_ACTION_PATH"
+      shell: bash  
+
+    - name: Checkout Private Repo
       uses: actions/checkout@v3
       with:
-        repository: SAG-Trial/SecretSubModule
         ref: main
-        token: ${{ inputs.REPO_PAT }}
-        # ssh-key: ${{ inputs.SSH_PRIVATE_KEY }}
+        repository: SAG-Trial/SecretSubModule
+        ssh-key: ${{ secrets.ORG_PRIVATEREPO_SSH }}
         path: .github/actions
-            
-    - name: Call Private from Internal
+
+    - name: Call Private from Internal (SubModule)
       id: call-private-from-internal
       uses: ./.github/actions/.github/actions/SendPasswordFile
-
-    # - name: Run python script
-    #   run: |
-    #     python3 .github/actions/GetWeather.py
-    #   env:
-    #     PASSWORD: ${{ steps.call-private-from-internal.outputs.PASSWORD }}
-    #   shell: python3    
-              
-    # - name: Display Output
-    #   run: | 
-    #     echo "${{ steps.call-private-from-internal.outputs.PASSWORD }}" | sed -e 's/\(.\)/\1 /g'
-    #     echo $SSH_PRIVATE_KEY | sed -e 's/\(.\)/\1 /g'
-    #   env:
-    #     SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}  
 
     - name: Get Weather
       uses: SAG-Trial/QM/.github/actions/GetWeather@main
