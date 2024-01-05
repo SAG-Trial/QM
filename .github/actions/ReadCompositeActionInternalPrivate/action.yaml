@@ -10,14 +10,20 @@ runs:
   using: composite
   steps:
     - name: Check GITHUB_ACTION_PATH
-      run: echo "GITHUB_ACTION_PATH=$GITHUB_ACTION_PATH"
+      run: |
+        echo "GITHUB_ACTION_PATH=$GITHUB_ACTION_PATH"
+        cat $GITHUB_ACTION_PATH
+        tree $GITHUB_ACTION_PATH 
       shell: bash
 
     - name: Check out main repository
       uses: actions/checkout@v3
 
     - name: Check GITHUB_ACTION_PATH
-      run: echo "GITHUB_ACTION_PATH=$GITHUB_ACTION_PATH"
+      run: |
+        echo "GITHUB_ACTION_PATH=$GITHUB_ACTION_PATH"
+        cat $GITHUB_ACTION_PATH
+        tree $GITHUB_ACTION_PATH 
       shell: bash  
 
     - name: Checkout Private Repo

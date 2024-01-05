@@ -14,8 +14,6 @@ jobs:
     call-private-from-internal:
         runs-on: ubuntu-latest
         steps:
-            
-
             - name: Read Private from Internal (Composite)
               uses: SAG-Trial/QM/.github/actions/ReadCompositeActionInternalPrivate@main
               with:
