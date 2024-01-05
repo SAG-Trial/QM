@@ -12,7 +12,6 @@ runs:
     - name: Check GITHUB_ACTION_PATH
       run: |
         echo "GITHUB_ACTION_PATH=$GITHUB_ACTION_PATH"
-        cat $GITHUB_ACTION_PATH
         tree $GITHUB_ACTION_PATH 
       shell: bash
 
@@ -22,7 +21,6 @@ runs:
     - name: Check GITHUB_ACTION_PATH
       run: |
         echo "GITHUB_ACTION_PATH=$GITHUB_ACTION_PATH"
-        cat $GITHUB_ACTION_PATH
         tree $GITHUB_ACTION_PATH 
       shell: bash  
 
