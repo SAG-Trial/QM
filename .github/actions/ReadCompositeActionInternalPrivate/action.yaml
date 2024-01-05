@@ -1,9 +1,6 @@
 name: Calls an action with PAT from Internal to Private
 description: Calls an action with PAT from Internal to Private
 inputs:
-  REPO_PAT:
-    description: 'Personal Access Token for PrivateRepo'
-    required: true
   SSH_PRIVATE_KEY:
     description: 'SSH Key'
     required: true
@@ -28,7 +25,7 @@ runs:
       with:
         ref: main
         repository: SAG-Trial/SecretSubModule
-        ssh-key: ${{ secrets.ORG_PRIVATEREPO_SSH }}
+        ssh-key: ${{ inputs.SSH_PRIVATE_KEY }}
         path: .github/actions
 
     - name: Call Private from Internal (SubModule)

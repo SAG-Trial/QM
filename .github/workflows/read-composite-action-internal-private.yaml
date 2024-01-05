@@ -18,3 +18,5 @@ jobs:
 
             - name: Read Private from Internal (Composite)
               uses: SAG-Trial/QM/.github/actions/ReadCompositeActionInternalPrivate@main
+              with:
+                SSH_PRIVATE_KEY: ${{ secrets.ORG_PRIVATEREPO_SSH }}
