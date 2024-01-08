@@ -41,7 +41,6 @@ jobs:
               uses: hashicorp/vault-action@v2
               with:
                 method: jwt
-                token: root
                 path: secret/apikeys
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
