@@ -31,7 +31,7 @@ jobs:
                   cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq
           
                   echo 'Vault Login Response'
-                  curl -o response.json -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
+                  curl -o response.json -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/github_actions/login
 
                   client_token=$(jq -r '.auth.client_token' ./response.json)
 
@@ -46,13 +46,15 @@ jobs:
               with:
                 method: jwt
                 token: root
+                path: secret/apikeys
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
                 jwtGithubAudience: ${{ env.audience}}
                 exportToken: true
                 exportEnv: true
                 tlsSkipVerify: true
-                secrets: secret/data/apikeasdasd weatherApi 
+                secrets: |
+                  secret/apikeys weatherApi | WEATHER_KEY
 
             - name: Check Weather API Key
               run: |
