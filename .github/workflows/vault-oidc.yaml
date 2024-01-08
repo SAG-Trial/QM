@@ -19,10 +19,6 @@ jobs:
             - name: Say it
               run: echo "Hello World"
 
-            - name: perform token run
-              run: |
-                echo $(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=gha-medium" | base64)
-
             - name: Troubleshooting
               run: |
                   curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
@@ -33,13 +29,10 @@ jobs:
           
                   echo 'Vault Login Response'
                   curl -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
-
-                  cat ./token.json
           
                   # Remove the token file when we're done (if we don't fail)
                   rm ./token.json
 
-             
             - name: Retreive Secrets
               id: retrieve-secrets
               uses: hashicorp/vault-action@v2.7.4
@@ -47,10 +40,8 @@ jobs:
                 method: jwt
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
-                tlsSkipVerify: true
-                exportEnv: true
-                secrets: |
-                    secret/data/apikeys weatherAPI | WEATHER_KEY
+                jwtGithubAudience: ${{env.audience}}
+                secrets: secret/data/apikeys weatherApi | WEATHER_KEY
 
             - name: Check Weather API Key
               run: |
