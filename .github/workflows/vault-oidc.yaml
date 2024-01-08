@@ -24,9 +24,6 @@ jobs:
               run: |
                 echo jsonEncoded=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=${{env.audience}}" | base64)  
 
-                echo 'Vault Login Response'
-                curl -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data $jsonEncoded ${{env.hashiUrl}}/v1/auth/jwt/login
-
             # - name: Troubleshooting
             #   id: troubleshooting
             #   run: |
