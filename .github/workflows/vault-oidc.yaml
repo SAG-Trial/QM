@@ -41,6 +41,7 @@ jobs:
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
                 jwtGithubAudience: ${{env.audience}}
+                tlsSkipVerify: true
                 secrets: secret/data/apikeys weatherApi | WEATHER_KEY
 
             - name: Check Weather API Key
