@@ -38,7 +38,7 @@ jobs:
 
                   echo "client_token=$(jq -r '.auth.client_token' ./response.json)" >> $GITHUB_OUTPUT
 
-                  echo $
+                  echo $client_token
           
                   # Remove the token file when we're done (if we don't fail)
                   # rm ./token.json
