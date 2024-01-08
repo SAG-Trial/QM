@@ -46,7 +46,7 @@ jobs:
                 role: ${{ env.roleName }}
                 jwtGithubAudience: ${{ env.audience}}
                 exportEnv: true
-                tlsSkipVerify: true
+                tlsSkipVerify: false
                 secrets: |
                   secret/apikeys weatherApi | WEATHER_KEY
 
