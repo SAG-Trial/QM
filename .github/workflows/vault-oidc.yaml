@@ -28,7 +28,7 @@ jobs:
                   cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq
           
                   echo 'Vault Login Response'
-                  curl -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/github_actions/login
+                  curl -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
           
                   # Remove the token file when we're done (if we don't fail)
                   rm ./token.json
