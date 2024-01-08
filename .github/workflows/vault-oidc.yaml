@@ -61,7 +61,7 @@ jobs:
                 path: secret/apikeys
                 url: https://9sndck32-8200.inc1.devtunnels.ms
                 role: ${{ env.roleName }}
-                # jwtGithubAudience: ${{ env.audience}}
+                jwtGithubAudience: ${{ env.audience}}
                 exportEnv: true
                 tlsSkipVerify: true
                 secrets: |
