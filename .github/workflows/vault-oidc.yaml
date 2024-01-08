@@ -41,6 +41,8 @@ jobs:
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
                 jwtGithubAudience: ${{env.audience}}
+                exportToken: true
+                exportEnv: true
                 tlsSkipVerify: true
                 secrets: secret/data/apikeys weatherApi | WEATHER_KEY
 
