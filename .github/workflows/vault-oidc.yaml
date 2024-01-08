@@ -42,6 +42,7 @@ jobs:
               with:
                 method: jwt
                 token: root
+                path: secret/apikeys
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
                 jwtGithubAudience: ${{ env.audience}}
