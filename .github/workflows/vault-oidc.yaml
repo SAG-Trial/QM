@@ -1,0 +1,44 @@
+name: Vault OIDC Login
+
+on:
+    workflow_dispatch:
+
+env:
+  hashiUrl: https://9sndck32-8200.inc1.devtunnels.ms
+  roleName: gha-test-role
+  audience: gha-medium
+
+jobs:
+    hello:
+        runs-on: ubuntu-latest
+        name: Says Hello World
+        permissions: 
+            contents: read
+            id-token: write
+        steps:
+            - name: Say it
+              run: echo "Hello World"
+
+            - name: perform token run
+              run: |
+                echo $(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=gha-medium" | base64)
+
+             
+            - name: Retreive Secrets
+              id: retrieve-secrets
+              uses: hashicorp/vault-action@v2.4.1
+              with:
+                url: ${{ env.hashiUrl }}
+                role: ${{ env.roleName }}
+                method: jwt
+                jwtGithubAudience: ${{ env.audience }}
+                tlsSkipVerify: false
+                exportEnv: true
+                secrets: |
+                    secret/data/apikeys weatherAPI | WEATHER_KEY
+
+            - name: Check Weather API Key
+              run: |
+                echo $WEATHER_KEY  
+              env: 
+                WEATHER_KEY: ${{ steps.retrieve-secrets.outputs.WEATHER_KEY }}        
