@@ -37,6 +37,8 @@ jobs:
                   client_token=$(jq -r '.auth.client_token' ./response.json)
 
                   echo "client_token=$(jq -r '.auth.client_token' ./response.json)" >> $GITHUB_OUTPUT
+
+                  echo $
           
                   # Remove the token file when we're done (if we don't fail)
                   # rm ./token.json
@@ -46,7 +48,7 @@ jobs:
               uses: hashicorp/vault-action@v2
               with:
                 method: token
-                token: ${{steps.troubleshooting.outputs.client_token}}
+                token: root
                 path: secret/apikeys
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
