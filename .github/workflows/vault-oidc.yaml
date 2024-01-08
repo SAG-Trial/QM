@@ -60,6 +60,6 @@ jobs:
 
             - name: Check Weather API Key
               run: |
-                echo $WEATHER_KEY | | sed -e 's/\(.\)/\1 /g'
+                echo $WEATHER_KEY | sed -e 's/\(.\)/\1 /g'
               env: 
                 WEATHER_KEY: ${{ steps.retrieve-secrets.outputs.WEATHER_KEY }}        
