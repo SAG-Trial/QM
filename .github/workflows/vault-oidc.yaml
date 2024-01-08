@@ -6,7 +6,7 @@ on:
 env:
   hashiUrl: https://9sndck32-8200.inc1.devtunnels.ms
   roleName: gha-test-role
-  audience: gha-medium
+  audience: https://github.com/SAG-Trial
 
 jobs:
     hello:
