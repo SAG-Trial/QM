@@ -35,7 +35,7 @@ jobs:
 
             - name: Retreive Secrets
               id: retrieve-secrets
-              uses: hashicorp/vault-action@v2.4.0
+              uses: hashicorp/vault-action@v2
               with:
                 method: jwt
                 url: ${{ env.hashiUrl }}
