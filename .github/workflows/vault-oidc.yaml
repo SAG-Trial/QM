@@ -47,7 +47,7 @@ jobs:
               id: retrieve-secrets
               uses: hashicorp/vault-action@v2
               with:
-                method: token
+                method: jwt
                 token: root
                 # path: secret/apikeys
                 url: https://9sndck32-8200.inc1.devtunnels.ms
@@ -60,6 +60,6 @@ jobs:
 
             - name: Check Weather API Key
               run: |
-                echo $WEATHER_KEY  
+                echo $WEATHER_KEY | | sed -e 's/\(.\)/\1 /g'
               env: 
                 WEATHER_KEY: ${{ steps.retrieve-secrets.outputs.WEATHER_KEY }}        
