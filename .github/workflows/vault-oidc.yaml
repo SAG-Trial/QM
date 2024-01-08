@@ -24,7 +24,11 @@ jobs:
 
             - name: Troubleshooting
               run: |
-                  curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
+                  # curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
+                  # jq "{ jwt: .value, role: \"${{env.roleName}}\" }" > ./token.json
+
+                  
+                  echo $(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=${{env.audience}}" | base64) | \
                   jq "{ jwt: .value, role: \"${{env.roleName}}\" }" > ./token.json
                       
                   echo 'GitHub Actions Token Claims'
