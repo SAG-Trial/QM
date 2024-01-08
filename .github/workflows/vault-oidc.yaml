@@ -39,6 +39,7 @@ jobs:
               with:
                 method: jwt
                 url: ${{ env.hashiUrl }}
+                path: secret/data/apikeys
                 role: ${{ env.roleName }}
                 jwtGithubAudience: ${{env.audience}}
                 secrets: secret/data/apikeys weatherApi | WEATHER_KEY
