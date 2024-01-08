@@ -23,7 +23,6 @@ jobs:
               run: echo "Hello World"
 
             - name: Troubleshooting
-              id: troubleshooting
               run: |
                   curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
                   jq "{ jwt: .value, role: \"${{env.roleName}}\" }" > ./token.json
@@ -36,7 +35,7 @@ jobs:
 
                   client_token=$(jq -r '.auth.client_token' ./response.json)
 
-                  echo "client_token=$(jq -r '.auth.client_token' ./response.json)" >> $GITHUB_OUTPUT
+                  echo "BUILD_STAGE=debug" >> $GITHUB_OUTPUT
           
                   # Remove the token file when we're done (if we don't fail)
                   # rm ./token.json
@@ -45,10 +44,11 @@ jobs:
               id: retrieve-secrets
               uses: hashicorp/vault-action@v2
               with:
-                method: token
-                token: ${{steps.troubleshooting.outputs.client_token }}
+                method: jst
+                token: root
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
+                jwtGithubAudience: ${{ env.audience}}
                 exportToken: true
                 exportEnv: true
                 tlsSkipVerify: true
