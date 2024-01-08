@@ -44,7 +44,7 @@ jobs:
               id: retrieve-secrets
               uses: hashicorp/vault-action@v2
               with:
-                method: jst
+                method: jwt
                 token: root
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
