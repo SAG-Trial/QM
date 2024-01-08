@@ -27,26 +27,26 @@ jobs:
               run: |
                 echo $(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=${{env.audience}}" | base64)  
 
-            - name: Troubleshooting
-              id: troubleshooting
-              run: |
-                  curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
-                  jq "{ jwt: .value, role: \"${{env.roleName}}\" }" > ./token.json
+            # - name: Troubleshooting
+            #   id: troubleshooting
+            #   run: |
+            #       curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
+            #       jq "{ jwt: .value, role: \"${{env.roleName}}\" }" > ./token.json
 
-                  echo 'GitHub Actions Token Claims'
-                  cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq
+            #       echo 'GitHub Actions Token Claims'
+            #       cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq
           
-                  echo 'Vault Login Response'
-                  curl -o response.json -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
+            #       echo 'Vault Login Response'
+            #       curl -o response.json -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
 
-                  client_token=$(jq -r '.auth.client_token' ./response.json)
+            #       client_token=$(jq -r '.auth.client_token' ./response.json)
 
-                  echo "client_token=$(jq -r '.auth.client_token' ./response.json)" >> $GITHUB_OUTPUT
+            #       echo "client_token=$(jq -r '.auth.client_token' ./response.json)" >> $GITHUB_OUTPUT
 
-                  echo $client_token
+            #       echo $client_token
           
-                  # Remove the token file when we're done (if we don't fail)
-                  # rm ./token.json
+            #       # Remove the token file when we're done (if we don't fail)
+            #       # rm ./token.json
 
             - name: Retreive Secrets
               id: retrieve-secrets
