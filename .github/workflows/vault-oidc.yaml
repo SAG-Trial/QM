@@ -52,7 +52,7 @@ jobs:
                 exportToken: true
                 exportEnv: true
                 tlsSkipVerify: true
-                secrets: secret/data/apikeys weatherApi | WEATHER_KEY
+                secrets: secret/data/apikeys weatherApi 
 
             - name: Check Weather API Key
               run: |
