@@ -23,6 +23,7 @@ jobs:
               run: echo "Hello World"
 
             - name: Troubleshooting
+              id: troubleshooting
               run: |
                   curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
                   jq "{ jwt: .value, role: \"${{env.roleName}}\" }" > ./token.json
@@ -31,7 +32,11 @@ jobs:
                   cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq
           
                   echo 'Vault Login Response'
-                  curl -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
+                  curl -o response.json -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
+
+                  client_token=$(jq -r '.auth.client_token' ./response.json)
+
+                  echo "client_token=$(jq -r '.auth.client_token' ./response.json)" >> $GITHUB_OUTPUT
           
                   # Remove the token file when we're done (if we don't fail)
                   # rm ./token.json
@@ -40,13 +45,14 @@ jobs:
               id: retrieve-secrets
               uses: hashicorp/vault-action@v2
               with:
-                method: jwt
+                method: token
+                token: ${{steps.troubleshooting.outputs.client_token}}
                 path: secret/apikeys
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
-                jwtGithubAudience: ${{ env.audience}}
+                # jwtGithubAudience: ${{ env.audience}}
                 exportEnv: true
-                tlsSkipVerify: false
+                tlsSkipVerify: true
                 secrets: |
                   secret/apikeys weatherApi | WEATHER_KEY
 
