@@ -47,7 +47,7 @@ jobs:
               id: retrieve-secrets
               uses: hashicorp/vault-action@v2
               with:
-                method: jwt
+                method: token
                 token: root
                 # path: secret/apikeys
                 url: https://9sndck32-8200.inc1.devtunnels.ms
