@@ -31,7 +31,7 @@ jobs:
                   curl -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
           
                   # Remove the token file when we're done (if we don't fail)
-                  rm ./token.json
+                  # rm ./token.json
 
             - name: Retreive Secrets
               id: retrieve-secrets
