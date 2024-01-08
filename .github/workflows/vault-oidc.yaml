@@ -57,6 +57,6 @@ jobs:
                 echo "::set-output name=WEATHER_KEY::$WEATHER_KEY"   
 
             - name: Get Weather
-              uses: SAG-Trial/QM/.github/action/GetWeather@main
+              uses: SAG-Trial/QM/.github/actions/GetWeather@main
               env: 
                 PASSWORD: ${{ steps.check-weather-api-key.outputs.WEATHER_KEY }}
