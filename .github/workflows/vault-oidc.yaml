@@ -25,7 +25,7 @@ jobs:
             - name: perform token run
               id: perform-token-run
               run: |
-                echo $(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=gha-medium" | base64)  
+                echo $(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=${{env.audience}}" | base64)  
 
             - name: Troubleshooting
               id: troubleshooting
