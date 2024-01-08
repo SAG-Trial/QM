@@ -44,11 +44,9 @@ jobs:
               id: retrieve-secrets
               uses: hashicorp/vault-action@v2.7.4
               with:
+                method: jwt
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
-                method: jwt
-                jwtGithubAudience: ${{ env.audience }}
-                token: root
                 tlsSkipVerify: true
                 exportEnv: true
                 secrets: |
