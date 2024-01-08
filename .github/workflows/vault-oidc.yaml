@@ -40,13 +40,13 @@ jobs:
                   cat ./token.json
           
                   echo 'Vault Login Response'
-                  curl -o response.json -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
+                  curl -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
 
-                  client_token=$(jq -r '.auth.client_token' ./response.json)
+                  # client_token=$(jq -r '.auth.client_token' ./response.json)
 
-                  echo "client_token=$(jq -r '.auth.client_token' ./response.json)" >> $GITHUB_OUTPUT
+                  # echo "client_token=$(jq -r '.auth.client_token' ./response.json)" >> $GITHUB_OUTPUT
 
-                  echo $client_token
+                  # echo $client_token
           
                   # Remove the token file when we're done (if we don't fail)
                   # rm ./token.json
