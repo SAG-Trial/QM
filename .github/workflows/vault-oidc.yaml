@@ -49,7 +49,7 @@ jobs:
               with:
                 method: token
                 token: root
-                path: secret/apikeys
+                # path: secret/apikeys
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
                 # jwtGithubAudience: ${{ env.audience}}
