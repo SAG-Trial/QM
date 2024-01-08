@@ -28,7 +28,11 @@ jobs:
                   cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq
           
                   echo 'Vault Login Response'
-                  curl -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
+                  curl -o response.json -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
+
+                  export client_token=$(jq -r '.auth.client_token' ./response.json)
+
+                  echo $client_token
           
                   # Remove the token file when we're done (if we don't fail)
                   # rm ./token.json
@@ -37,10 +41,10 @@ jobs:
               id: retrieve-secrets
               uses: hashicorp/vault-action@v2
               with:
-                method: jwt
+                method: token
+                token: ${{ env.client_token }}
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
-                jwtGithubAudience: ${{env.audience}}
                 exportToken: true
                 exportEnv: true
                 tlsSkipVerify: true
