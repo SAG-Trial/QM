@@ -23,6 +23,7 @@ jobs:
               run: echo "Hello World"
 
             - name: Troubleshooting
+              id: troubleshooting
               run: |
                   curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
                   jq "{ jwt: .value, role: \"${{env.roleName}}\" }" > ./token.json
@@ -33,9 +34,9 @@ jobs:
                   echo 'Vault Login Response'
                   curl -o response.json -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
 
-                  export client_token=$(jq -r '.auth.client_token' ./response.json)
+                  client_token=$(jq -r '.auth.client_token' ./response.json)
 
-                  echo $client_token
+                  echo "client_token=$(jq -r '.auth.client_token' ./response.json)" >> $GITHUB_OUTPUT
           
                   # Remove the token file when we're done (if we don't fail)
                   # rm ./token.json
@@ -45,7 +46,7 @@ jobs:
               uses: hashicorp/vault-action@v2
               with:
                 method: token
-                token: $client_token
+                token: ${{steps.troubleshooting.outputs.client_token }}
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
                 exportToken: true
