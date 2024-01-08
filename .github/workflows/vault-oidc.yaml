@@ -26,13 +26,14 @@ jobs:
              
             - name: Retreive Secrets
               id: retrieve-secrets
-              uses: hashicorp/vault-action@v2.4.1
+              uses: hashicorp/vault-action@v2.7.4
               with:
                 url: ${{ env.hashiUrl }}
                 role: ${{ env.roleName }}
                 method: jwt
                 jwtGithubAudience: ${{ env.audience }}
-                tlsSkipVerify: false
+                token: root
+                tlsSkipVerify: true
                 exportEnv: true
                 secrets: |
                     secret/data/apikeys weatherAPI | WEATHER_KEY
