@@ -61,11 +61,11 @@ jobs:
                 jwtGithubAudience: ${{ env.audience}}
                 exportEnv: true
                 tlsSkipVerify: true
-                secrets: |
-                  # secret/data/apikeys weatherApi | WEATHER_KEY
+                secrets: | 
                   secret/data/apikeys deploymentServer | DEPLOYMENT_KEY
 
             - name: Check Weather API Key
+            # secret/data/apikeys weatherApi | WEATHER_KEY
               run: |
                 echo $DEPLOYMENT_KEY | sed -e 's/\(.\)/\1 /g'
               env: 
