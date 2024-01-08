@@ -14,42 +14,39 @@ env:
 jobs:
     hello:
         runs-on: ubuntu-latest
-        name: Says Hello World
+        name: Vault OIDC Login
         permissions: 
             contents: read
             id-token: write
         steps:
-            - name: Say it
-              run: echo "Hello World"
-
-            # - name: perform token run
-            #   id: perform-token-run
-            #   run: |
-            #     echo $(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=${{env.audience}}" | base64)  
-
-            - name: Troubleshooting
-              id: troubleshooting
+            - name: perform token run
+              id: perform-token-run
               run: |
-                  curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
-                  jq "{ jwt: .value, role: \"${{env.roleName}}\" }" > ./token.json
+                echo $(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=${{env.audience}}" | base64)  
 
-                  echo 'GitHub Actions Token Claims'
-                  cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq
+            # - name: Troubleshooting
+            #   id: troubleshooting
+            #   run: |
+            #       curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
+            #       jq "{ jwt: .value, role: \"${{env.roleName}}\" }" > ./token.json
 
-                  echo "cat ./token.json"
-                  cat ./token.json
+            #       echo 'GitHub Actions Token Claims'
+            #       cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq
+
+            #       echo "cat ./token.json"
+            #       cat ./token.json
           
-                  echo 'Vault Login Response'
-                  curl -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
+            #       echo 'Vault Login Response'
+            #       curl -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hashiUrl}}/v1/auth/jwt/login
 
-                  # client_token=$(jq -r '.auth.client_token' ./response.json)
+            #       # client_token=$(jq -r '.auth.client_token' ./response.json)
 
-                  # echo "client_token=$(jq -r '.auth.client_token' ./response.json)" >> $GITHUB_OUTPUT
+            #       # echo "client_token=$(jq -r '.auth.client_token' ./response.json)" >> $GITHUB_OUTPUT
 
-                  # echo $client_token
+            #       # echo $client_token
           
-                  # Remove the token file when we're done (if we don't fail)
-                  # rm ./token.json
+            #       # Remove the token file when we're done (if we don't fail)
+            #       # rm ./token.json
 
             - name: Retreive Secrets
               id: retrieve-secrets
@@ -65,10 +62,11 @@ jobs:
                 exportEnv: true
                 tlsSkipVerify: true
                 secrets: |
-                  secret/data/apikeys weatherApi | WEATHER_KEY
+                  # secret/data/apikeys weatherApi | WEATHER_KEY
+                  secret/data/apikeys deploymentServer | DEPLOYMENT_KEY
 
             - name: Check Weather API Key
               run: |
-                echo $WEATHER_KEY | sed -e 's/\(.\)/\1 /g'
+                echo $DEPLOYMENT_KEY | sed -e 's/\(.\)/\1 /g'
               env: 
-                WEATHER_KEY: ${{ steps.retrieve-secrets.outputs.WEATHER_KEY }}        
+                DEPLOYMENT_KEY: ${{ steps.retrieve-secrets.outputs.DEPLOYMENT_KEY }}        
