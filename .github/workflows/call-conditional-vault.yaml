@@ -8,6 +8,18 @@ on:
  
 
 jobs:
+    get-jwt-token:
+        runs-on: ubuntu-latest
+        steps:
+            - name: token curl
+              run: |
+                curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
+                jq "{ jwt: .value, role: \"${{env.roleName}}\" }" > ./token.json
+
+                echo 'GitHub Actions Token Claims'
+                cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq 
+
+
     reuse-conditional-vault:
         permissions:
             id-token: write
