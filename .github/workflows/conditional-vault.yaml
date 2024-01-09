@@ -2,6 +2,7 @@ name: Conditional Vault OIDC Login
 on:
     workflow_call: 
     repository_dispatch: 
+    
 
 jobs:
     validate-job:
