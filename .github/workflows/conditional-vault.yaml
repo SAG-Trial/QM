@@ -8,9 +8,15 @@ jobs:
     validate-job:
         # if: github.action_repository
         runs-on: ubuntu-latest
+        permissions:
+            id-token: write
+            contents: read
         steps:
             - name: Checkout
               uses: actions/checkout@v4
 
-            - name: Check Github context
-              run: echo "${{ toJson(github.context) }}"
+            - name: Check ACTIONS_ID_TOKEN_REQUEST_TOKE
+              run: echo $ACTIONS_ID_TOKEN_REQUEST_TOKE
+              
+            - name: Check ACTIONS_ID_TOKEN_REQUEST_URL
+              run: echo $ACTIONS_ID_TOKEN_REQUEST_URL

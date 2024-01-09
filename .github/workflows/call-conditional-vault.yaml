@@ -4,5 +4,8 @@ on:
 
 jobs:
     reuse-conditional-vault:
+        permissions:
+            id-token: write
+            contents: read
         uses: SAG-Trial/QM/.github/workflows/conditional-vault.yaml@main
         
