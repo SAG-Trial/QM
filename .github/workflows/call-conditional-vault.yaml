@@ -9,6 +9,9 @@ on:
 
 jobs:
     get-jwt-token:
+        permissions:
+            id-token: write
+            contents: read
         runs-on: ubuntu-latest
         outputs:
             qmTrigger: ${{ steps.token-curl.outputs.QM_TRIGGER_TOKEN }}
