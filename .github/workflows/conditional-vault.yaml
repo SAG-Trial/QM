@@ -1,0 +1,14 @@
+name: Conditional Vault OIDC Login
+on:
+    workflow_call: 
+    repository_dispatch: 
+
+jobs:
+    validate-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Check Github context
+              run: echo "${{ toJson(github) }}"

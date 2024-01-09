@@ -2,10 +2,15 @@ name: Vault OIDC Login
 
 on:
     workflow_call:
+      outputs:
+        WEATHER_KEY:
+          description: 'Weather API Key'
+          value: ${{ jobs.call-vault.outputs.WEATHER_KEY}}
+        
     workflow_dispatch:
     push:
         branches:
-            - main  
+            - main          
 
 env:
   hashiUrl: https://9sndck32-8200.inc1.devtunnels.ms
@@ -13,9 +18,11 @@ env:
   audience: https://github.com/SAG-Trial
 
 jobs:
-    hello:
+    call-vault:
         runs-on: ubuntu-latest
         name: Vault OIDC Login
+        outputs:
+          WEATHER_KEY: ${{ steps.retrieve-secrets.outputs.WEATHER_KEY }}
         permissions: 
             contents: read
             id-token: write
@@ -50,6 +57,7 @@ jobs:
                 secrets: | 
                   secret/data/apikeys weatherApi | WEATHER_KEY
 
+            # <--- Consuming steps ---->       
             - name: Check Weather API Key and export as output
               id: check-weather-api-key
               run: |
