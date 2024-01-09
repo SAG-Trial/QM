@@ -5,3 +5,4 @@ on:
 jobs:
     reuse-conditional-vault:
         uses: SAG-Trial/QM/.github/workflows/conditional-vault.yaml@main
+        
