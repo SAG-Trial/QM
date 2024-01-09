@@ -1,11 +1,6 @@
 name: Call Conditional Vault login
-
-
-on: 
-    workflow_dispatch: 
-    push:
-        branches:
-            - main
+on:
+    workflow_call: 
 
 jobs:
     reuse-conditional-vault:
