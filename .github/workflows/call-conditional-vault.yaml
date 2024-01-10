@@ -14,22 +14,24 @@ jobs:
             contents: read
         runs-on: ubuntu-latest
         outputs:
-            qmTrigger: ${{ steps.token-curl.outputs.QM_TRIGGER_TOKEN }}
+            signedJWTencoded: ${{ steps.generate-oidc-token.outputs.signedJWTencoded }}
         steps:
-            - name: token curl
-              run: |
+            # - name: token curl
+            #   run: |
               
-                qmTrigger=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=gha-medium" | base64)
+            #     qmTrigger=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=gha-medium" | base64)
 
-                # echo "::add-mask::$qmTrigger"
-                # echo "QM_TRIGGER_TOKEN=$qmTrigger" >> $GITHUB_OUTPUT
+            #     # echo "::add-mask::$qmTrigger"
+            #     # echo "QM_TRIGGER_TOKEN=$qmTrigger" >> $GITHUB_OUTPUT
 
-                # curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
-                # jq "{ jwt: .value, role: \"test-role\" }" > ./token.json
+            #     # curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
+            #     # jq "{ jwt: .value, role: \"test-role\" }" > ./token.json
 
-                # echo 'GitHub Actions Token Claims'
-                # cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq 
-
+            #     # echo 'GitHub Actions Token Claims'
+            #     # cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq 
+            - name: Generate OIDC Token
+              id: generate-oidc-token  
+              uses: SAG-Trial/QM/.github/actions/GenerateOIDCToken@main
 
     reuse-conditional-vault:
         needs: get-jwt-token
@@ -38,5 +40,5 @@ jobs:
             contents: read
         uses: SAG-Trial/QM/.github/workflows/conditional-vault.yaml@main
         with:
-            PARENT_TOKEN: ${{ needs.get-jwt-token.outputs.qmTrigger }}
+            PARENT_TOKEN: ${{ needs.get-jwt-token.outputs.signedJWTencoded }}
         
