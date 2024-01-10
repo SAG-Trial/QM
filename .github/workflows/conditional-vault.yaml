@@ -2,7 +2,7 @@ name: Conditional Vault OIDC Login
 on:
     workflow_call: 
       inputs:
-        PARENT_TOKEN:
+        PARENT_OIDC:
           description: 'Parent token'
           required: true
           type: string
@@ -20,7 +20,7 @@ jobs:
               id: verify-parent-token
               uses: SAG-Trial/QM/.github/actions/DecryptAndVerifyJWTToken@main
               with: 
-                signedJWTbase64encoded: ${{ inputs.PARENT_TOKEN }}
+                signedJWTbase64encoded: ${{ inputs.PARENT_OIDC }}
 
             - name: Display Parent's JWT token verification
               run: echo ${{ steps.verify-parent-token.outputs.JWTTokenVerified }}  
