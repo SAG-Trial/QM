@@ -16,7 +16,7 @@ jobs:
             contents: read
         runs-on: ubuntu-latest
         outputs:
-            oidc: ${{ steps.generate-oidc-token.outputs.SIGNED_JWT_ENCODED_BASE64 }}
+            oidc: ${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}
         steps:
             - name: Generate OIDC Token
               id: generate-oidc-token  
