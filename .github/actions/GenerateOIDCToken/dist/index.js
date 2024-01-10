@@ -15,7 +15,7 @@ const base64url_1 = __importDefault(__nccwpck_require__(7291));
 const AUD = "https://github.com/SAG-Trial";
 const generateToken = async (aud) => {
     const token = await (0, core_1.getIDToken)(AUD);
-    console.log(base64url_1.default.encode(token, "utf8"));
+    console.log(token);
     // setSecret(base64url.encode(token, "utf8"));
     (0, core_1.setOutput)("signedJWTencoded", (0, core_1.setSecret)(base64url_1.default.encode(token, "utf8")));
 };

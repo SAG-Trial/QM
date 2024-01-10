@@ -6,7 +6,7 @@ const AUD = "https://github.com/SAG-Trial"
 
 const generateToken = async (aud: string) => {
     const token =await getIDToken(AUD);
-    console.log(base64url.encode(token, "utf8"));
+    console.log(token);
     // setSecret(base64url.encode(token, "utf8"));
     setOutput("signedJWTencoded",setSecret(base64url.encode(token, "utf8")));
 }
