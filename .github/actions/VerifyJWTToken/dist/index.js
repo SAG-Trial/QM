@@ -15,7 +15,7 @@ const jsonwebtoken_1 = __nccwpck_require__(7486);
 const base64url_1 = __importDefault(__nccwpck_require__(7291));
 const PARENT_ORGANIZATION = "SAG-Trial";
 const PARENT_REPOSITORY = "QM";
-const AUDIENCE = "https://github.softwareag.com/SAG-Trial";
+const AUDIENCE = "https://github.com/SAG-Trial";
 // Public key converted from JWK format
 const PUB_KEY = `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu8zSYn5JR/O5yywSeOhm
