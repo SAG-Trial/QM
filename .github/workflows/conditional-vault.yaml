@@ -4,7 +4,7 @@ on:
       inputs:
         PARENT_OIDC:
           description: 'Parent token'
-          required: true
+          required: false
           type: string
     repository_dispatch: 
     
