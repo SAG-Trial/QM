@@ -75,9 +75,9 @@ const verifyJWTToken = async (tokenBase64encoded: string, pubKey: string) => {
 
         // Check whether the user of vault login workflow is from QM repository
         if (
-          parentOrganisation == PARENT_ORGANIZATION &&
-          parentRepository == PARENT_REPOSITORY &&
-          payloadAudience == AUDIENCE
+          parentOrganisation === PARENT_ORGANIZATION &&
+          parentRepository === PARENT_REPOSITORY &&
+          payloadAudience === AUDIENCE
         ) {
           setOutput("JWTTokenVerified", "true");
         } else {
