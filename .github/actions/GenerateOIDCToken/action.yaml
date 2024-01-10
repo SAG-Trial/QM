@@ -1,0 +1,9 @@
+name: Generate OIDC Token
+description: Generate OIDC Token
+outputs:
+  signedJWTencoded:
+    description: The signed JWT encoded token
+
+runs:
+  using: node16
+  main: dist/index.js
