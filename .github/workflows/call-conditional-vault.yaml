@@ -29,6 +29,6 @@ jobs:
             id-token: write
             contents: read
         uses: SAG-Trial/QM/.github/workflows/conditional-vault.yaml@main
-        with:
-            PARENT_OIDC: ${{ needs.get-jwt-token.outputs.oidc }}
+        # with:
+        #     PARENT_OIDC: ${{ needs.get-jwt-token.outputs.oidc }}
         

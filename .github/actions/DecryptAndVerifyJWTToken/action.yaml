@@ -12,19 +12,31 @@ outputs:
 runs:
   using: composite
   steps:
+    - name: Download OIDC from artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: OIDC_BASE64
+        
     - name: Decrypt JWT Token
       id: decrypt-jwt-token
       run: |
         # Decrypt the JWT
-        SIGNED_JWT_ENCODED_BASE64_DECRYPTED=$(echo -n ${{ inputs.signedJWTbase64encoded }} | base64 -d | gpg --decrypt --quiet --batch --passphrase "qm secret passphrase" --output -)
+        gpg --quiet --batch --yes --decrypt --passphrase='qm-passphrase' --output oidc.txt oidc.txt.gpg
 
-        echo $SIGNED_JWT_ENCODED_BASE64_DECRYPTED
+        SIGNED_JWT_ENCODED_BASE64_DECRYPTED=$(cat oidc.txt)
 
         # Adding Mask
         echo "::add-mask::$SIGNED_JWT_ENCODED_BASE64_DECRYPTED"
 
         echo "PARENT_TOKEN=$SIGNED_JWT_ENCODED_BASE64_DECRYPTED" >> $GITHUB_OUTPUT
+
+        rm -rf oidc.txt oidc.txt.gpg
       shell: bash
+
+    - uses: geekyeggo/delete-artifact@v4
+      with:
+        token: ${{ github.token }}
+        name: OIDC_BASE64
 
     - name: Verify Parent's JWT Token
       id: verify-parent-token
