@@ -13,11 +13,14 @@ jobs:
     validate-job:
         runs-on: ubuntu-latest
         steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
             - name: Verify Parent's JWT Token
               id: verify-parent-token
               uses: SAG-Trial/QM/.github/actions/VerifyJWTToken@main
               with: 
-                signedJWTbase64encoded: ${{ inputs.PARENT_TOKEN}}
+                signedJWTbase64encoded: ${{ inputs.PARENT_TOKEN }}
 
             - name: Display Parent's JWT token verification
               run: echo ${{ steps.verify-parent-token.outputs.JWTTokenVerified }}  
