@@ -32,7 +32,7 @@ const signedJWTbase64encoded = (0, core_1.getInput)("signedJWTencoded");
 const verifyJWTToken = async (tokenBase64encoded, pubKey) => {
     // Decode the base64 encoded token from the parent
     const signedJWTdecoded = base64url_1.default.decode(tokenBase64encoded);
-    console.log("🚀 ~ signedJWTdecoded:", signedJWTdecoded);
+    //   console.log("🚀 ~ signedJWTdecoded:", signedJWTdecoded);
     // signedWebToken is decoded from base64 to an object
     const signedJWTToken = await JSON.parse(signedJWTdecoded);
     // Verify if the token from the parent is valid
