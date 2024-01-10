@@ -13,17 +13,17 @@ runs:
       run: |
         SIGNED_JWT_ENCODED_BASE64=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://github.com/SAG-Trial" | base64 -w 0)
 
+         gpg --version
+
         # Encrypt the JWT
         SIGNED_JWT_ENCODED_BASE64_ENCRYPTED=$(echo $SIGNED_JWT_ENCODED_BASE64 | gpg --symmetric --quiet --batch --passphrase "qm secret passphrase" --output - | base64 -w0)
 
-        # Decrypt
-        SIGNED_JWT_ENCODED_BASE64_DECRYPTED=$(echo -n $SIGNED_JWT_ENCODED_BASE64_ENCRYPTED | base64 -d | gpg --decrypt --quiet --batch --passphrase "qm secret passphrase" --output -)
+        echo $SIGNED_JWT_ENCODED_BASE64_ENCRYPTED
 
         # Adding Mask
         echo "::add-mask::$SIGNED_JWT_ENCODED_BASE64_ENCRYPTED"
 
-        gpg --version
-
+        # Sendine Encrypted as Output  
         echo -n "SIGNED_JWT_ENCODED_BASE64=$SIGNED_JWT_ENCODED_BASE64_ENCRYPTED" >> $GITHUB_OUTPUT
       shell: bash
 
