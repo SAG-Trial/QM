@@ -18,10 +18,13 @@ jobs:
         outputs:
             signedJWTencoded: ${{ steps.generate-oidc-token.outputs.signedJWTencoded }}
         steps:
-            - name: token curl
+            - name: Generate OIDC Token
+              id: generate-oidc-token
               run: |
-              
                 signedJWTencoded=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=${{env.aud}}" | base64)
+
+                # echo "::set-output name=signedJWTencoded::$signedJWTencoded"
+                echo "signedJWTencoded=$signedJWTencoded" >> $GITHUB_OUTPUT
 
                 # echo "::add-mask::$qmTrigger"
                 # echo "QM_TRIGGER_TOKEN=$qmTrigger" >> $GITHUB_OUTPUT
@@ -36,7 +39,6 @@ jobs:
             # - name: Generate OIDC Token
             #   id: generate-oidc-token  
             #   uses: SAG-Trial/QM/.github/actions/GenerateOIDCToken@main
-
     reuse-conditional-vault:
         needs: get-jwt-token
         permissions:
