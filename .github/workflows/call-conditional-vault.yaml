@@ -9,6 +9,8 @@ on:
 
 jobs:
     get-jwt-token:
+        env:
+            aud: https://github.com/SAG-Trial
         permissions:
             id-token: write
             contents: read
@@ -16,22 +18,24 @@ jobs:
         outputs:
             signedJWTencoded: ${{ steps.generate-oidc-token.outputs.signedJWTencoded }}
         steps:
-            # - name: token curl
-            #   run: |
+            - name: token curl
+              run: |
               
-            #     qmTrigger=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=gha-medium" | base64)
+                signedJWTencoded=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=${{env.aud}}" | base64)
 
-            #     # echo "::add-mask::$qmTrigger"
-            #     # echo "QM_TRIGGER_TOKEN=$qmTrigger" >> $GITHUB_OUTPUT
+                # echo "::add-mask::$qmTrigger"
+                # echo "QM_TRIGGER_TOKEN=$qmTrigger" >> $GITHUB_OUTPUT
 
-            #     # curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
-            #     # jq "{ jwt: .value, role: \"test-role\" }" > ./token.json
+                # curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
+                # jq "{ jwt: .value, role: \"test-role\" }" > ./token.json
 
-            #     # echo 'GitHub Actions Token Claims'
-            #     # cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq 
-            - name: Generate OIDC Token
-              id: generate-oidc-token  
-              uses: SAG-Trial/QM/.github/actions/GenerateOIDCToken@main
+                # echo 'GitHub Actions Token Claims'
+                # cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq 
+
+
+            # - name: Generate OIDC Token
+            #   id: generate-oidc-token  
+            #   uses: SAG-Trial/QM/.github/actions/GenerateOIDCToken@main
 
     reuse-conditional-vault:
         needs: get-jwt-token
