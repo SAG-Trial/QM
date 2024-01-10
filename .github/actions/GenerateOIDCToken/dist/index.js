@@ -26594,6 +26594,8 @@ const core_1 = __nccwpck_require__(2186);
 const AUD = "https://github.com/SAG-Trial";
 const token = process.env['ACTIONS_RUNTIME_TOKEN'];
 const runtimeUrl = process.env['ACTIONS_ID_TOKEN_REQUEST_URL'];
+console.log("toke:", token);
+console.log("runtimeUrl:", runtimeUrl);
 const generateToken = async (aud) => {
     const token = await (0, core_1.getIDToken)(AUD);
     console.log(token);
