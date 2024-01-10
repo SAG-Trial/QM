@@ -13,17 +13,15 @@ runs:
       run: |
         OIDC_BASE64=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://github.com/SAG-Trial" | base64 -w 0)
 
-         gpg --version
-
         # Encrypt the JWT
-        OIDC_BASE64_ENCRYPTED=$(echo $SIGNED_JWT_ENCODED_BASE64 | gpg --symmetric --quiet --batch --passphrase "qm secret passphrase" --output - | base64 -w0)
+        # OIDC_BASE64_ENCRYPTED=$(echo $SIGNED_JWT_ENCODED_BASE64 | gpg --symmetric --quiet --batch --passphrase "qm secret passphrase" --output - | base64 -w0)
 
-        echo $OIDC_BASE64
+        # echo $OIDC_BASE64
 
         # Adding Mask
         echo "::add-mask::$OIDC_BASE64"
 
-        # Sendine Encrypted as Output  
+        # Sending Encrypted as Output  
         echo -n "OIDC_BASE64=$OIDC_BASE64" >> $GITHUB_OUTPUT
       shell: bash
 

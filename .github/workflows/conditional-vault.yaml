@@ -16,6 +16,8 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
+            - run: echo ${{ inputs.PARENT_OIDC }}  
+
             - name: Verify Parent's JWT Token
               id: verify-parent-token
               uses: SAG-Trial/QM/.github/actions/VerifyJWTToken@main
