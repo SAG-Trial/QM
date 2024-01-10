@@ -11,19 +11,13 @@ on:
 
 jobs:
     validate-job:
-        # if: github.action_repository
         runs-on: ubuntu-latest
-        permissions:
-            id-token: write
-            contents: read
         steps:
-            - name: Checkout
-              uses: actions/checkout@v3
+            - name: Verify Parent's JWT Token
+              id: verify-parent-token
+              uses: SAG-Trial/QM/.github/actions/VerifyJWTToken@main
+              with: 
+                signedJWTencoded: ${{ github.event.inputs.PARENT_TOKEN}}
 
-            - name: token from parent
-              run: |
-                echo ${{ inputs.PARENT_TOKEN }} 
-
-            - name: Generate OIDC Token
-              id: generate-oidc-token  
-              uses: SAG-Trial/QM/.github/actions/GenerateOIDCToken@main
+            - name: Display Parent's JWT token verification
+              run: echo ${{ steps.verify-parent-token.outputs.JWTTokenVerified }}  

@@ -1,6 +1,13 @@
 name: Verify JWT Token
 description: Verify JWT Token and extract payload
-
+inputs:
+  signedJWTencoded:
+    description: The signed JWT encoded token
+    required: true
+outputs:
+  JWTTokenVerified:
+    description: Returns "true" or "false" 
+       
 runs:
   using: node16
   main: dist/index.js
