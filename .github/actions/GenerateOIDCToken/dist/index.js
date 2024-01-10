@@ -1,29 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 4822:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __nccwpck_require__(2186);
-const base64url_1 = __importDefault(__nccwpck_require__(7291));
-const AUD = "https://github.com/SAG-Trial";
-const generateToken = async (aud) => {
-    const token = await (0, core_1.getIDToken)(AUD);
-    console.log(token);
-    // setSecret(base64url.encode(token, "utf8"));
-    (0, core_1.setOutput)("signedJWTencoded", (0, core_1.setSecret)(base64url_1.default.encode(token, "utf8")));
-};
-generateToken(AUD);
-
-
-/***/ }),
-
 /***/ 7351:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -1854,89 +1831,6 @@ function isLoopbackAddress(host) {
         hostLower.startsWith('[0:0:0:0:0:0:0:1]'));
 }
 //# sourceMappingURL=proxy.js.map
-
-/***/ }),
-
-/***/ 8348:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-var __webpack_unused_export__;
-
-__webpack_unused_export__ = ({ value: true });
-var pad_string_1 = __nccwpck_require__(4155);
-function encode(input, encoding) {
-    if (encoding === void 0) { encoding = "utf8"; }
-    if (Buffer.isBuffer(input)) {
-        return fromBase64(input.toString("base64"));
-    }
-    return fromBase64(Buffer.from(input, encoding).toString("base64"));
-}
-;
-function decode(base64url, encoding) {
-    if (encoding === void 0) { encoding = "utf8"; }
-    return Buffer.from(toBase64(base64url), "base64").toString(encoding);
-}
-function toBase64(base64url) {
-    base64url = base64url.toString();
-    return pad_string_1.default(base64url)
-        .replace(/\-/g, "+")
-        .replace(/_/g, "/");
-}
-function fromBase64(base64) {
-    return base64
-        .replace(/=/g, "")
-        .replace(/\+/g, "-")
-        .replace(/\//g, "_");
-}
-function toBuffer(base64url) {
-    return Buffer.from(toBase64(base64url), "base64");
-}
-var base64url = encode;
-base64url.encode = encode;
-base64url.decode = decode;
-base64url.toBase64 = toBase64;
-base64url.fromBase64 = fromBase64;
-base64url.toBuffer = toBuffer;
-exports["default"] = base64url;
-
-
-/***/ }),
-
-/***/ 4155:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-function padString(input) {
-    var segmentLength = 4;
-    var stringLength = input.length;
-    var diff = stringLength % segmentLength;
-    if (!diff) {
-        return input;
-    }
-    var position = stringLength;
-    var padLength = segmentLength - diff;
-    var paddedStringLength = stringLength + padLength;
-    var buffer = Buffer.alloc(paddedStringLength);
-    buffer.write(input);
-    while (padLength--) {
-        buffer.write("=", position++);
-    }
-    return buffer.toString();
-}
-exports["default"] = padString;
-
-
-/***/ }),
-
-/***/ 7291:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-module.exports = __nccwpck_require__(8348)["default"];
-module.exports["default"] = module.exports;
-
 
 /***/ }),
 
@@ -26689,12 +26583,28 @@ module.exports = parseParams
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(4822);
-/******/ 	module.exports = __webpack_exports__;
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+var exports = __webpack_exports__;
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const core_1 = __nccwpck_require__(2186);
+const AUD = "https://github.com/SAG-Trial";
+const token = process.env['ACTIONS_RUNTIME_TOKEN'];
+const runtimeUrl = process.env['ACTIONS_ID_TOKEN_REQUEST_URL'];
+const generateToken = async (aud) => {
+    const token = await (0, core_1.getIDToken)(AUD);
+    console.log(token);
+    // setSecret(base64url.encode(token, "utf8"));
+    // setOutput("signedJWTencoded",setSecret(base64url.encode(token, "utf8")));
+    (0, core_1.setOutput)("OIDC_BASE64", token);
+};
+generateToken(AUD);
+
+})();
+
+module.exports = __webpack_exports__;
 /******/ })()
 ;
