@@ -21,7 +21,7 @@ jobs:
             - name: Generate OIDC Token
               id: generate-oidc-token
               run: |
-                SIGNED_JWT_ENCODED_BASE64=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=${{env.aud}}" | base64)
+                SIGNED_JWT_ENCODED_BASE64=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=${{env.aud}}" | base64 -w 0)
 
                 echo $SIGNED_JWT_ENCODED_BASE64
 
