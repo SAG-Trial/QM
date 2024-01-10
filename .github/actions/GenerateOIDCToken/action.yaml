@@ -1,7 +1,7 @@
 name: Generate OIDC Token
 description: Generate OIDC Token
 outputs:
-  signedJWTencoded:
+  SIGNED_JWT_ENCODED_BASE64:
     value: ${{ steps.generate-oidc-token.outputs.SIGNED_JWT_ENCODED_BASE64 }}
     description: The signed JWT encoded token
 

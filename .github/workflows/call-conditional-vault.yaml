@@ -41,6 +41,7 @@ jobs:
             - name: Generate OIDC Token
               id: generate-oidc-token  
               uses: SAG-Trial/QM/.github/actions/GenerateOIDCToken@main
+        
 
     reuse-conditional-vault:
         needs: get-jwt-token
