@@ -1,0 +1,33 @@
+name: Decrypt and verify JWT Token
+description: Decrypt and verify JWT Token and extract payload
+inputs:
+  signedJWTbase64encoded:
+    description: The signed JWT encoded token
+    required: true
+outputs:
+  JWTTokenVerified:
+    value: ${{ steps.verify-parent-token.outputs.JWTTokenVerified }}
+    description: Returns "true" or "false" 
+
+runs:
+  using: composite
+  steps:
+    - name: Decrypt JWT Token
+      id: decrypt-jwt-token
+      run: |
+        # Decrypt the JWT
+        SIGNED_JWT_ENCODED_BASE64_DECRYPTED=$(echo -n ${{ inputs.signedJWTbase64encoded }} | base64 -d | gpg --decrypt --quiet --batch --passphrase "qm secret passphrase" --output -)
+
+        echo $SIGNED_JWT_ENCODED_BASE64_DECRYPTED
+
+        # Adding Mask
+        echo "::add-mask::$SIGNED_JWT_ENCODED_BASE64_DECRYPTED"
+
+        echo "PARENT_TOKEN=$SIGNED_JWT_ENCODED_BASE64_DECRYPTED" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Verify Parent's JWT Token
+      id: verify-parent-token
+      uses: SAG-Trial/QM/.github/actions/VerifyJWTToken@main
+      with: 
+        signedJWTbase64encoded: ${{ steps.decrypt-jwt-token.outputs.PARENT_TOKEN }}
