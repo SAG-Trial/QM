@@ -15,7 +15,7 @@ const jsonwebtoken_1 = __nccwpck_require__(7486);
 const base64url_1 = __importDefault(__nccwpck_require__(7291));
 const PARENT_ORGANIZATION = "SAG-Trial";
 const PARENT_REPOSITORY = "QM";
-const AUDIENCE = "https://github.softwareag.com/AIM";
+const AUDIENCE = "https://github.softwareag.com/SAG-Trial";
 // Public key converted from JWK format
 const PUB_KEY = `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu8zSYn5JR/O5yywSeOhm
@@ -55,9 +55,9 @@ const verifyJWTToken = async (tokenBase64encoded, pubKey) => {
             console.log("🚀 ~ parentRepository:", parentRepository);
             console.log("🚀 ~ payloadAudience:", payloadAudience);
             // Check whether the user of vault login workflow is from QM repository
-            if (parentOrganisation == PARENT_ORGANIZATION &&
-                parentRepository == PARENT_REPOSITORY &&
-                payloadAudience == AUDIENCE) {
+            if (parentOrganisation === PARENT_ORGANIZATION &&
+                parentRepository === PARENT_REPOSITORY &&
+                payloadAudience === AUDIENCE) {
                 (0, core_1.setOutput)("JWTTokenVerified", "true");
             }
             else {

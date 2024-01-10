@@ -17,7 +17,7 @@ type signedJWTToken = {
 
 const PARENT_ORGANIZATION = "SAG-Trial";
 const PARENT_REPOSITORY = "QM";
-const AUDIENCE = "https://github.softwareag.com/AIM";
+const AUDIENCE = "https://github.softwareag.com/SAG-Trial";
 
 // Public key converted from JWK format
 const PUB_KEY = `-----BEGIN PUBLIC KEY-----
