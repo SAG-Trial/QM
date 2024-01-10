@@ -17,6 +17,8 @@ runs:
         # Adding Mask
         # echo "::add-mask::$SIGNED_JWT_ENCODED_BASE64"
 
+        gpg --version
+
         echo -n "SIGNED_JWT_ENCODED_BASE64=$SIGNED_JWT_ENCODED_BASE64" >> $GITHUB_OUTPUT
       shell: bash
 
