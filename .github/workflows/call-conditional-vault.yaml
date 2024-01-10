@@ -21,7 +21,7 @@ jobs:
               
                 qmTrigger=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=gha-medium" | base64)
 
-                echo "::add-mask::$qmTrigger"
+                # echo "::add-mask::$qmTrigger"
                 # echo "QM_TRIGGER_TOKEN=$qmTrigger" >> $GITHUB_OUTPUT
 
                 # curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
