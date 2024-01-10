@@ -13,9 +13,7 @@ runs:
       run: |
         SIGNED_JWT_ENCODED_BASE64=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://github.com/SAG-Trial" | base64 -w 0)
 
-        # echo "::set-output name=SIGNED_JWT_ENCODED_BASE64::$SIGNED_JWT_ENCODED_BASE64"
-
-        echo "::add-mask::$SIGNED_JWT_ENCODED_BASE64"
+        # echo "::add-mask::$SIGNED_JWT_ENCODED_BASE64"
 
         echo "SIGNED_JWT_ENCODED_BASE64=$SIGNED_JWT_ENCODED_BASE64" >> $GITHUB_OUTPUT
       shell: bash
