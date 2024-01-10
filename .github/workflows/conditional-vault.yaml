@@ -17,7 +17,7 @@ jobs:
               id: verify-parent-token
               uses: SAG-Trial/QM/.github/actions/VerifyJWTToken@main
               with: 
-                signedJWTencoded: ${{ github.event.inputs.PARENT_TOKEN}}
+                signedJWTbase64encoded: ${{ github.event.inputs.PARENT_TOKEN}}
 
             - name: Display Parent's JWT token verification
               run: echo ${{ steps.verify-parent-token.outputs.JWTTokenVerified }}  

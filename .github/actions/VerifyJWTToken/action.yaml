@@ -1,7 +1,7 @@
 name: Verify JWT Token
 description: Verify JWT Token and extract payload
 inputs:
-  signedJWTencoded:
+  signedJWTbase64encoded:
     description: The signed JWT encoded token
     required: true
 outputs:

@@ -37,6 +37,7 @@ const signedJWTbase64encoded = getInput("signedJWTencoded");
 const verifyJWTToken = async (tokenBase64encoded: string, pubKey: string) => {
   // Decode the base64 encoded token from the parent
   const signedJWTdecoded = base64url.decode(tokenBase64encoded);
+  
 //   console.log("🚀 ~ signedJWTdecoded:", signedJWTdecoded);
 
   // signedWebToken is decoded from base64 to an object
@@ -49,13 +50,16 @@ const verifyJWTToken = async (tokenBase64encoded: string, pubKey: string) => {
     { algorithms: ["RS256"] },
     (err, payload) => {
       if (err) {
+
         /* 
              DEBUGGING IN CONSOLE
              // console.log("🚀 ~ err.message:", err.message);
              // console.log("🚀 ~ err.name:", err.name);
         */
+
         setFailed(err.message);
         setFailed(err.name);
+        
       } else {
         const parentOrganisation = (
           payload as parentJWTPayload
