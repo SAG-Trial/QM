@@ -8,7 +8,7 @@ on:
           type: string
       outputs:
         weatherKey:
-          value: ${{ jobs.reusable-vault-login.outputs.weatherKey }}
+          value: ${{ jobs.reusable-vault-login.outputs.weatherString }}
           description: 'True or false value if JWT token is verified'   
     repository_dispatch: 
     
@@ -20,7 +20,7 @@ jobs:
         name: Reusable Vault Login
         runs-on: ubuntu-latest
         outputs:
-          weatherKey: ${{ steps.send-key-output.outputs.weatherKey }}
+          weatherString: ${{ steps.send-key-output.outputs.weatherKey }}
         steps:
 
 
