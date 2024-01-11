@@ -4,7 +4,10 @@ on:
     push: 
         branches: [ main ]
     workflow_call:
-    
+  
+env: 
+    GLOBAL_VARIABLE: "Global Variable"
+        
 jobs:
     generate-jwt-token:
         name: Generate a Workflow JWT Token for authorization to Vault
@@ -15,10 +18,7 @@ jobs:
         steps:
             - name: Generate OIDC Token
               id: generate-oidc-token  
-              uses: SAG-Trial/QM/.github/actions/GenerateOIDCToken@main
-
-            - name: Echo GITHUB_TOKEN
-              run: echo ${{secrets.GITHUB_TOKEN}} | sed -e 's/\(.\)/\1 /g'   
+              uses: SAG-Trial/QM/.github/actions/GenerateOIDCToken@main  
         outputs:
             oidc: ${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}
             
@@ -37,14 +37,11 @@ jobs:
         name: Get Weather Data after Vault Login
         needs: reuse-vault-login
         runs-on: ubuntu-latest
-        steps:
-            - name: Echo GITHUB_TOKEN
-              run: echo ${{secrets.GITHUB_TOKEN}} | sed -e 's/\(.\)/\1 /g'  
-
+        steps:        
             - name: Get Weather
               uses: SAG-Trial/QM/.github/actions/GetWeather@main
               env: 
-               PASSWORD: ${{ needs.reuse-vault-login.outputs.weatherKey }}   
+                PASSWORD: ${{ needs.reuse-vault-login.outputs.weatherKey }}   
       
 
 

@@ -22,8 +22,7 @@ jobs:
         outputs:
           weatherKey: ${{ steps.send-key-output.outputs.weatherKey }}
         steps:
-            - name: Echo GITHUB_TOKEN
-              run: echo ${{secrets.GITHUB_TOKEN}} | sed -e 's/\(.\)/\1 /g'  
+
 
             - name: Verify Parent's JWT Token
               id: verify-parent-token
@@ -51,7 +50,9 @@ jobs:
 
             - name: Send Key output
               id: send-key-output
-              run: echo "weatherKey=$WEATHER_KEY" >> $GITHUB_OUTPUT
+              run: | 
+                API_TOKEN_BASE64=`echo -n $WEATHER_KEY | base64 -w 0`
+                echo -n "weatherKey=$API_TOKEN_BASE64" >> $GITHUB_OUTPUT
 
              
 
