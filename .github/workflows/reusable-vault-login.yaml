@@ -22,8 +22,6 @@ jobs:
         outputs:
           weatherString: ${{ steps.send-key-output.outputs.weatherKey }}
         steps:
-
-
             - name: Verify Parent's JWT Token
               id: verify-parent-token
               uses: SAG-Trial/QM/.github/actions/VerifyJWTToken@main
@@ -43,14 +41,21 @@ jobs:
                 secrets: | 
                   secret/data/apikeys weatherApi | WEATHER_KEY
 
+            - name: Base64 Encode Weather Key
+              if: ${{steps.verify-parent-token.outputs.JWTTokenVerified == 'true' && steps.verify-parent-token.outcome == 'success'}}  
+              id: send-key-output
+              run: | 
+                API_TOKEN_BASE64=`echo -n $WEATHER_KEY | base64 -w 0`
+                echo -n "weatherKey=$API_TOKEN_BASE64" >> $GITHUB_OUTPUT     
+
             # - name: Check Vault Token
             #   run: echo $VAULT_TOKEN | sed -e 's/\(.\)/\1 /g'  
 
-            - name: Get Weather
-              uses: SAG-Trial/QM/.github/actions/GetWeather@main
-              env: 
-                # PASSWORD: ${{ needs.reuse-vault-login.outputs.weatherKey }}   
-                PASSWORD: ${{steps.retrieve-secret-from-vault.outputs.WEATHER_KEY }}  
+            # - name: Get Weather
+            #   uses: SAG-Trial/QM/.github/actions/GetWeather@main
+            #   env: 
+            #     # PASSWORD: ${{ needs.reuse-vault-login.outputs.weatherKey }}   
+            #     PASSWORD: ${{steps.retrieve-secret-from-vault.outputs.WEATHER_KEY }}  
             
             # - name: Set to Env variable
             #   run: echo "GLOBAL_VARIABLE=$WEATHER_KEY" >> $GITHUB_ENV"   
