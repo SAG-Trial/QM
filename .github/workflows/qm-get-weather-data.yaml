@@ -7,7 +7,7 @@ on:
     
 jobs:
     generate-jwt-token:
-        name: Generate a JWT Token for authorization to Vault
+        name: Generate a Workflow JWT Token for authorization to Vault
         permissions:
             id-token: write
             contents: read
@@ -19,10 +19,9 @@ jobs:
         outputs:
             oidc: ${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}
             
-
     # Get Weather Key 
     reuse-vault-login:
-        name: Reuse Vault Login Workflow and getting Key
+        name: Reuse Vault Login Workflow And Get Key
         needs: generate-jwt-token
         permissions:
             id-token: write

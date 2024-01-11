@@ -2,7 +2,7 @@ name: Generate OIDC Token
 description: Generate OIDC Token
 outputs:
   OIDC_BASE64:
-    value: ${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}
+    value: ${{ steps.send-output.outputs.OIDC_BASE64 }}
     description: The signed JWT encoded token
 
 runs:
@@ -15,8 +15,8 @@ runs:
 
         # echo $OIDC_BASE64
 
-        # Sending as Output  
-        echo -n "OIDC_BASE64=$OIDC_BASE64" >> $GITHUB_OUTPUT
+        # # Sending as Output  
+        # echo -n "OIDC_BASE64=$OIDC_BASE64" >> $GITHUB_OUTPUT
 
         # Adding Mask
         # echo "::add-mask::$OIDC_BASE64"
@@ -25,8 +25,15 @@ runs:
     # - name: Encrypt OIDC
     #   run: |
     #     # Encrypt the JWT
-    #     echo ${{steps.generate-oidc-token.outputs.OIDC_BASE64}} | gpg --quiet --symmetric --cipher-algo AES256 --batch --yes --passphrase 'qm-passphrase' --output oidc.txt.gpg
+    #     echo ${{steps.generate-oidc-token.outputs.OIDC_BASE64}} | gpg --quiet --symmetric --cipher-algo AES256 --batch --yes --passphrase '${{github.token}}' --output oidc.txt.gpg
     #   shell: bash
+
+    - name: Send Output
+      id: send-output
+      run: |
+        # Sending as Output  
+        echo -n "OIDC_BASE64=$OIDC_BASE64" >> $GITHUB_OUTPUT
+      shell: bash
  
     # - name: Upload OIDC as artifact
     #   uses: actions/upload-artifact@v4

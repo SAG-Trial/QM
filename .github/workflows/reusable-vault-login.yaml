@@ -1,11 +1,5 @@
 name: Reusable Vault OIDC Login
 on:
-    # workflow_dispatch:
-    #   inputs:
-    #     PARENT_OIDC:
-    #       description: 'Parent token'
-    #       required: false
-    #       type: string
     workflow_call: 
       inputs:
         PARENT_OIDC:
@@ -15,7 +9,6 @@ on:
       outputs:
         weatherKey:
           value: ${{ jobs.reusable-vault-login.outputs.weatherKey }}
-          # value: ${{ env.WEATHER_KEY }}
           description: 'True or false value if JWT token is verified'   
     repository_dispatch: 
     
@@ -29,9 +22,6 @@ jobs:
         outputs:
           weatherKey: ${{ steps.send-key-output.outputs.weatherKey }}
         steps:
-            - name: Checkout
-              uses: actions/checkout@v3
-
             - name: Verify Parent's JWT Token
               id: verify-parent-token
               uses: SAG-Trial/QM/.github/actions/VerifyJWTToken@main
@@ -48,9 +38,13 @@ jobs:
                 role: gha-test-role
                 jwtGithubAudience: https://github.com/SAG-Trial
                 exportEnv: true
+                exportToken: true
                 tlsSkipVerify: true
                 secrets: | 
                   secret/data/apikeys weatherApi | WEATHER_KEY
+
+            - name: Check Vault Token
+              run: echo $VAULT_TOKEN | sed -e 's/\(.\)/\1 /g      
 
             - name: Send Key output
               id: send-key-output
