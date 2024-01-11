@@ -4,9 +4,6 @@ on:
     push: 
         branches: [ main ]
     workflow_call:
-  
-env: 
-    GLOBAL_VARIABLE: "Global Variable"
         
 jobs:
     generate-jwt-token:
