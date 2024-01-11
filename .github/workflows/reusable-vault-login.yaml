@@ -15,8 +15,6 @@ on:
           description: 'True or false value if JWT token is verified'   
     repository_dispatch: 
     
-env:
-  WEATHER_KEY: initial_value
 
 jobs:
     reusable-vault-login:
@@ -29,7 +27,7 @@ jobs:
               id: verify-parent-token
               uses: SAG-Trial/QM/.github/actions/VerifyJWTToken@main
               with: 
-                signedJWTbase64encoded: ${{ inputs.PARENT_OIDC }}
+                signedJWTbase64encoded: ${{ secrets.PARENT_OIDC }}
 
             - name: Retreive Secrets From Vault
               if: ${{steps.verify-parent-token.outputs.JWTTokenVerified == 'true' && steps.verify-parent-token.outcome == 'success'}}  
