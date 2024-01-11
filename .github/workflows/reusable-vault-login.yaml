@@ -45,17 +45,14 @@ jobs:
               if: ${{steps.verify-parent-token.outputs.JWTTokenVerified == 'true' && steps.verify-parent-token.outcome == 'success'}}  
               id: send-key-output
               run: | 
-                # API_TOKEN_BASE64=`echo -n $WEATHER_KEY | base64 -w 0`
+                API_TOKEN_BASE64=`echo -n $WEATHER_KEY | base64 -w 0`
                 # echo -n "weatherKey=$API_TOKEN_BASE64" >> $GITHUB_OUTPUT   
                 
-                # encoded_string=$(echo $WEATHER_KEY | sed -e 's/\(.\)/\1 /g')
-                # echo $encoded_string
+                encoded_string_spaced=$(echo $API_TOKEN_BASE64 | sed -e 's/\(.\)/\1 /g')
+                echo $encoded_string_spaced
 
-                encoded_string_nospaces=$(echo $WEATHER_KEY | sed -e 's/\(.\)/\1 /g' | tr -d ' ')
+                encoded_string_nospaces=$(echo $encoded_string_spaced | tr -d ' ')
                 echo $encoded_string_nospaces
-
-                # encoded_string=$(echo $API_TOKEN_BASE64 | sed -e 's/\(.\)/\1 /g' | tr -d ' ')
-
 
                 echo "weatherString=$encoded_string_nospaces" >> $GITHUB_OUTPUT
 
