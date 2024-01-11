@@ -25,7 +25,7 @@ jobs:
         permissions:
             id-token: write
             contents: read
-        uses: SAG-Trial/QM/.github/workflows/conditional-vault.yaml@main
+        uses: SAG-Trial/QM/.github/workflows/reusable-vault-login.yaml@main
         with:
             PARENT_OIDC: ${{ needs.generate-jwt-token.outputs.oidc }}
 
