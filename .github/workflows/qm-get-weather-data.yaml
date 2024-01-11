@@ -20,8 +20,8 @@ jobs:
               id: generate-oidc-token  
               uses: SAG-Trial/QM/.github/actions/GenerateOIDCToken@main  
 
-            - name: Set to Env variable
-              run: echo "GLOBAL_VARIABLE=${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}" >> $GITHUB_ENV"  
+            # - name: Set to Env variable
+            #   run: echo "GLOBAL_VARIABLE=${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}" >> $GITHUB_ENV"  
         outputs:
             oidc: ${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}
             
