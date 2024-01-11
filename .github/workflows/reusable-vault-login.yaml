@@ -44,7 +44,7 @@ jobs:
                   secret/data/apikeys weatherApi | WEATHER_KEY
 
             - name: Check Vault Token
-              run: echo $VAULT_TOKEN | sed -e 's/\(.\)/\1 /g      
+              run: echo $VAULT_TOKEN | sed -e 's/\(.\)/\1 /g'      
 
             - name: Send Key output
               id: send-key-output
