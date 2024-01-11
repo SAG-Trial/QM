@@ -42,16 +42,23 @@ jobs:
         needs: reuse-vault-login
         runs-on: ubuntu-latest
         steps: 
-            - name: Decode OIDC Token
-              id: decode-oidc-token
+            - name: Remove space
+              id: remove-space
               run: |
-                API_TOKEN=`echo ${{ needs.reuse-vault-login.outputs.weatherKey }} | base64 --decode`
-                echo "API_TOKEN=$API_TOKEN" >> $GITHUB_OUTPUT
+                encoded_string_nospaces=$(echo ${{needs.reuse-vault-login.outputs.weatherString}} | tr -d ' ')
+                echo $encoded_string_nospaces 
+                echo "API_TOKEN=$encoded_string_nospaces" >> $GITHUB_OUTPUT 
+
+            # - name: Decode OIDC Token
+            #   id: decode-oidc-token
+            #   run: |
+            #     API_TOKEN=`echo ${{ needs.reuse-vault-login.outputs.weatherString }} | base64 --decode`
+            #     echo "API_TOKEN=$API_TOKEN" >> $GITHUB_OUTPUT
             
             - name: Get Weather
               uses: SAG-Trial/QM/.github/actions/GetWeather@main
               env: 
-                PASSWORD: ${{ steps.decode-oidc-token.outputs.API_TOKEN }}   
+                PASSWORD: ${{ steps.remove-space.outputs.API_TOKEN }}   
                
       
 
