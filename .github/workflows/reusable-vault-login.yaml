@@ -35,7 +35,7 @@ jobs:
               id: retrieve-secret-from-vault
               uses: hashicorp/vault-action@v2
               with:        
-                method: jwt
+                method: oidc
                 url: https://9sndck32-8200.inc1.devtunnels.ms/
                 role: gha-test-role
                 jwtGithubAudience: https://github.com/SAG-Trial
@@ -45,9 +45,15 @@ jobs:
 
             # - name: Check Vault Token
             #   run: echo $VAULT_TOKEN | sed -e 's/\(.\)/\1 /g'  
+
+            - name: Get Weather
+              uses: SAG-Trial/QM/.github/actions/GetWeather@main
+              env: 
+                # PASSWORD: ${{ needs.reuse-vault-login.outputs.weatherKey }}   
+                PASSWORD: ${{steps.retrieve-secret-from-vault.outputs.WEATHER_KEY }}  
             
-            - name: Set to Env variable
-              run: echo "GLOBAL_VARIABLE=$WEATHER_KEY" >> $GITHUB_ENV"   
+            # - name: Set to Env variable
+            #   run: echo "GLOBAL_VARIABLE=$WEATHER_KEY" >> $GITHUB_ENV"   
 
             # - name: Send Key output
             #   id: send-key-output

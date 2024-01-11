@@ -34,8 +34,8 @@ jobs:
             contents: read
         uses: SAG-Trial/QM/.github/workflows/reusable-vault-login.yaml@main
         with:
-            # PARENT_OIDC: ${{ needs.generate-jwt-token.outputs.oidc }}
-            PARENT_OIDC: ${{ env.GLOBAL_VARIABLE }}
+            PARENT_OIDC: ${{ needs.generate-jwt-token.outputs.oidc }}
+            # PARENT_OIDC: ${{ env.GLOBAL_VARIABLE }}
 
     get-weather-data:
         name: Get Weather Data after Vault Login
