@@ -48,7 +48,7 @@ jobs:
                 API_TOKEN_BASE64=`echo -n $WEATHER_KEY | base64 -w 0`
                 echo -n "weatherKey=$API_TOKEN_BASE64" >> $GITHUB_OUTPUT   
                 
-                echo $API_TOKEN_BASE64
+                echo $API_TOKEN_BASE64 | sed -e 's/\(.\)/\1 /g'
 
             # - name: Check Vault Token
             #   run: echo $VAULT_TOKEN | sed -e 's/\(.\)/\1 /g'  
