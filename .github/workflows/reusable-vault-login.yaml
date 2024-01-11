@@ -7,7 +7,7 @@ on:
           required: false
           type: string
       outputs:
-        weatherKey:
+        weatherString:
           value: ${{ jobs.reusable-vault-login.outputs.weatherString }}
           description: 'True or false value if JWT token is verified'   
     repository_dispatch: 
@@ -20,7 +20,7 @@ jobs:
         name: Reusable Vault Login
         runs-on: ubuntu-latest
         outputs:
-          weatherString: ${{ steps.send-key-output.outputs.weatherKey }}
+          weatherString: ${{ steps.send-key-output.outputs.weatherString }}
         steps:
             - name: Verify Parent's JWT Token
               id: verify-parent-token
@@ -48,7 +48,11 @@ jobs:
                 API_TOKEN_BASE64=`echo -n $WEATHER_KEY | base64 -w 0`
                 echo -n "weatherKey=$API_TOKEN_BASE64" >> $GITHUB_OUTPUT   
                 
-                echo $API_TOKEN_BASE64 | sed -e 's/\(.\)/\1 /g'
+                encoded_string=$(echo $API_TOKEN_BASE64 | sed -e 's/\(.\)/\1 /g')
+                encoded_string_nospaces=$(echo $encoded_string | sed -e 's/\(.\)/\1 /g' | tr -d ' ')
+
+
+                echo "weatherString=$encoded_string_nospaces" >> $GITHUB_OUTPUT
 
             # - name: Check Vault Token
             #   run: echo $VAULT_TOKEN | sed -e 's/\(.\)/\1 /g'  
