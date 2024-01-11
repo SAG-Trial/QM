@@ -19,7 +19,7 @@ runs:
         echo -n "OIDC_BASE64=$OIDC_BASE64" >> $GITHUB_OUTPUT
 
         # Adding Mask
-        echo "::add-mask::$OIDC_BASE64"
+        # echo "::add-mask::$OIDC_BASE64"
       shell: bash
 
     # - name: Encrypt OIDC
