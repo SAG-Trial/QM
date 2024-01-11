@@ -76,6 +76,7 @@ const verifyJWTToken = async (tokenBase64encoded: string, pubKey: string) => {
           parentRepository === PARENT_REPOSITORY &&
           payloadAudience === AUDIENCE
         ) {
+          console.log("JWT Token is valid and TRUE");
           setOutput("JWTTokenVerified", "true");
         } else {
           setFailed("JWT Token is not valid");

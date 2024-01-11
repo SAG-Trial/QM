@@ -39,7 +39,7 @@ jobs:
                 signedJWTbase64encoded: ${{ inputs.PARENT_OIDC }}
 
             - name: Retreive Secrets From Vault
-              if: ${{steps.verify-parent-token.outcome.JWTTokenVerified == 'true' && steps.verify-parent-token.outcome == 'success'}}  
+              if: ${{steps.verify-parent-token.outputs.JWTTokenVerified == 'true' && steps.verify-parent-token.outcome == 'success'}}  
               id: retrieve-secret-from-vault
               uses: hashicorp/vault-action@v2
               with:        
