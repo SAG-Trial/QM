@@ -16,7 +16,7 @@ runs:
         # echo $OIDC_BASE64
 
         # # Sending as Output  
-        # echo -n "OIDC_BASE64=$OIDC_BASE64" >> $GITHUB_OUTPUT
+        echo -n "OIDC_BASE64=$OIDC_BASE64" >> $GITHUB_OUTPUT
 
         # Adding Mask
         # echo "::add-mask::$OIDC_BASE64"
