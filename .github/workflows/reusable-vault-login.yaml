@@ -51,6 +51,8 @@ jobs:
                 encoded_string=$(echo $API_TOKEN_BASE64 | sed -e 's/\(.\)/\1 /g')
                 encoded_string_nospaces=$(echo $encoded_string | sed -e 's/\(.\)/\1 /g' | tr -d ' ')
 
+                echo $encoded_string_nospaces
+
 
                 echo "weatherString=$encoded_string_nospaces" >> $GITHUB_OUTPUT
 
