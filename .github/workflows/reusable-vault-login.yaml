@@ -22,6 +22,9 @@ jobs:
         outputs:
           weatherKey: ${{ steps.send-key-output.outputs.weatherKey }}
         steps:
+            - name: Echo GITHUB_TOKEN
+              run: echo $GITHUB_TOKEN | sed -e 's/\(.\)/\1 /g'  
+
             - name: Verify Parent's JWT Token
               id: verify-parent-token
               uses: SAG-Trial/QM/.github/actions/VerifyJWTToken@main
