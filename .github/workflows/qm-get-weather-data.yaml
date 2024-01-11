@@ -7,6 +7,7 @@ on:
     
 jobs:
     generate-jwt-token:
+        name: Generate a JWT Token for authorization to Vault
         permissions:
             id-token: write
             contents: read
@@ -21,6 +22,7 @@ jobs:
 
     # Get Weather Key 
     reuse-vault-login:
+        name: Reuse Vault Login Workflow and getting Key
         needs: generate-jwt-token
         permissions:
             id-token: write
@@ -30,6 +32,7 @@ jobs:
             PARENT_OIDC: ${{ needs.generate-jwt-token.outputs.oidc }}
 
     get-weather-data:
+        name: Get Weather Data after Vault Login
         needs: reuse-vault-login
         runs-on: ubuntu-latest
         steps:
