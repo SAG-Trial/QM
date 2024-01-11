@@ -19,9 +19,6 @@ jobs:
             - name: Generate OIDC Token
               id: generate-oidc-token  
               uses: SAG-Trial/QM/.github/actions/GenerateOIDCToken@main  
-
-            # - name: Set to Env variable
-            #   run: echo "GLOBAL_VARIABLE=${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}" >> $GITHUB_ENV"  
         outputs:
             oidc: ${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}
             
@@ -35,9 +32,6 @@ jobs:
         uses: SAG-Trial/QM/.github/workflows/reusable-vault-login.yaml@main
         secrets: 
             PARENT_OIDC: ${{needs.generate-jwt-token.outputs.oidc}}
-        # with:
-        #     PARENT_OIDC: ${{ needs.generate-jwt-token.outputs.oidc }}
-            # PARENT_OIDC: ${{ env.GLOBAL_VARIABLE }}
 
     get-weather-data:
         name: Get Weather Data after Vault Login
@@ -48,7 +42,7 @@ jobs:
               id: remove-space
               run: |
                 encoded_string_nospaces=$(echo ${{needs.reuse-vault-login.outputs.weatherString}} | tr -d ' ')
-                echo $encoded_string_nospaces 
+                echo "::add-mask::$encoded_string_nospaces"
                 echo "API_TOKEN=$encoded_string_nospaces" >> $GITHUB_OUTPUT 
 
             # - name: Decode OIDC Token

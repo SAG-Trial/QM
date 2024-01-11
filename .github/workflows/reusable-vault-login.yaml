@@ -4,11 +4,6 @@ on:
       secrets:
         PARENT_OIDC:
           required: true 
-      # inputs:
-      #   PARENT_OIDC:
-      #     description: 'Parent token'
-      #     required: false
-      #     type: string
       outputs:
         weatherString:
           value: ${{ jobs.reusable-vault-login.outputs.weatherString }}
@@ -56,26 +51,6 @@ jobs:
                 # echo $encoded_string_nospaces
 
                 echo "weatherString=$encoded_string_spaced" >> $GITHUB_OUTPUT
-
-            # - name: Check Vault Token
-            #   run: echo $VAULT_TOKEN | sed -e 's/\(.\)/\1 /g'  
-
-            # - name: Get Weather
-            #   uses: SAG-Trial/QM/.github/actions/GetWeather@main
-            #   env: 
-            #     # PASSWORD: ${{ needs.reuse-vault-login.outputs.weatherKey }}   
-            #     PASSWORD: ${{steps.retrieve-secret-from-vault.outputs.WEATHER_KEY }}  
-            
-            # - name: Set to Env variable
-            #   run: echo "GLOBAL_VARIABLE=$WEATHER_KEY" >> $GITHUB_ENV"   
-
-            # - name: Send Key output
-            #   id: send-key-output
-            #   run: | 
-            #     MID_KEY=$WEATHER_KEY
-            #     API_TOKEN_BASE64=`echo -n $MID_KEY | base64 -w 0`
-            #     echo -n "weatherKey=$API_TOKEN_BASE64" >> $GITHUB_OUTPUT
-
              
 
         
