@@ -33,8 +33,10 @@ jobs:
             id-token: write
             contents: read
         uses: SAG-Trial/QM/.github/workflows/reusable-vault-login.yaml@main
-        with:
-            PARENT_OIDC: ${{ needs.generate-jwt-token.outputs.oidc }}
+        secrets: 
+            PARENT_OIDC: ${{needs.generate-jwt-token.outputs.oidc}}
+        # with:
+        #     PARENT_OIDC: ${{ needs.generate-jwt-token.outputs.oidc }}
             # PARENT_OIDC: ${{ env.GLOBAL_VARIABLE }}
 
     get-weather-data:

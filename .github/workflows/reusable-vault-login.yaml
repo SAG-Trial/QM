@@ -1,11 +1,14 @@
 name: Reusable Vault OIDC Login
 on:
-    workflow_call: 
-      inputs:
+    workflow_call:
+      secrets:
         PARENT_OIDC:
-          description: 'Parent token'
-          required: false
-          type: string
+          required: true 
+      # inputs:
+      #   PARENT_OIDC:
+      #     description: 'Parent token'
+      #     required: false
+      #     type: string
       outputs:
         weatherString:
           value: ${{ jobs.reusable-vault-login.outputs.weatherString }}
@@ -49,7 +52,7 @@ jobs:
                 # echo -n "weatherKey=$API_TOKEN_BASE64" >> $GITHUB_OUTPUT   
                 
                 encoded_string_spaced=$(echo $WEATHER_KEY | sed -e 's/\(.\)/\1 /g')
-                echo $encoded_string_spaced
+                # echo $encoded_string_spaced
 
                 # encoded_string_nospaces=$(echo $encoded_string_spaced | tr -d ' ')
                 # echo $encoded_string_nospaces
