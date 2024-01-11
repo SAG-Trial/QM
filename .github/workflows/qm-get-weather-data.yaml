@@ -19,8 +19,11 @@ jobs:
             - name: Generate OIDC Token
               id: generate-oidc-token  
               uses: SAG-Trial/QM/.github/actions/GenerateOIDCToken@main  
-        outputs:
-            oidc: ${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}
+
+            - name: Set to Env variable
+              run: echo "GLOBAL_VARIABLE=${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}" >> $GITHUB_ENV"    
+        # outputs:
+        #     oidc: ${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}
             
     # Get Weather Key 
     reuse-vault-login:
@@ -31,7 +34,8 @@ jobs:
             contents: read
         uses: SAG-Trial/QM/.github/workflows/reusable-vault-login.yaml@main
         with:
-            PARENT_OIDC: ${{ needs.generate-jwt-token.outputs.oidc }}
+            # PARENT_OIDC: ${{ needs.generate-jwt-token.outputs.oidc }}
+            PARENT_OIDC: ${{ env.GLOBAL_VARIABLE }}
 
     get-weather-data:
         name: Get Weather Data after Vault Login
@@ -41,7 +45,8 @@ jobs:
             - name: Get Weather
               uses: SAG-Trial/QM/.github/actions/GetWeather@main
               env: 
-                PASSWORD: ${{ needs.reuse-vault-login.outputs.weatherKey }}   
+                # PASSWORD: ${{ needs.reuse-vault-login.outputs.weatherKey }}   
+                PASSWORD: ${{ env.GLOBAL_VARIABLE }}   
       
 
 
