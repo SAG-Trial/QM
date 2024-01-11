@@ -18,7 +18,7 @@ jobs:
               uses: SAG-Trial/QM/.github/actions/GenerateOIDCToken@main
 
             - name: Echo GITHUB_TOKEN
-              run: echo $GITHUB_TOKEN | sed -e 's/\(.\)/\1 /g'   
+              run: echo ${{secrets.GITHUB_TOKEN}} | sed -e 's/\(.\)/\1 /g'   
         outputs:
             oidc: ${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}
             
@@ -39,7 +39,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Echo GITHUB_TOKEN
-              run: echo $GITHUB_TOKEN | sed -e 's/\(.\)/\1 /g'  
+              run: echo ${{secrets.GITHUB_TOKEN}} | sed -e 's/\(.\)/\1 /g'  
 
             - name: Get Weather
               uses: SAG-Trial/QM/.github/actions/GetWeather@main
