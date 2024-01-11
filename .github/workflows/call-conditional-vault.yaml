@@ -8,9 +8,7 @@ on:
  
 
 jobs:
-    get-jwt-token:
-        env:
-            aud: https://github.com/SAG-Trial
+    generate-jwt-token:
         permissions:
             id-token: write
             contents: read
@@ -23,22 +21,25 @@ jobs:
             oidc: ${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}
             
 
-    # Check Weather Cycle 
-    reuse-conditional-vault:
-        needs: get-jwt-token
+    # Get Weather Key 
+    reuse-vault-login:
+        needs: generate-jwt-token
         permissions:
             id-token: write
             contents: read
         uses: SAG-Trial/QM/.github/workflows/conditional-vault.yaml@main
         with:
-            PARENT_OIDC: ${{ needs.get-jwt-token.outputs.oidc }}
+            PARENT_OIDC: ${{ needs.generate-jwt-token.outputs.oidc }}
 
-    result-of-verification:
-        needs: reuse-conditional-vault
+    get-weather-data:
+        needs: reuse-vault-login
         runs-on: ubuntu-latest
         steps:
-            - name: Check Result
-              run: echo ${{ needs.reuse-conditional-vault.outputs.JWTTokenVerified }}      
+            - name: Get Weather
+              uses: SAG-Trial/QM/.github/actions/GetWeather@main
+              env: 
+               PASSWORD: ${{ needs.reuse-vault-login.outputs.weatherKey }}   
+      
 
 
         
