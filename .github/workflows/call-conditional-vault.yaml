@@ -15,14 +15,15 @@ jobs:
             id-token: write
             contents: read
         runs-on: ubuntu-latest
-        outputs:
-            oidc: ${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}
         steps:
             - name: Generate OIDC Token
               id: generate-oidc-token  
               uses: SAG-Trial/QM/.github/actions/GenerateOIDCToken@main
-        
+        outputs:
+            oidc: ${{ steps.generate-oidc-token.outputs.OIDC_BASE64 }}
+            
 
+    # Check Weather Cycle 
     reuse-conditional-vault:
         needs: get-jwt-token
         permissions:
@@ -31,4 +32,13 @@ jobs:
         uses: SAG-Trial/QM/.github/workflows/conditional-vault.yaml@main
         with:
             PARENT_OIDC: ${{ needs.get-jwt-token.outputs.oidc }}
+
+    result-of-verification:
+        needs: reuse-conditional-vault
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check Result
+              run: echo ${{ needs.reuse-conditional-vault.outputs.JWTTokenVerified }}      
+
+
         
