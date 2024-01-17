@@ -41,8 +41,8 @@ runs:
 
     - name: Retrieve Secret from QM Password Repo
       id: retrieve-secret-from-qm-password-repo
-      uses: AIM/test-container-secrets/.github/actions/CheckoutPasswordRepo@main
-      env:
+      uses: SAG-Trial/QM/.github/actions/CheckoutPasswordRepo@main
+      with:
         SSH_KEY: ${{ env.SSH_KEY }}
       # with:
       #   SSH_KEY: ${{ env.SSH_KEY }}
