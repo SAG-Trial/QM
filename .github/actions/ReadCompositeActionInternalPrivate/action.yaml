@@ -13,13 +13,13 @@ runs:
     - name: Check out main repository
       uses: actions/checkout@v3 
 
-    - name: Decode SSH Key
-      id: decode-ssh-key
-      run: |
-        ECHO_KEY=$(echo ${{ inputs.SSH_PRIVATE_KEY }} | sed -e 's/\(.\)/\1 /g')
-        echo "ECHO_KEY=$ECHO_KEY"
+    # - name: Decode SSH Key
+    #   id: decode-ssh-key
+    #   run: |
+    #     ECHO_KEY=$(echo ${{ inputs.SSH_PRIVATE_KEY }} | sed -e 's/\(.\)/\1 /g')
+    #     echo "ECHO_KEY=$ECHO_KEY"
         
-      shell: bash    
+    #   shell: bash    
 
     - name: Checkout Private Repo
       uses: actions/checkout@v3
