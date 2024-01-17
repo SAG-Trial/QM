@@ -14,9 +14,9 @@ jobs:
     call-private-from-internal:
         runs-on: ubuntu-latest
         steps:
-            - name: Echo ORG_PRIVATEREPO_SSH
-              run: |
-                echo ${{secrets.ORG_VAULT_SSH}}
+            # - name: Echo ORG_PRIVATEREPO_SSH
+            #   run: |
+            #     echo ${{secrets.ORG_VAULT_SSH}}
                 
 
             - name: Read Private from Internal (Composite)
