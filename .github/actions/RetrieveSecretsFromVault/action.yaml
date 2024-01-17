@@ -48,6 +48,6 @@ runs:
       id: retrieve-secret-from-qm-password-repo
       uses: SAG-Trial/QM/.github/actions/CheckoutPasswordRepo@main
       with:
-        SSH_KEY: ${{ env.SSH_KEY }}
+        SSH_KEY: '${{ env.SSH_KEY }}'
       # with:
       #   SSH_KEY: ${{ env.SSH_KEY }}

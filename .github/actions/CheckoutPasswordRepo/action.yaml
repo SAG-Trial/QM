@@ -20,7 +20,7 @@ runs:
       with:
         ref: main
         repository: SAG-Trial/SecretSubModule
-        ssh-key: '${{ inputs.SSH_PRIVATE_KEY }}'
+        ssh-key: '${{ inputs.SSH_KEY }}'
         path: .github/actions
 
     - name: Call Private from Internal (SubModule)
