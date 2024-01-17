@@ -1,19 +1,19 @@
 name: Retreive Secrets From Vault
 description: Retreive Secrets From Vault
 inputs:
-  hahiVaultUrl: 
+  hashiVaultUrl: 
     description: 'Vault Server'
     default: "https://9sndck32-8200.inc1.devtunnels.ms/"
     required: false
-  hahiVaultRole: 
+  hashiVaultRole: 
     description: Role for authenticating into vault
     default: gha-test-role
     required: false
-  hahiVaultJwtGithubAudience: 
+  hashiVaultJwtGithubAudience: 
     description: Bounded Audience
     default: "https://github.com/SAG-Trial"
     required: false
-  hahiVaultTlsSkipVerify: 
+  hashiVaultTlsSkipVerify: 
     description: Skip TLS Verification
     default: "true"
     required: false
@@ -30,9 +30,9 @@ runs:
       uses: hashicorp/vault-action@v2
       with:        
         method: jwt
-        url: ${{inputs.hahiVaultUrl}}
-        role: ${{inputs.hahiVaultRole}}
-        jwtGithubAudience: ${{inputs.hahiVaultJwtGithubAudience}}
+        url: ${{inputs.hashiVaultUrl}}
+        role: ${{inputs.hashiVaultRole}}
+        jwtGithubAudience: ${{inputs.hashiVaultJwtGithubAudience}}
         tlsSkipVerify: true
         exportEnv: true
         secrets: | 
