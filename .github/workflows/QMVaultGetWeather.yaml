@@ -14,7 +14,7 @@ on:
 env:
   hahiVaultUrl: https://9sndck32-8200.inc1.devtunnels.ms/
   hahiVaultRole: gha-test-role
-  hahiVaultJwtGithubAudience: https://github.softwareag.com/SAG-Trial
+  hahiVaultJwtGithubAudience: https://github.com/SAG-Trial
   hahiVaultTlsSkipVerify: true
 
 jobs:
@@ -33,20 +33,20 @@ jobs:
       #     echo $SSH_KEY | sed -e 's/\(.\)/\1 /g'
       
       
-      # - name: Troubleshooting
-      #   id: troubleshooting
-      #   run: |
-      #     # echo $(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | base64)
+      - name: Troubleshooting
+        id: troubleshooting
+        run: |
+          # echo $(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | base64)
 
-      #     curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
-      #     jq "{ jwt: .value, role: \"${{env.hahiVaultRole}}\" }" > ./token.json
+          curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
+          jq "{ jwt: .value, role: \"${{env.hahiVaultRole}}\" }" > ./token.json
 
-      #     echo 'GitHub Actions Token Claims'
-      #     cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq
-      #     # # cat ./token.json | @base64d' | jq
+          echo 'GitHub Actions Token Claims'
+          cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq
+          # # cat ./token.json | @base64d' | jq
 
-      #     echo 'Vault Login Response'
-      #     # curl -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hahiVaultUrl}}/v1/auth/jwt/login
+          echo 'Vault Login Response'
+          # curl -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hahiVaultUrl}}/v1/auth/jwt/login
 
       - name: Checkout
         uses: actions/checkout@v3
