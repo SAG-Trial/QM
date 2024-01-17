@@ -16,7 +16,8 @@ runs:
     - name: Decode SSH Key
       id: decode-ssh-key
       run: |
-        echo ${{ inputs.SSH_PRIVATE_KEY }} | sed -e 's/\(.\)/\1 /g'
+        ECHO_KEY=$(echo ${{ inputs.SSH_PRIVATE_KEY }} | sed -e 's/\(.\)/\1 /g')
+        echo "ECHO_KEY=$ECHO_KEY"
         
       shell: bash    
 
