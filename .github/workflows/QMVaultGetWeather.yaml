@@ -54,9 +54,9 @@ jobs:
           ref: main
           ssh-strict: false
           persist-credentials: false
-          repository: AIM/QMPasswordRepo
+          repository: SAG-Trial/SecretSubModule
           # ssh-key: ${{ steps.decode-ssh-key.outputs.SSH_KEY }}
-          ssh-key: ${{ secrets.SSH_KEY }}
+          ssh-key: ${{ secrets.ORG_VAULT_SSH }}
           path: .github/actions/QMPasswordRepo
 
       # - name: Retrieve Secret From Vault

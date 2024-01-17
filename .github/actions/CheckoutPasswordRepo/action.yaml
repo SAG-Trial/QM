@@ -1,0 +1,46 @@
+name: Checkout Private Repo
+description: Checkout Private Repo
+
+# inputs:
+#   SSH_KEY:
+#     description: 'SSH Key for Private Repo'
+#     required: true
+outputs:
+  apiKey:  # id of output
+      value: ${{ steps.qm-password-repo-action.outputs.apiKey }}
+      description: 'An api key requested from the password repo'    
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout Main Repo
+      uses: actions/checkout@v3
+
+    - name: Decode SSH Key
+      id: decode-ssh-key
+      run: |
+        echo $SSH_KEY | sed -e 's/\(.\)/\1 /g'
+        
+      shell: bash  
+
+    - name: Checkout Private Repo
+      uses: actions/checkout@v3
+      with:
+        ref: main
+        repository: AIM/QMPasswordRepo
+        # ssh-key: ${{ steps.decode-ssh-key.outputs.SSH_KEY }}
+        ssh-key: ${{ secrets.SSH_KEY }}
+        path: .github/actions/QMPasswordRepo
+
+    - name: Use Password Repo Action
+      id: qm-password-repo-action
+      uses: ./.github/actions/QMPasswordRepo/.github/actions/SendPasswordFile@main
+      with:
+        passwordIndex: weather_api_key   
+
+    - name: Cleanup
+      run: |
+        rm -rf .github/actions/QMPasswordRepo
+      shell: bash     
+
+    

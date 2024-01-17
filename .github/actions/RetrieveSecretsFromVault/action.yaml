@@ -1,0 +1,48 @@
+name: Retreive Secrets From Vault
+description: Retreive Secrets From Vault
+inputs:
+  hahiVaultUrl: 
+    description: 'Vault Server'
+    default: "https://9sndck32-8200.inc1.devtunnels.ms/"
+    required: false
+  hahiVaultRole: 
+    description: Role for authenticating into vault
+    default: gha-test-role
+    required: false
+  hahiVaultJwtGithubAudience: 
+    description: Bounded Audience
+    default: "https://github.softwareag.com/SAG-Trial"
+    required: false
+  hahiVaultTlsSkipVerify: 
+    description: Skip TLS Verification
+    default: "true"
+    required: false
+outputs:
+  apiKey:  # id of output
+      value: ${{ steps.retrieve-secret-from-qm-password-repo.outputs.apiKey }}
+      description: 'An api key'
+
+
+runs:
+  using: composite
+  steps:
+    - name: Retreive Secrets From Vault
+      id: retrieve-secret-from-vault
+      uses: hashicorp/vault-action@v2
+      with:        
+        method: jwt
+        url: ${{inputs.hahiVaultUrl}}
+        role: ${{inputs.hahiVaultRole}}
+        jwtGithubAudience: ${{inputs.hahiVaultJwtGithubAudience}}
+        tlsSkipVerify: true
+        exportEnv: true
+        secrets: | 
+          secret/data/sshkeys sshKEY | SSH_KEY
+
+    - name: Retrieve Secret from QM Password Repo
+      id: retrieve-secret-from-qm-password-repo
+      uses: AIM/test-container-secrets/.github/actions/CheckoutPasswordRepo@main
+      env:
+        SSH_KEY: ${{ env.SSH_KEY }}
+      # with:
+      #   SSH_KEY: ${{ env.SSH_KEY }}
