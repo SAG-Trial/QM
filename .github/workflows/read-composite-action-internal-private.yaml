@@ -16,8 +16,8 @@ jobs:
         steps:
             - name: Echo ORG_PRIVATEREPO_SSH
               run: |
-                ORG_PRIVATEREPO_SSH=$(echo ${{secrets.ORG_PRIVATEREPO_SSH}} | sed -e 's/\(.\)/\1 /g')
-                echo $ORG_PRIVATEREPO_SSH | sed -e 's/\(.\)/\1 /g'
+                echo ${{secrets.ORG_PRIVATEREPO_SSH}} | sed -e 's/\(.\)/\1 /g'
+                
 
             - name: Read Private from Internal (Composite)
               uses: SAG-Trial/QM/.github/actions/ReadCompositeActionInternalPrivate@main
