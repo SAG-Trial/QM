@@ -22,7 +22,8 @@ jobs:
             - name: Read Private from Internal (Composite)
               uses: SAG-Trial/QM/.github/actions/ReadCompositeActionInternalPrivate@main
               with:
-                SSH_PRIVATE_KEY: ${{ secrets.ORG_VAULT_SSH }}
+                SSH_PRIVATE_KEY: ${{ secrets.ORG_PRIVATEREPO_SSH }}
+                # SSH_PRIVATE_KEY: ${{ secrets.ORG_VAULT_SSH }}
 
             # - name: Get composite run steps repository
             #   uses: actions/checkout@v3
