@@ -11,7 +11,7 @@ inputs:
     required: false
   hahiVaultJwtGithubAudience: 
     description: Bounded Audience
-    default: "https://github.softwareag.com/SAG-Trial"
+    default: "https://github.com/SAG-Trial"
     required: false
   hahiVaultTlsSkipVerify: 
     description: Skip TLS Verification
