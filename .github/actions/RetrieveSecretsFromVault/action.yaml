@@ -22,7 +22,6 @@ outputs:
       value: ${{ steps.retrieve-secret-from-qm-password-repo.outputs.apiKey }}
       description: 'An api key'
 
-
 runs:
   using: composite
   steps:
