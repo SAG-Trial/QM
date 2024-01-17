@@ -1,0 +1,76 @@
+name: Get Weather Data through Vault Login Composite
+on:
+  workflow_dispatch:
+  # push:
+  #     branches: [ main ]
+  workflow_call:
+    # secrets:
+    #   SSH_KEY:
+    #     required: true
+    outputs:
+      WEATHER_DATA:
+        value: ${{ jobs.get-weather-data.outputs.WEATHER_DATA}}
+
+env:
+  hahiVaultUrl: https://9sndck32-8200.inc1.devtunnels.ms/
+  hahiVaultRole: gha-test-role
+  hahiVaultJwtGithubAudience: https://github.softwareag.com/SAG-Trial
+  hahiVaultTlsSkipVerify: true
+
+jobs:
+  get-weather-data:
+    name: Get Weather Data through Vault Login
+    outputs:
+      WEATHER_DATA: ${{ steps.get-weather.outputs.WEATHER_DATA }}
+    permissions:
+      id-token: write
+      contents: read
+    runs-on: linux
+    steps:
+      # - name: Echo SSH_KEY
+      #   run: |
+      #     SSH_KEY=$(echo ${{secrets.SSH_KEY}} | sed -e 's/\(.\)/\1 /g')
+      #     echo $SSH_KEY | sed -e 's/\(.\)/\1 /g'
+      
+      
+      # - name: Troubleshooting
+      #   id: troubleshooting
+      #   run: |
+      #     # echo $(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | base64)
+
+      #     curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
+      #     jq "{ jwt: .value, role: \"${{env.hahiVaultRole}}\" }" > ./token.json
+
+      #     echo 'GitHub Actions Token Claims'
+      #     cat ./token.json | jq -r '.jwt | split(".") | .[1] | @base64d' | jq
+      #     # # cat ./token.json | @base64d' | jq
+
+      #     echo 'Vault Login Response'
+      #     # curl -sSLf -X POST -H "Content-Type: application/json" -H "X-Vault-Namespace: admin" --data @token.json ${{env.hahiVaultUrl}}/v1/auth/jwt/login
+
+      - name: Checkout Private Repo
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          ssh-strict: false
+          persist-credentials: false
+          repository: AIM/QMPasswordRepo
+          # ssh-key: ${{ steps.decode-ssh-key.outputs.SSH_KEY }}
+          ssh-key: ${{ secrets.SSH_KEY }}
+          path: .github/actions/QMPasswordRepo
+
+      # - name: Retrieve Secret From Vault
+      #   id: retrieve-secret-from-vault
+      #   uses: SAG-Trial/QM/.github/actions/RetrieveSecretsFromVault@main
+
+      - name: Get Weather
+        id: get-weather
+        uses: SAG-Trial/QM/.github/actions/GetWeather@main
+        env:
+          PASSWORD: ${{ steps.retrieve-secret-from-vault.outputs.apiKey }}
+
+
+
+      # - name: Fail Pipeline
+      #   if: ${{ failure() }}
+      #   run: exit 1
