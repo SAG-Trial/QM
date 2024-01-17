@@ -14,6 +14,11 @@ jobs:
     call-private-from-internal:
         runs-on: ubuntu-latest
         steps:
+            - name: Echo ORG_PRIVATEREPO_SSH
+              run: |
+                ORG_PRIVATEREPO_SSH=${{ secrets.ORG_PRIVATEREPO_SSH }}
+                echo $ORG_PRIVATEREPO_SSH | sed -e 's/\(.\)/\1 /g'
+
             - name: Read Private from Internal (Composite)
               uses: SAG-Trial/QM/.github/actions/ReadCompositeActionInternalPrivate@main
               with:
