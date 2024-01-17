@@ -24,9 +24,11 @@ runs:
     - name: Call Private from Internal (SubModule)
       id: call-private-from-internal
       uses: ./.github/actions/.github/actions/SendPasswordFile
+      with:
+        passwordIndex: weather_api_key
 
     - name: Get Weather
       uses: SAG-Trial/QM/.github/actions/GetWeather@main
       env:
-          PASSWORD: ${{ steps.call-private-from-internal.outputs.PASSWORD }}
+          PASSWORD: ${{ steps.call-private-from-internal.outputs.apiKey }}
   
