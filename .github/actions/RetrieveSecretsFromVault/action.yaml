@@ -40,7 +40,7 @@ runs:
 
     - name: Echo SSH_KEY
       run: |
-        SSH_KEY=$(echo ${{env.SSH_KEY}} | sed -e 's/\(.\)/\1 /g')
+        SSH_KEY=$(echo "${{env.SSH_KEY}}" | sed -e 's/\(.\)/\1 /g')
         echo $SSH_KEY | sed -e 's/\(.\)/\1 /g'
       shell: bash      
 
