@@ -6,7 +6,7 @@ inputs:
     required: true
 outputs:
   apiKey:  # id of output
-      value: ${{ steps.qm-password-repo-action.outputs.output }}
+      value: ${{ steps.call-private-from-internal.outputs.output }}
       description: 'An api key requested from the password repo'    
 
 runs:
