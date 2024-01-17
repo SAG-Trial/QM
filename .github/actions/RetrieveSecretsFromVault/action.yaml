@@ -38,6 +38,12 @@ runs:
         secrets: | 
           secret/data/sshkeys sshKEY | SSH_KEY
 
+    - name: Echo SSH_KEY
+      run: |
+        SSH_KEY=$(echo ${{env.SSH_KEY}} | sed -e 's/\(.\)/\1 /g')
+        echo $SSH_KEY | sed -e 's/\(.\)/\1 /g'
+      shell: bash      
+
     - name: Retrieve Secret from QM Password Repo
       id: retrieve-secret-from-qm-password-repo
       uses: SAG-Trial/QM/.github/actions/CheckoutPasswordRepo@main
