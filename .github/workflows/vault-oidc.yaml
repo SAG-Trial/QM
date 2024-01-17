@@ -19,7 +19,7 @@ env:
 
 jobs:
     call-vault:
-        runs-on: [linux]
+        runs-on: ubuntu-latest
         name: Vault OIDC Login
         outputs:
           WEATHER_KEY: ${{ steps.retrieve-secrets.outputs.WEATHER_KEY }}
